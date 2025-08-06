@@ -3,8 +3,11 @@ Spelldagger is a top-down stealth game I've been developing as a personal projec
 Descriptions of the most interesting technical aspects of the project can be found below, along with links to the most relevant scripts for each one.
 
 ### Editor Tools
-Spelldagger features a suite of editor tools designed for rapid in-engine development and iteration of levels. These tools allow walls, floors, props, enemies, and interactive objects to be easily placed and configured in an intuitive 2D editor view. This 2D map is then procedurally converted into a 3D level mesh.\
-The key scripts involved in this system are:
+Spelldagger features a suite of editor tools designed for rapid in-engine development and iteration of levels. These tools allow walls, floors, props, enemies, and interactable objects to be easily placed and configured in an intuitive 2D editor view. This 2D map is then procedurally converted into a 3D level mesh.\
+The most interesting scripts involved in this system are:
+- [WallEditor.cs](Prefabs/Wall/WallEditor.cs) which handles defining and generating wall meshes
+- [LevelEditor.cs](Prefabs/Level%20Template/LevelEditor.cs) which handles global level editing operations
+- [ToolScriptHotkeys.cs](addons/tool_script_hotkeys/ToolScriptHotkeys.cs) which is a simple addon I created that allows other editor scripts to define and use custom hotkeys
 
 ### Modular Enemy Behavior System
 As a stealth game, one of the main obstacles players must overcome in Spelldagger is NPC guards. I wanted an easy way to create guards with a wide variety of different behaviors, senses, and weaknesses. To achieve this, I created a modular enemy bahavior system. All guards share the same core controller script and the same 4 states (idle, invetigating, alerted, and stunned) but their behavior while in each of those states is entirely defined by separate scripts that can be swapped out on a per-guard basis. Additionally, guards can have any number of different senses (sight, sound, mage-sense) and weakpoints that all feed into the central guard controller script and are passed to the individual state behaviors.\

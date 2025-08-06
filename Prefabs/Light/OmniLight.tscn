@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=3 uid="uid://66ps6wrm0i4s"]
+
+[ext_resource type="Script" uid="uid://cmon0i40tn80k" path="res://Prefabs/Light/LightEditor.cs" id="1_0c2eb"]
+[ext_resource type="Script" uid="uid://b0fma3ap4hbwd" path="res://Prefabs/Light/LightArea.cs" id="2_t4wyp"]
+[ext_resource type="Script" uid="uid://dhchgkjlwnhx2" path="res://Resources/Scripts/ProximityFader.cs" id="3_0c03b"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_vlf0w"]
+radius = 1.0
+
+[node name="OmniLight" type="Node3D" node_paths=PackedStringArray("OmniLight", "LightCaptureOmniLight", "CollisionShape", "Area")]
+script = ExtResource("1_0c2eb")
+OmniLight = NodePath("OmniLight3D")
+LightCaptureOmniLight = NodePath("OmniLight3D/LightCaptureLight")
+CollisionShape = NodePath("Area3D/CollisionShape3D")
+Area = NodePath("Area3D")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.919355, 0.868147, 0.771892, 1)
+light_energy = 1.5
+light_cull_mask = 4293918721
+shadow_enabled = true
+shadow_opacity = 0.9
+shadow_blur = 5.0
+shadow_caster_mask = 4293918725
+omni_range = 10.0
+omni_attenuation = 0.25
+
+[node name="LightCaptureLight" type="OmniLight3D" parent="OmniLight3D"]
+layers = 32
+light_size = 0.01
+light_cull_mask = 4293918752
+shadow_enabled = true
+shadow_caster_mask = 4293918756
+omni_range = 10.0
+omni_attenuation = -0.2
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_t4wyp")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(8.25, 0, 0, 0, 8.25, 0, 0, 0, 8.25, 0, 0, 0)
+shape = SubResource("SphereShape3D_vlf0w")
+
+[node name="ProximityFade" type="Node3D" parent="."]
+script = ExtResource("3_0c03b")
+Light3dPaths = Array[NodePath]([NodePath("../OmniLight3D"), NodePath("../OmniLight3D/LightCaptureLight")])

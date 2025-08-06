@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://n1s80cc0bmfk"]
+
+[ext_resource type="Script" uid="uid://epicln8ti83p" path="res://Prefabs/Input/InputManager.cs" id="1_63mi6"]
+
+[node name="InputManager" type="Node"]
+script = ExtResource("1_63mi6")

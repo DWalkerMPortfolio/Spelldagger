@@ -1,0 +1,8 @@
+- Draw
+- Initialize
+- Load! (including data maps and paths)
+- Guard AI
+- Props (interactions)
+- Player movement + collision
+- Doors
+- World state

@@ -1,0 +1,90 @@
+[gd_scene load_steps=19 format=3 uid="uid://r4en3c0oqmqk"]
+
+[ext_resource type="PackedScene" uid="uid://cbgt34rs8ldj0" path="res://Prefabs/Guard/GuardBase.tscn" id="1_km6nu"]
+[ext_resource type="Resource" uid="uid://wwdyhkyifwg3" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorPatrol.tres" id="2_0i4vs"]
+[ext_resource type="PackedScene" uid="uid://dpgtoiqs4em2f" path="res://Prefabs/Guard/Perception Sources/GuardVisionRadius.tscn" id="2_7b3ku"]
+[ext_resource type="Resource" uid="uid://diqwsctn5dpj8" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorInvestigate.tres" id="3_my5d7"]
+[ext_resource type="PackedScene" uid="uid://c7c04uykvrh3x" path="res://Prefabs/Guard/Perception Sources/GuardVisionCone.tscn" id="3_yo0o3"]
+[ext_resource type="Script" uid="uid://8fgdr4xkwci1" path="res://Prefabs/Guard/GuardWeakPoint.cs" id="4_0x21r"]
+[ext_resource type="Material" uid="uid://cl70mm5t3y6xf" path="res://Prefabs/Guard/GuardPlaceholderMaterial.tres" id="4_h06pm"]
+[ext_resource type="Resource" uid="uid://fgbos0b87bs0" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorChasePlayer.tres" id="4_w3q8t"]
+[ext_resource type="PackedScene" uid="uid://wl4t52q52ihm" path="res://Prefabs/Guard/Perception Sources/GuardDamageDetector.tscn" id="5_3p0do"]
+[ext_resource type="Resource" uid="uid://boyi7pmhhdp4g" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorStunned.tres" id="5_5x1vt"]
+[ext_resource type="PackedScene" uid="uid://ci7x6vdcwjdqv" path="res://Prefabs/Guard/Perception Sources/GuardSoundListener.tscn" id="5_h06pm"]
+[ext_resource type="PackedScene" uid="uid://bsvjmqgujp4k5" path="res://Prefabs/Guard/Weapons/GuardLaser.tscn" id="6_h06pm"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0x21r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3p0do"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h06pm"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wo0wo"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cmg84"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.975322, 0, 0.0407292, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x66hp"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[node name="GuardBasic" instance=ExtResource("1_km6nu")]
+IdleBehavior = ExtResource("2_0i4vs")
+InvestigatingBehavior = ExtResource("3_my5d7")
+AlertedBehavior = ExtResource("4_w3q8t")
+DamagedBehavior = ExtResource("5_5x1vt")
+
+[node name="CollisionShape3D" parent="3DRoot/CharacterBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Foot" parent="3DRoot/CharacterBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="VisionRadius" parent="3DRoot/CharacterBody3D/Foot" index="0" instance=ExtResource("2_7b3ku")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="VisionCone" parent="3DRoot/CharacterBody3D/Foot" index="1" instance=ExtResource("3_yo0o3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="DebugLabel" parent="3DRoot/CharacterBody3D" index="2"]
+transform = Transform3D(-3, -4.52987e-07, -1.98007e-14, 0, -1.31134e-07, 3, -4.52987e-07, 3, 1.31134e-07, 0, 3.72668, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/CharacterBody3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("4_h06pm")
+mesh = SubResource("CapsuleMesh_0x21r")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/CharacterBody3D/MeshInstance3D" index="0"]
+transform = Transform3D(0.532623, 0, 0, 0, 0.282645, 0, 0, 0, 0.868949, 0, 0.304362, -0.140365)
+material_override = SubResource("StandardMaterial3D_3p0do")
+mesh = SubResource("BoxMesh_h06pm")
+
+[node name="WeakPoint" type="Area3D" parent="3DRoot/CharacterBody3D" index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.5)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("4_0x21r")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/CharacterBody3D/WeakPoint" index="0"]
+shape = SubResource("BoxShape3D_wo0wo")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/CharacterBody3D/WeakPoint" index="1"]
+material_override = SubResource("StandardMaterial3D_cmg84")
+mesh = SubResource("BoxMesh_x66hp")
+
+[node name="SoundListener" parent="3DRoot/CharacterBody3D" index="5" instance=ExtResource("5_h06pm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="DamageDetector" parent="3DRoot/CharacterBody3D" index="6" instance=ExtResource("5_3p0do")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="Laser" parent="3DRoot/CharacterBody3D" index="7" instance=ExtResource("6_h06pm")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+
+[node name="GuardController" parent="." index="1"]
+PerceptionSourcePaths = Array[NodePath]([NodePath("../3DRoot/CharacterBody3D/Foot/VisionRadius"), NodePath("../3DRoot/CharacterBody3D/Foot/VisionCone"), NodePath("../3DRoot/CharacterBody3D/SoundListener"), NodePath("../3DRoot/CharacterBody3D/DamageDetector")])
+WeakPointPaths = Array[NodePath]([NodePath("../3DRoot/CharacterBody3D/WeakPoint")])
+WeaponPaths = Array[NodePath]([NodePath("../3DRoot/CharacterBody3D/Laser")])

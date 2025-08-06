@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://fgbos0b87bs0"]
+
+[ext_resource type="Script" uid="uid://ksl8mfmd80cw" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorChasePlayer.cs" id="1_an8ub"]
+
+[resource]
+script = ExtResource("1_an8ub")
+JustGetLineOfSight = true
+Speed = 3.0
+TurnSpeed = 270.0
+StartChaseSoundRadius = 15.0
+MinMovingToLastSeenPositionTime = 1.0
+ChaseStopRadius = 1.25
+RecalculatePathDistance = 3.0
+FollowLastSpottedPlayerDirectionDistance = 3.0

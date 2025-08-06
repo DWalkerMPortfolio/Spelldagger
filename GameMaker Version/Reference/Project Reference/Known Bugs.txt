@@ -1,0 +1,12 @@
+- May be loading every sector twice (caused by lights marked as changed?)
+- Guards walk through walls when failing to find a valid path
+- Select does weird stuff with texture + deletes wrong instances
+- Can't change layer sometimes (texture point number not properly set?)
+- Export crashes sometimes (data issues?)
+- Loading a distant sector (with farsight for example) unloads objects in the current sector
+- Falling allows you to clip through walls
+- Walls unload before lights, allowing lights to pass through walls at edge of screen
+- Secret door visibility doesn't work properly
+- Level editor crashes sometimes upon removing a path from an object
+- Ladders are broken (particularly upwards ladders)
+- Document UI stuck open when picking up document and key at same time

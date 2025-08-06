@@ -1,0 +1,38 @@
+[gd_scene load_steps=8 format=3 uid="uid://dahyhnrylvxdw"]
+
+[ext_resource type="Material" uid="uid://ckpc8h6unvaoo" path="res://Resources/Materials/Default.tres" id="1_qotfx"]
+[ext_resource type="PackedScene" uid="uid://c6h1qs8nrqfr1" path="res://Prefabs/Camera/MainCamera.tscn" id="2_uamlk"]
+[ext_resource type="Shader" uid="uid://brhh2uyt62qvp" path="res://Prefabs/Camera/PostProcessOutlines.gdshader" id="3_05sx1"]
+[ext_resource type="PackedScene" uid="uid://66ps6wrm0i4s" path="res://Prefabs/Light/OmniLight.tscn" id="3_gel73"]
+[ext_resource type="PackedScene" uid="uid://bs6mrihivu0je" path="res://Prefabs/Meshes/LightCaptureMeshInstance.tscn" id="4_05sx1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4y0dj"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("3_05sx1")
+shader_parameter/outline_color = Color(1, 1, 1, 0.75)
+shader_parameter/depth_threshold = 0.025
+shader_parameter/depth_normal_threshold = 0.9
+shader_parameter/normal_threshold = Vector2(0, 0.15)
+shader_parameter/normal_strength = 1.0
+shader_parameter/light_threshold = 0.5
+shader_parameter/light_outline_color = Color(1, 1, 1, 0.35)
+
+[sub_resource type="BoxMesh" id="BoxMesh_4y0dj"]
+
+[node name="ShaderTest" type="Node3D"]
+
+[node name="MainCamera" parent="." instance=ExtResource("2_uamlk")]
+
+[node name="PostProcess" parent="MainCamera/CameraRoot/Camera3D" index="1"]
+material_override = SubResource("ShaderMaterial_4y0dj")
+
+[node name="OmniLight" parent="." instance=ExtResource("3_gel73")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.64755, 2.26663, 4.95377)
+
+[node name="LightCaptureMeshInstance" parent="." instance=ExtResource("4_05sx1")]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, -4.32735, 0)
+material_override = ExtResource("1_qotfx")
+mesh = SubResource("BoxMesh_4y0dj")
+
+[editable path="MainCamera"]

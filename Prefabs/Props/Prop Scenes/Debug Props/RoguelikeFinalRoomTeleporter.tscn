@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://n4p4cr5q6fa5"]
+
+[ext_resource type="PackedScene" uid="uid://c1wh3quqt7y8n" path="res://Prefabs/Props/PropBase.tscn" id="1_147u3"]
+[ext_resource type="Script" uid="uid://d0wn282c6w657" path="res://Prefabs/Roguelike/RoguelikeFinalRoomTeleporter.cs" id="2_krpsv"]
+[ext_resource type="Resource" uid="uid://c2x72bhaah4o6" path="res://Prefabs/Pickup/Rune/WarpRune.tres" id="3_3req0"]
+[ext_resource type="Resource" uid="uid://ba54852ipuy3" path="res://Prefabs/Pickup/Rune/DistractionRune.tres" id="4_igl5e"]
+[ext_resource type="Resource" uid="uid://hfbva7inkonc" path="res://Prefabs/Pickup/Rune/FarsightRune.tres" id="5_mpbrk"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_147u3"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(1, 0.168417, 0.258279, 0.243137)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lakqm"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h7t6j"]
+height = 0.1
+radius = 1.0
+
+[node name="RoguelikeFinalRoomTeleporter" instance=ExtResource("1_147u3")]
+
+[node name="3DRoot" parent="." index="0"]
+ExcludedCollisionObjects = []
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot" index="0"]
+material_override = SubResource("StandardMaterial3D_147u3")
+mesh = SubResource("CylinderMesh_lakqm")
+
+[node name="Area3D" type="Area3D" parent="3DRoot" index="1"]
+collision_mask = 2
+script = ExtResource("2_krpsv")
+Root = NodePath("../..")
+WarpItem = ExtResource("3_3req0")
+DistractionItem = ExtResource("4_igl5e")
+FarsightItem = ExtResource("5_mpbrk")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/Area3D" index="0"]
+shape = SubResource("CylinderShape3D_h7t6j")

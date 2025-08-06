@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://bvm0m4n0i8oow"]
+
+[ext_resource type="ArrayMesh" uid="uid://coig2ai5ue758" path="res://Prefabs/Pickup/Key/Keys.glb-Meshes/Basic.res" id="1_mtn32"]
+[ext_resource type="Script" uid="uid://vxyb03ylcui4" path="res://Prefabs/Pickup/Key/KeyItem.cs" id="1_y0kgr"]
+
+[resource]
+script = ExtResource("1_y0kgr")
+Name = "Test Key"
+Mesh = ExtResource("1_mtn32")

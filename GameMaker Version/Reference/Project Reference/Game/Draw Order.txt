@@ -1,0 +1,23 @@
+Pre Draw:
+ - obj_control:
+	- calculate texture surface (if sector changed)
+	- calculate dark texture surface (if sector or light changed)
+ - class_light:
+	- calculate surface (if changed)
+Draw Begin:
+ - obj_control:
+	- draw texture surface
+	- with class_light:
+		- subtract surface from dark texture surface (if light changed)
+	- draw dark texture surface
+ - class_guard:
+	- calculate vision cone
+	- draw vision cone
+Draw:
+ - all other objects:
+	- draw self
+
+Draw End:
+ - obj_control:
+	- draw shadow surface
+	- draw walls

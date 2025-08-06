@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://kx74qlsngq0m"]
+
+[ext_resource type="PackedScene" uid="uid://c5xglmd86vgpx" path="res://Prefabs/Pickup/Document/Documents/TestDocumentTemplate.tscn" id="2_cewtm"]
+[ext_resource type="ArrayMesh" uid="uid://tvgdv3taattt" path="res://Prefabs/Pickup/Document/Documents.glb-Meshes/Book.res" id="2_crr1k"]
+[ext_resource type="Script" uid="uid://b7h5wt2adw728" path="res://Prefabs/Pickup/Document/DocumentItem.cs" id="3_a7cea"]
+
+[resource]
+script = ExtResource("3_a7cea")
+Template = ExtResource("2_cewtm")
+Text = "Note to self: 
+It's a lot easier to hear where the secret door to the real vault is than to see it.
+- Bob"
+Name = "Vault Noise Note"
+Mesh = ExtResource("2_crr1k")

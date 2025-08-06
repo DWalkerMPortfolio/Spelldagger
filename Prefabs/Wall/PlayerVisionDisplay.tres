@@ -1,0 +1,21 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b6kfyvl3eu1bd"]
+
+[ext_resource type="Shader" uid="uid://di17km0rfqiv6" path="res://Prefabs/Wall/PlayerVisionDisplay.gdshader" id="1_er0hl"]
+[ext_resource type="Texture2D" uid="uid://bxk1kass1hyb0" path="res://Prefabs/VFX/Textures/Distortion.png" id="2_ousvx"]
+[ext_resource type="Texture2D" uid="uid://i12a3ru6hyas" path="res://Prefabs/VFX/Textures/Swirl 1 - 128x128.png" id="3_tr4dh"]
+
+[resource]
+render_priority = 100
+shader = ExtResource("1_er0hl")
+shader_parameter/offset_distance = 1000.0
+shader_parameter/light_step = Vector2(0.9, 1)
+shader_parameter/color1 = Color(0, 0, 0, 1)
+shader_parameter/color2 = Color(0.573312, 0.693914, 0.849594, 1)
+shader_parameter/noise = ExtResource("3_tr4dh")
+shader_parameter/noise_scale = Vector2(0.1, 0.1)
+shader_parameter/noise_strength = 0.01
+shader_parameter/noise_contrast = 2.0
+shader_parameter/distortion = ExtResource("2_ousvx")
+shader_parameter/distortion_scale = Vector2(0.1, 0.1)
+shader_parameter/distortion_flow = Vector2(-0.015, 0.015)
+shader_parameter/distortion_strength = 3.0

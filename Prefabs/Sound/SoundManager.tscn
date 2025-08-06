@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bhialu44fpmjc"]
+
+[ext_resource type="Script" uid="uid://bbduhrhmjb7uj" path="res://Prefabs/Sound/SoundManager.cs" id="1_f023g"]
+[ext_resource type="PackedScene" uid="uid://dxakotxdwiqep" path="res://Prefabs/Sound/Sound.tscn" id="2_nwwx5"]
+
+[node name="SoundManager" type="Node"]
+script = ExtResource("1_f023g")
+SoundPrefab = ExtResource("2_nwwx5")

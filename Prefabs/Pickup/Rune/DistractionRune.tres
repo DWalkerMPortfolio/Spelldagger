@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://ba54852ipuy3"]
+
+[ext_resource type="Script" uid="uid://ftac1liyuuh" path="res://Prefabs/Pickup/Rune/RuneItem.cs" id="1_k1io0"]
+
+[resource]
+script = ExtResource("1_k1io0")
+Name = "Distraction"

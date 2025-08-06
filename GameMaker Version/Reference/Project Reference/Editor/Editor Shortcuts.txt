@@ -1,0 +1,45 @@
+General
+- P: copy coordinates
+- Shift: change mode
+- G: toggle grid scale
+- T: change sector size
+- M: change maximum sector
+- Up/Down: change layer
+- S: save
+- L: load
+- E: export
+
+Line:
+- Tab: toggle wall/detail
+
+Texture:
+- I: import texture sheet
+- Tab: change texture
+
+Object:
+- Tab: change object
+- Q: search for object
+- Control: rotate 45 degrees
+- Z: rotate 15 degrees
+- Alt: change object category
+- Comma: toggle name display
+- I: import object
+- N: change object name
+- F: change object sprite file
+- C: change object category
+- O: change object origin
+- R: change object range of influence
+- Backspace: delete object
+
+Data:
+- Tab: change data type
+- Alt (in document mode): change document
+- Q (in document mode): search for document
+- Backspace (in document mode): delete document
+
+Select:
+- Tab: toggle one/all layer select
+
+Textbox:
+- Escape: cancel
+- F1: save

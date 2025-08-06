@@ -1,0 +1,135 @@
+[gd_scene load_steps=19 format=3 uid="uid://dg5af6epk8qr3"]
+
+[ext_resource type="Script" uid="uid://631gp7g6cuo5" path="res://Prefabs/Door/DoorEditor.cs" id="1_v0nrl"]
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="2_so7vb"]
+[ext_resource type="ArrayMesh" uid="uid://cya2fvw70rdsy" path="res://Prefabs/Door/Doors.glb-Meshes/Basic.res" id="2_vfg66"]
+[ext_resource type="Script" uid="uid://d2a1b38783txu" path="res://Prefabs/Door/Door.cs" id="3_5onlj"]
+[ext_resource type="PackedScene" uid="uid://bs6mrihivu0je" path="res://Prefabs/Meshes/LightCaptureMeshInstance.tscn" id="5_jojus"]
+[ext_resource type="Script" uid="uid://d4mt0qeh0k076" path="res://Prefabs/Wall/VisionOccluder.cs" id="6_r40jo"]
+[ext_resource type="Material" uid="uid://cspjcqml0kjqa" path="res://Resources/Materials/VisionOccluder.tres" id="7_vfg66"]
+[ext_resource type="Material" uid="uid://b6kfyvl3eu1bd" path="res://Prefabs/Wall/PlayerVisionDisplay.tres" id="8_5onlj"]
+[ext_resource type="Script" uid="uid://b24u3toe6v2d4" path="res://Resources/Scripts/HideInGame3D.cs" id="8_g7kqk"]
+[ext_resource type="Script" uid="uid://dm1q01vk6bofl" path="res://Prefabs/Interactable/Interactable.cs" id="8_vfg66"]
+[ext_resource type="Script" uid="uid://cbhx1rnqyn53p" path="res://Prefabs/Wall/PlayerVisionDisplay.cs" id="9_g7kqk"]
+[ext_resource type="Script" uid="uid://dqf0p7wxlnlew" path="res://Prefabs/Player/Pocketwatch/TemporalController.cs" id="12_yq83s"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_so7vb"]
+size = Vector3(1, 5.36, 2.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_r40jo"]
+size = Vector2(2.6, 5)
+orientation = 0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_5onlj"]
+size = Vector3(0.1, 5, 2.6)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1nji4"]
+size = Vector3(0.25, 4.5, 2.5)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_r40jo"]
+size = Vector3(4, 1, 4)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g7kqk"]
+size = Vector3(2, 1, 2)
+
+[node name="Door" type="Node2D" node_paths=PackedStringArray("Door", "Root", "WallCutterZone")]
+script = ExtResource("1_v0nrl")
+Keys = []
+Mesh = ExtResource("2_vfg66")
+Door = NodePath("3DRoot/DoorRoot")
+Root = NodePath("3DRoot")
+WallCutterZone = NodePath("3DRoot/WallCutterZone")
+PreviousPosition = Vector2(0, 0)
+
+[node name="3DRoot" type="Node3D" parent="." node_paths=PackedStringArray("twoDParent")]
+process_mode = 3
+script = ExtResource("2_so7vb")
+ExcludedCollisionObjects = []
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+twoDParent = NodePath("..")
+ExcludedRids = []
+
+[node name="WallCutterZone" type="CollisionShape3D" parent="3DRoot"]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.59309, -0.00152588)
+shape = SubResource("BoxShape3D_so7vb")
+
+[node name="DoorRoot" type="Node3D" parent="3DRoot" node_paths=PackedStringArray("InteractionZone", "GuardDetector", "DoorRoot", "DisableWhenOpen", "MeshInstance")]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.25)
+script = ExtResource("3_5onlj")
+InteractionZone = NodePath("../InteractionZone")
+GuardDetector = NodePath("../GuardDetector")
+DoorRoot = NodePath(".")
+DisableWhenOpen = NodePath("DisableWhenOpen")
+MeshInstance = NodePath("LightCaptureMeshInstance")
+Keys = []
+
+[node name="LightCaptureMeshInstance" parent="3DRoot/DoorRoot" instance=ExtResource("5_jojus")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
+mesh = ExtResource("2_vfg66")
+
+[node name="DisableWhenOpen" type="Node3D" parent="3DRoot/DoorRoot"]
+
+[node name="VisionOccluder" type="StaticBody3D" parent="3DRoot/DoorRoot/DisableWhenOpen" node_paths=PackedStringArray("CollisionShape")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -1.25)
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("6_r40jo")
+CollisionShape = NodePath("CollisionShape3D")
+
+[node name="Mesh" type="MeshInstance3D" parent="3DRoot/DoorRoot/DisableWhenOpen/VisionOccluder"]
+layers = 4
+material_override = ExtResource("7_vfg66")
+cast_shadow = 3
+mesh = SubResource("QuadMesh_r40jo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/DoorRoot/DisableWhenOpen/VisionOccluder"]
+shape = SubResource("BoxShape3D_5onlj")
+
+[node name="HideInEditorRoot" type="Node3D" parent="3DRoot/DoorRoot/DisableWhenOpen/VisionOccluder"]
+visible = false
+script = ExtResource("8_g7kqk")
+HideInEditor = true
+
+[node name="PlayerVisionDisplay" type="MeshInstance3D" parent="3DRoot/DoorRoot/DisableWhenOpen/VisionOccluder/HideInEditorRoot" node_paths=PackedStringArray("Root")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+layers = 8
+material_override = ExtResource("8_5onlj")
+cast_shadow = 0
+mesh = SubResource("QuadMesh_r40jo")
+skeleton = NodePath("../../..")
+script = ExtResource("9_g7kqk")
+Root = NodePath("../../../../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="3DRoot/DoorRoot/DisableWhenOpen"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.25)
+collision_layer = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/DoorRoot/DisableWhenOpen/StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.25, 0)
+shape = SubResource("BoxShape3D_1nji4")
+
+[node name="InteractionZone" type="Area3D" parent="3DRoot"]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.774696, 0)
+collision_layer = 64
+collision_mask = 0
+monitoring = false
+script = ExtResource("8_vfg66")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/InteractionZone"]
+shape = SubResource("BoxShape3D_r40jo")
+
+[node name="GuardDetector" type="Area3D" parent="3DRoot"]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.774696, 0)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/GuardDetector"]
+shape = SubResource("BoxShape3D_g7kqk")
+
+[node name="TemporalController" type="Node" parent="3DRoot" node_paths=PackedStringArray("ControlledNode")]
+script = ExtResource("12_yq83s")
+ControlledNode = NodePath("../DoorRoot")

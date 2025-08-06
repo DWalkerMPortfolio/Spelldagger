@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://dmcvws3cal3mc"]
+
+[ext_resource type="Script" uid="uid://cowfiobnw4qvc" path="res://addons/spelldagger_utilities/SpelldaggerUtilityReferences.cs" id="1_hgyk5"]
+[ext_resource type="PackedScene" uid="uid://c1wh3quqt7y8n" path="res://Prefabs/Props/PropBase.tscn" id="2_vjh7o"]
+[ext_resource type="PackedScene" uid="uid://drn22ompsdcbn" path="res://addons/spelldagger_utilities/GenerateMeshPropsPopup.tscn" id="3_vjh7o"]
+
+[node name="References" type="Node"]
+script = ExtResource("1_hgyk5")
+PropBase = ExtResource("2_vjh7o")
+GenerateMeshPropsPopup = ExtResource("3_vjh7o")

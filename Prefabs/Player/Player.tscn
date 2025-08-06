@@ -1,0 +1,219 @@
+[gd_scene load_steps=28 format=3 uid="uid://ddoun17tpqe7r"]
+
+[ext_resource type="Script" uid="uid://dh4f1eewg11j7" path="res://Prefabs/Player/PlayerController.cs" id="1_00aof"]
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="1_esgsg"]
+[ext_resource type="Script" uid="uid://ngvjmghb6y4v" path="res://Prefabs/Player/PlayerEditor.cs" id="1_mvuy7"]
+[ext_resource type="Script" uid="uid://b1b13rml4f2rt" path="res://Prefabs/Player/DaggerHolder.cs" id="2_0bpt4"]
+[ext_resource type="Script" uid="uid://dqf0p7wxlnlew" path="res://Prefabs/Player/Pocketwatch/TemporalController.cs" id="3_0e7m8"]
+[ext_resource type="PackedScene" uid="uid://dpofgvrn7dfjw" path="res://Prefabs/Light/LightDetector.tscn" id="3_2lcig"]
+[ext_resource type="PackedScene" uid="uid://dsd5ujj21kbg5" path="res://Prefabs/Player/Dagger/Dagger.tscn" id="3_eykbg"]
+[ext_resource type="Script" uid="uid://b2b8m4jax188l" path="res://Prefabs/Player/Pocketwatch/Pocketwatch.cs" id="4_swf5e"]
+[ext_resource type="Script" uid="uid://cfjxbfmyeq1gl" path="res://Prefabs/Camera/CameraTarget.cs" id="6_tk2i6"]
+[ext_resource type="Script" uid="uid://clomcaij35jcr" path="res://Prefabs/Interactable/Interactor.cs" id="7_21ku0"]
+[ext_resource type="Script" uid="uid://dotd3pexjqs8h" path="res://Resources/Scripts/StateMachine.cs" id="7_tl25y"]
+[ext_resource type="Script" uid="uid://bptvuesk7mawy" path="res://Prefabs/Player/PlayerVisionSource.cs" id="8_21evy"]
+[ext_resource type="PackedScene" uid="uid://bnuouowbfc5ob" path="res://Prefabs/Player/PlayerAnimated.tscn" id="9_03ewh"]
+[ext_resource type="Script" uid="uid://d1knaotwx4e8d" path="res://Prefabs/Camera/ClockOverlay.cs" id="9_mvuy7"]
+[ext_resource type="PackedScene" uid="uid://c6h1qs8nrqfr1" path="res://Prefabs/Camera/MainCamera.tscn" id="13_21ku0"]
+[ext_resource type="PackedScene" uid="uid://cfjhyo1klene4" path="res://Prefabs/Camera/OverlaySymbols.glb" id="13_tl25y"]
+[ext_resource type="Material" uid="uid://dy4xatih34bdu" path="res://Prefabs/Camera/ClockOverlay.tres" id="14_21ku0"]
+[ext_resource type="Script" uid="uid://n0txrut1b6tm" path="res://Prefabs/Player/PlayerInventory.cs" id="16_3opp6"]
+[ext_resource type="PackedScene" uid="uid://l0ess1uhqbux" path="res://Prefabs/Camera/HUD/HUD.tscn" id="17_vbwbj"]
+[ext_resource type="Resource" uid="uid://hfbva7inkonc" path="res://Prefabs/Pickup/Rune/FarsightRune.tres" id="18_3j425"]
+[ext_resource type="Resource" uid="uid://c2x72bhaah4o6" path="res://Prefabs/Pickup/Rune/WarpRune.tres" id="18_us0jv"]
+[ext_resource type="Resource" uid="uid://ba54852ipuy3" path="res://Prefabs/Pickup/Rune/DistractionRune.tres" id="19_03ewh"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2lcig"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_tl25y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_03ewh"]
+albedo_color = Color(0.282257, 0.497452, 1, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_hxf3l"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_21evy"]
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("Root")]
+script = ExtResource("1_mvuy7")
+Root = NodePath("3D Root")
+
+[node name="3D Root" type="Node3D" parent="." node_paths=PackedStringArray("twoDParent")]
+script = ExtResource("1_esgsg")
+ExcludedCollisionObjects = []
+ActiveInGame = false
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+twoDParent = NodePath("..")
+ExcludedRids = []
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="3D Root" node_paths=PackedStringArray("Foot", "LightDetector", "Inventory", "DaggerHolder", "StateMachine", "AnimationPlayer", "MeshInstance", "RemoteTransform", "Pocketwatch", "Interactor")]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+collision_layer = 2
+collision_mask = 137
+script = ExtResource("1_00aof")
+Foot = NodePath("Foot")
+LightDetector = NodePath("LightDetector")
+Inventory = NodePath("../../Inventory")
+DaggerHolder = NodePath("../FollowPlayerNoRotation/DaggerHolder")
+StateMachine = NodePath("StateMachine")
+AnimationPlayer = NodePath("PlayerAnimated/AnimationPlayer")
+MeshInstance = NodePath("PlayerAnimated/Armature/Skeleton3D/Mesh")
+RemoteTransform = NodePath("RemoteTransform3D")
+Pocketwatch = NodePath("../../Pocketwatch")
+Interactor = NodePath("Interactor")
+TopSpeed = 6.0
+SprintTopSpeed = 12.0
+Acceleration = 100.0
+Deceleration = 250.0
+GravityScale = 20.0
+SprintSoundInterval = 0.25
+SprintSoundRadius = 10.0
+DashDistance = 5.0
+DashSpeed = 25.0
+DashCooldown = 0.5
+AnimationBlendTime = 0.5
+RotationSpeed = 1000.0
+PushForce = 0.1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3D Root/CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_2lcig")
+
+[node name="LightDetector" parent="3D Root/CharacterBody3D" instance=ExtResource("3_2lcig")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="TemporalController" type="Node" parent="3D Root/CharacterBody3D" node_paths=PackedStringArray("ControlledNode")]
+script = ExtResource("3_0e7m8")
+ControlledNode = NodePath("..")
+
+[node name="Foot" type="Node3D" parent="3D Root/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="StateMachine" type="Node" parent="3D Root/CharacterBody3D"]
+script = ExtResource("7_tl25y")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="3D Root/CharacterBody3D"]
+remote_path = NodePath("../../FollowPlayerNoRotation")
+update_rotation = false
+update_scale = false
+
+[node name="Interactor" type="Area3D" parent="3D Root/CharacterBody3D"]
+collision_layer = 0
+collision_mask = 64
+monitorable = false
+script = ExtResource("7_21ku0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3D Root/CharacterBody3D/Interactor"]
+shape = SubResource("SphereShape3D_tl25y")
+
+[node name="PlayerVisionSource" type="Node3D" parent="3D Root/CharacterBody3D"]
+process_mode = 3
+script = ExtResource("8_21evy")
+
+[node name="PlayerAnimated" parent="3D Root/CharacterBody3D" instance=ExtResource("9_03ewh")]
+transform = Transform3D(-0.8, 0, 6.99382e-08, 0, 0.8, 0, -6.99382e-08, 0, -0.8, 0, -1, 0)
+visible = false
+
+[node name="MeshPlaceholder" type="MeshInstance3D" parent="3D Root/CharacterBody3D"]
+material_override = SubResource("StandardMaterial3D_03ewh")
+mesh = SubResource("CapsuleMesh_hxf3l")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3D Root/CharacterBody3D/MeshPlaceholder"]
+transform = Transform3D(0.603195, 0, 0, 0, 0.286778, 0, 0, 0, 0.691393, 0, 0.312971, -0.232258)
+mesh = SubResource("BoxMesh_21evy")
+
+[node name="FollowPlayerNoRotation" type="Node3D" parent="3D Root"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+
+[node name="DaggerHolder" type="Node3D" parent="3D Root/FollowPlayerNoRotation" node_paths=PackedStringArray("DaggerL", "DaggerR")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("2_0bpt4")
+DaggerL = NodePath("../../DaggerL")
+DaggerR = NodePath("../../DaggerR")
+
+[node name="SlotRoot" type="Node3D" parent="3D Root/FollowPlayerNoRotation/DaggerHolder"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+
+[node name="DaggerSlotL" type="Node3D" parent="3D Root/FollowPlayerNoRotation/DaggerHolder/SlotRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.25, 0, 0)
+
+[node name="DaggerSlotR" type="Node3D" parent="3D Root/FollowPlayerNoRotation/DaggerHolder/SlotRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0)
+
+[node name="OverlaySymbols" parent="3D Root/FollowPlayerNoRotation" instance=ExtResource("13_tl25y")]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 3, 0)
+
+[node name="Clock" parent="3D Root/FollowPlayerNoRotation/OverlaySymbols" index="0" node_paths=PackedStringArray("HourHand", "MinuteHand")]
+process_mode = 3
+material_override = ExtResource("14_21ku0")
+script = ExtResource("9_mvuy7")
+HourHand = NodePath("HourHand")
+MinuteHand = NodePath("MinuteHand")
+FadeInDuration = 0.25
+FlashDuration = 0.1
+RotationSpeedFactor = 0.05
+
+[node name="HourHand" parent="3D Root/FollowPlayerNoRotation/OverlaySymbols/Clock" index="0"]
+material_override = ExtResource("14_21ku0")
+
+[node name="MinuteHand" parent="3D Root/FollowPlayerNoRotation/OverlaySymbols/Clock" index="1"]
+material_override = ExtResource("14_21ku0")
+
+[node name="DaggerL" parent="3D Root" node_paths=PackedStringArray("Slot", "PlayerBody") instance=ExtResource("3_eykbg")]
+top_level = true
+Slot = NodePath("../FollowPlayerNoRotation/DaggerHolder/SlotRoot/DaggerSlotL")
+PlayerBody = NodePath("../CharacterBody3D")
+
+[node name="DaggerR" parent="3D Root" node_paths=PackedStringArray("Slot", "PlayerBody") instance=ExtResource("3_eykbg")]
+top_level = true
+Chirality = 1
+Slot = NodePath("../FollowPlayerNoRotation/DaggerHolder/SlotRoot/DaggerSlotR")
+PlayerBody = NodePath("../CharacterBody3D")
+
+[node name="CameraTarget" type="Node3D" parent="3D Root" node_paths=PackedStringArray("Origin")]
+process_mode = 3
+script = ExtResource("6_tk2i6")
+Active = true
+Origin = NodePath("../CharacterBody3D")
+MaxDistance = 2.0
+Easing = 0.05
+
+[node name="MainCamera" parent="3D Root" instance=ExtResource("13_21ku0")]
+
+[node name="Pocketwatch" type="Node" parent="." node_paths=PackedStringArray("ClockOverlay", "RewindsRemainingLabel")]
+process_mode = 3
+script = ExtResource("4_swf5e")
+ClockOverlay = NodePath("../3D Root/FollowPlayerNoRotation/OverlaySymbols/Clock")
+RewindsRemainingLabel = NodePath("DebugRewindsRemainingLabel")
+FastForwardAcceleration = 3.0
+FastForwardMaxSpeed = 10.0
+RewindMinSpeed = 3.0
+RewindAcceleration = 5.0
+RewindMaxSpeed = 10.0
+MaxRewinds = 5
+
+[node name="DebugRewindsRemainingLabel" type="Label" parent="Pocketwatch"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+offset_right = 169.0
+grow_vertical = 0
+text = "Rewinds Remaining: 5"
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource("16_3opp6")
+StartingItems = Array[Resource]([ExtResource("18_3j425"), ExtResource("19_03ewh"), ExtResource("18_us0jv")])
+
+[node name="TemporalController" type="Node" parent="Inventory" node_paths=PackedStringArray("ControlledNode")]
+script = ExtResource("3_0e7m8")
+ControlledNode = NodePath("..")
+
+[node name="Hud" parent="." instance=ExtResource("17_vbwbj")]
+top_level = true
+metadata/_edit_lock_ = true
+
+[editable path="3D Root/CharacterBody3D/PlayerAnimated"]
+[editable path="3D Root/CharacterBody3D/PlayerAnimated/PlayerCloak2"]
+[editable path="3D Root/FollowPlayerNoRotation/OverlaySymbols"]

@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://268ylkdsus4s"]
+
+[ext_resource type="PackedScene" uid="uid://c6h1qs8nrqfr1" path="res://Prefabs/Camera/MainCamera.tscn" id="1_f7gp8"]
+[ext_resource type="Script" uid="uid://bbtwmgithgumb" path="res://Prefabs/Debug/DebugDrawTest.cs" id="4_nibve"]
+
+[node name="DebugDrawTest" type="Node3D"]
+
+[node name="DebugSphere" type="Node3D" parent="."]
+script = ExtResource("4_nibve")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 21.8248)
+visible = false
+
+[node name="MainCamera" parent="." instance=ExtResource("1_f7gp8")]

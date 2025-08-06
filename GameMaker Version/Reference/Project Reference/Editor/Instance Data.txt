@@ -1,0 +1,10 @@
+(): not yet implemented
+||: to be removed
+
+Guard: path, type.s, group.i
+Door: state.s, key.s
+Key: key.s
+Document: document
+Plants: fungusID.i
+Placeholder Props: label.s
+Label: label.s

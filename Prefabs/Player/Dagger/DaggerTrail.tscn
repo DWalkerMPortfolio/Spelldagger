@@ -1,0 +1,30 @@
+[gd_scene load_steps=6 format=3 uid="uid://p114j6mabpq1"]
+
+[ext_resource type="Script" uid="uid://d146upb73jch6" path="res://Resources/Scripts/DestroyTimer.cs" id="1_74pu0"]
+[ext_resource type="Shader" uid="uid://b0hu8isl27bek" path="res://Prefabs/Player/Dagger/DaggerTrail.gdshader" id="1_332st"]
+[ext_resource type="Texture2D" uid="uid://bxk1kass1hyb0" path="res://Prefabs/VFX/Textures/Distortion.png" id="2_1e6am"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c08ow"]
+render_priority = 0
+shader = ExtResource("1_332st")
+shader_parameter/noise = ExtResource("2_1e6am")
+shader_parameter/noise_strength = 0.0
+shader_parameter/color = Color(1, 1, 1, 0.0196078)
+
+[sub_resource type="Curve" id="Curve_q4dwm"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.50578, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[node name="DaggerTrail" type="TrailEmitter"]
+material = SubResource("ShaderMaterial_c08ow")
+curve = SubResource("Curve_q4dwm")
+geometry_nodepath = NodePath(".")
+num_points = 5
+size = 0.25
+update_interval = 10.0
+
+[node name="Timer" type="Timer" parent="." node_paths=PackedStringArray("DestroyTarget")]
+wait_time = 10.0
+autostart = true
+script = ExtResource("1_74pu0")
+DestroyTarget = NodePath("..")

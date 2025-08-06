@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://bt47ihd0xflte"]
+
+[ext_resource type="Script" uid="uid://cj8ioj8oer3a1" path="res://Prefabs/Hazard/HazardVolume.cs" id="1_2dd6l"]
+[ext_resource type="Script" uid="uid://dy1smqdgy62lq" path="res://Prefabs/Guard/Weapons/GuardDamageRadius.cs" id="1_g1sww"]
+[ext_resource type="Material" uid="uid://d3prydcp5qnav" path="res://Prefabs/Hazard/HazardDebug.tres" id="2_g1sww"]
+[ext_resource type="Script" uid="uid://dqf0p7wxlnlew" path="res://Prefabs/Player/Pocketwatch/TemporalController.cs" id="4_1t2n1"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_1t2n1"]
+resource_local_to_scene = true
+height = 1.0
+radius = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_0bqql"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 1.0
+
+[node name="DamageRadius" type="Node3D" node_paths=PackedStringArray("CollisionShape", "MeshInstance")]
+script = ExtResource("1_g1sww")
+ChargeDuration = 1.0
+Radius = 2.5
+CollisionShape = NodePath("MeleeHazardVolume/CollisionShape3D")
+MeshInstance = NodePath("MeleeHazardVolume/MeshInstance3D")
+
+[node name="MeleeHazardVolume" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 7
+script = ExtResource("1_2dd6l")
+Team = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeleeHazardVolume"]
+shape = SubResource("CylinderShape3D_1t2n1")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeleeHazardVolume"]
+transform = Transform3D(0.01, 0, 0, 0, 1, 0, 0, 0, 0.01, 0, -0.5, 0)
+material_override = ExtResource("2_g1sww")
+cast_shadow = 0
+mesh = SubResource("CylinderMesh_0bqql")
+
+[node name="TemporalController" type="Node" parent="." node_paths=PackedStringArray("ControlledNode")]
+script = ExtResource("4_1t2n1")
+ControlledNode = NodePath("..")

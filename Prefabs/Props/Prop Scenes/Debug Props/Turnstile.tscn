@@ -1,0 +1,44 @@
+[gd_scene load_steps=6 format=3 uid="uid://t0ogy7fecdji"]
+
+[ext_resource type="PackedScene" uid="uid://c1wh3quqt7y8n" path="res://Prefabs/Props/PropBase.tscn" id="1_2y5l5"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3w4ve"]
+size = Vector3(4.5, 0.3, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dke5y"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_8esra"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_2ngea"]
+
+[node name="Turnstile" instance=ExtResource("1_2y5l5")]
+
+[node name="Bar" type="RigidBody3D" parent="3DRoot" index="0"]
+process_mode = 1
+collision_layer = 128
+collision_mask = 10
+axis_lock_linear_x = true
+axis_lock_linear_y = true
+axis_lock_linear_z = true
+axis_lock_angular_x = true
+axis_lock_angular_z = true
+can_sleep = false
+angular_damp = 1.5
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/Bar" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35817, 0)
+shape = SubResource("BoxShape3D_3w4ve")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/Bar" index="1"]
+transform = Transform3D(4.5, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 1.35817, 0)
+mesh = SubResource("BoxMesh_dke5y")
+
+[node name="Pole" type="StaticBody3D" parent="3DRoot" index="1"]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.52381, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/Pole" index="0"]
+shape = SubResource("CylinderShape3D_8esra")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/Pole" index="1"]
+mesh = SubResource("CylinderMesh_2ngea")

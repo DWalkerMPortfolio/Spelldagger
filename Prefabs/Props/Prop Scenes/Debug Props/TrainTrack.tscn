@@ -1,0 +1,73 @@
+[gd_scene load_steps=9 format=3 uid="uid://beh0cq3soma1p"]
+
+[ext_resource type="Script" uid="uid://k82qcxyfpqjb" path="res://Prefabs/Train/TrainTrack.cs" id="1_p6tsw"]
+[ext_resource type="Material" uid="uid://b0rv8txukt3qw" path="res://Resources/Materials/Rough Wood Planks/RoughWoodPlanksTrainTrack.tres" id="3_55rq5"]
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="3_u04rt"]
+[ext_resource type="Material" uid="uid://dtg8a70qk3n84" path="res://Resources/Materials/Metal/Steel.tres" id="4_wqf2u"]
+
+[sub_resource type="Curve2D" id="Curve2D_3c2qy"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_dwwtc"]
+size = Vector3(7, 0.1, 1)
+
+[sub_resource type="Curve3D" id="Curve3D_55rq5"]
+
+[sub_resource type="MultiMesh" id="MultiMesh_wqf2u"]
+transform_format = 1
+mesh = SubResource("BoxMesh_dwwtc")
+
+[node name="TrainTrack" type="Path2D" node_paths=PackedStringArray("Path3D", "MultiMesh", "Root")]
+curve = SubResource("Curve2D_3c2qy")
+script = ExtResource("1_p6tsw")
+Path3D = NodePath("3DRoot/Path3D")
+MultiMesh = NodePath("3DRoot/Path3D/MultiMeshInstance3D")
+PlankMesh = SubResource("BoxMesh_dwwtc")
+PlankInterval = 2.5
+Root = NodePath("3DRoot")
+
+[node name="3DRoot" type="Node3D" parent="." node_paths=PackedStringArray("twoDParent")]
+process_mode = 3
+script = ExtResource("3_u04rt")
+Offset = Vector3(0, -2, 0)
+ExcludedCollisionObjects = []
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+twoDParent = NodePath("..")
+ExcludedRids = []
+
+[node name="Path3D" type="Path3D" parent="3DRoot"]
+process_mode = 1
+curve = SubResource("Curve3D_55rq5")
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="3DRoot/Path3D"]
+material_override = ExtResource("3_55rq5")
+multimesh = SubResource("MultiMesh_wqf2u")
+
+[node name="LeftRail" type="CSGPolygon3D" parent="."]
+polygon = PackedVector2Array(-2.5, 0, -2.5, 0.25, -2.75, 0.25, -2.75, 0)
+mode = 2
+path_node = NodePath("../3DRoot/Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+material = ExtResource("4_wqf2u")
+
+[node name="RightRail" type="CSGPolygon3D" parent="."]
+polygon = PackedVector2Array(2.5, 0, 2.5, 0.25, 2.75, 0.25, 2.75, 0)
+mode = 2
+path_node = NodePath("../3DRoot/Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 10.0
+path_joined = false
+material = ExtResource("4_wqf2u")

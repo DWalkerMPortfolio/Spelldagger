@@ -1,0 +1,10 @@
+[gd_scene load_steps=4 format=3 uid="uid://63nyw8ccuceq"]
+
+[ext_resource type="PackedScene" uid="uid://c1wh3quqt7y8n" path="res://Prefabs/Props/PropBase.tscn" id="1_1mh54"]
+[ext_resource type="PackedScene" uid="uid://c18b10ntsqnnr" path="res://Prefabs/Meshes/ProximityFadeMeshInstance.tscn" id="2_ub0w1"]
+[ext_resource type="ArrayMesh" uid="uid://dykddawxxxueh" path="res://Prefabs/Props/Prop Scenes/Initial Props/Props.glb-Meshes/Rug.res" id="3_vblsa"]
+
+[node name="Rug" instance=ExtResource("1_1mh54")]
+
+[node name="ProximityFadeMeshInstance" parent="3DRoot" index="0" instance=ExtResource("2_ub0w1")]
+mesh = ExtResource("3_vblsa")

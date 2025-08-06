@@ -1,0 +1,5 @@
+//surface_set_target(obj_control.darkTextureSurface)
+shader_set(shd_grayscale)
+draw_sprite_ext(sprite_index,image_index,x,y,image_xscale,image_yscale,image_angle,c_white,image_alpha)
+shader_reset()
+//surface_reset_target()

@@ -1,0 +1,37 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://cwqjptcia5cbe"]
+
+[ext_resource type="Shader" uid="uid://85msycibstys" path="res://Resources/Shaders/SDStandardShader.gdshader" id="1_vegrs"]
+[ext_resource type="Texture2D" uid="uid://4fb8x6n8l2qx" path="res://Resources/Materials/Gravel/ground_with_rocks_03_color_1k.png" id="2_li5h7"]
+[ext_resource type="Texture2D" uid="uid://bnpxm1ruxs7tx" path="res://Resources/Materials/Gravel/ground_with_rocks_03_ambient_occlussion_1k.png" id="3_q6fp3"]
+[ext_resource type="Texture2D" uid="uid://cw81vn46eg555" path="res://Resources/Materials/Gravel/ground_with_rocks_03_normal_dx_1k.png" id="4_vegrs"]
+[ext_resource type="Texture2D" uid="uid://dh2kk4ipkqp5j" path="res://Resources/Materials/Gravel/ground_with_rocks_03_roughness_1k.png" id="5_8rpyn"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_vegrs")
+shader_parameter/albedo = Color(0.466181, 0.466181, 0.466181, 1)
+shader_parameter/texture_albedo = ExtResource("2_li5h7")
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/texture_roughness = ExtResource("5_8rpyn")
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 0.0
+shader_parameter/texture_normal = ExtResource("4_vegrs")
+shader_parameter/normal_strength = 1.0
+shader_parameter/texture_ambient_occlusion = ExtResource("3_q6fp3")
+shader_parameter/ao_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/ao_light_affect = 0.0
+shader_parameter/backlight = Color(0, 0, 0, 1)
+shader_parameter/floor_uvs = true
+shader_parameter/uv_scale = Vector2(0.5, 0.5)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/dark_albedo = Color(0, 0, 0, 1)
+shader_parameter/dark_detail_texture_lod = 3.0
+shader_parameter/dark_detail_texture_step = Vector2(0.15, 0.3)
+shader_parameter/dark_detail_color = Color(1, 1, 1, 0.035)
+shader_parameter/dark_detail_noise_scale = Vector2(0.35, 0.35)
+shader_parameter/dark_detail_noise_step_range = Vector2(0.25, 1)
+shader_parameter/dark_detail_noise_min_value = 0.6
+shader_parameter/dark_normal_step = Vector2(0.8, 1)

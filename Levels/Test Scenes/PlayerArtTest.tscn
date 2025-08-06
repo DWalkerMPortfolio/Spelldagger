@@ -1,0 +1,133 @@
+[gd_scene load_steps=8 format=4 uid="uid://6x3mhjkhd70o"]
+
+[ext_resource type="PackedScene" uid="uid://gijq5c0trrtr" path="res://Prefabs/Level Template/LevelTemplate.tscn" id="1_7y80s"]
+[ext_resource type="PackedScene" uid="uid://o351ma0f741e" path="res://Prefabs/Level Template/LevelFloor.tscn" id="2_ckg1d"]
+[ext_resource type="PackedScene" uid="uid://cic2m4e3tr68n" path="res://Prefabs/Floor/Floor.tscn" id="4_ockm8"]
+[ext_resource type="Material" uid="uid://cawalymmsawim" path="res://Resources/Materials/DefaultFloor.tres" id="6_edqyy"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_m4ev4"]
+resource_local_to_scene = true
+vertices = PackedVector3Array(-15, 0.499998, -15, -15, 0.499998, 15, 15, 0.499998, 15, 15, 0.499998, -15)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 1
+geometry_collision_mask = 1
+agent_radius = 1.0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bacaw"]
+_surfaces = [{
+"aabb": AABB(-16, -16, -0.5, 32, 32, 0.5),
+"attribute_data": PackedByteArray("AAAAAAAAwD4AAIA/AADAPgAAgD8AAAA/AACAPwAAAD8AAIA/AACAPwAAAD8AAIA/AACAPwAAwD4AAAAAAADAPgAAAAAAAIA+AAAAPwAAgD8AAAAAAACAPwAAAAAAAAA/AAAAAAAAAAAAAIA/AAAAAAAAgD8AAAA+AACAPwAAAD8AAAAAAAAAPwAAAAAAAMA+AAAAAAAAgD4AAIA/AACAPgAAgD8AAMA+AACAPwAAgD4AAAAAAACAPgAAAAAAAAA+AAAAPwAAgD8AAAA/AAAAPwAAgD8AAAA/AAAAAAAAAD4AAIA/AAAAPgAAgD8AAIA+AAAAAAAAAD8AAAA/AAAAPwAAAD8AAIA/AACAPwAAAD4AAAAAAAAAPgAAAAAAAAAA"),
+"format": 34359738391,
+"material": ExtResource("6_edqyy"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AACAwQAAgMEAAAAAAACAwQAAgMEAAAC/AACAwQAAgEEAAAC/AACAwQAAgEEAAAC/AACAwQAAgMEAAAC/AACAQQAAgMEAAAC/AACAwQAAgMEAAAC/AACAwQAAgMEAAAAAAACAQQAAgMEAAAAAAACAQQAAgMEAAAAAAACAwQAAgMEAAAAAAACAwQAAgEEAAAAAAACAwQAAgEEAAAAAAACAwQAAgEEAAAC/AACAQQAAgEEAAAC/AACAwQAAgEEAAAC/AACAwQAAgEEAAAAAAACAwQAAgMEAAAAAAACAQQAAgMEAAAAAAACAQQAAgMEAAAC/AACAwQAAgMEAAAC/AACAQQAAgMEAAAC/AACAQQAAgMEAAAAAAACAQQAAgEEAAAAAAACAQQAAgMEAAAC/AACAQQAAgEEAAAC/AACAwQAAgEEAAAC/AACAQQAAgEEAAAAAAACAQQAAgEEAAAC/AACAQQAAgMEAAAC/AACAwQAAgEEAAAAAAACAQQAAgEEAAAAAAACAQQAAgMEAAAAAAACAQQAAgEEAAAC/AACAQQAAgEEAAAAAAACAwQAAgEEAAAAAAAD/f/////8AAP9//////wAA/3///////////wAA/7//////AAD/v/////8AAP+//38AAP//////fwAA//////9/AAD//////3//f////7//f/9/////v/9//3////+//3//////////f/////////9/////////AAD/f/////8AAP9//////wAA/3///////38AAP//////fwAA//////9/AAD/////////f/////////9//////////3///////////wAA/7//////AAD/v/////8AAP+/////f/////////9//////////3///////3//f////7//f/9/////v/9//3////+//3//////////f/////////9/////////")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_bacaw"]
+data = PackedVector3Array(-16, -16, 0, -16, -16, -0.5, -16, 16, -0.5, -16, 16, -0.5, -16, -16, -0.5, 16, -16, -0.5, -16, -16, -0.5, -16, -16, 0, 16, -16, 0, 16, -16, 0, -16, -16, 0, -16, 16, 0, -16, 16, 0, -16, 16, -0.5, 16, 16, -0.5, -16, 16, -0.5, -16, 16, 0, -16, -16, 0, 16, -16, 0, 16, -16, -0.5, -16, -16, -0.5, 16, -16, -0.5, 16, -16, 0, 16, 16, 0, 16, -16, -0.5, 16, 16, -0.5, -16, 16, -0.5, 16, 16, 0, 16, 16, -0.5, 16, -16, -0.5, -16, 16, 0, 16, 16, 0, 16, -16, 0, 16, 16, -0.5, 16, 16, 0, -16, 16, 0)
+
+[node name="PlayerArtTest" type="Node3D"]
+
+[node name="LevelTemplate" parent="." instance=ExtResource("1_7y80s")]
+
+[node name="NavigationRegion3D" parent="LevelTemplate" index="0"]
+navigation_mesh = SubResource("NavigationMesh_m4ev4")
+
+[node name="Floor0" parent="LevelTemplate/NavigationRegion3D" index="0" node_paths=PackedStringArray("ElementRoots", "LevelEditor") instance=ExtResource("2_ckg1d")]
+ElementRoots = {
+0: NodePath("FloorRoot"),
+1: NodePath("WallRoot"),
+2: NodePath("GuardRoot"),
+3: NodePath("PropRoot"),
+4: NodePath("PickupRoot")
+}
+LevelEditor = NodePath("../..")
+
+[node name="Floor" parent="LevelTemplate/NavigationRegion3D/Floor0/FloorRoot" index="0" instance=ExtResource("4_ockm8")]
+polygon = PackedVector2Array(-1024, -1024, 1024, -1024, 1024, 1024, -1024, 1024)
+PreviousPolygon = PackedVector2Array(-1024, -1024, 1024, -1024, 1024, 1024, -1024, 1024)
+Initialized = true
+
+[node name="MeshInstance3D" parent="LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot/HideInEditorRoot" index="0"]
+mesh = SubResource("ArrayMesh_bacaw")
+
+[node name="LightCapture" parent="LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot/HideInEditorRoot/MeshInstance3D" index="0"]
+mesh = SubResource("ArrayMesh_bacaw")
+
+[node name="ShadowCaster" parent="LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot/HideInEditorRoot" index="1"]
+mesh = SubResource("ArrayMesh_bacaw")
+
+[node name="GuardVisionDisplay" parent="LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot" index="1"]
+mesh = SubResource("ArrayMesh_bacaw")
+
+[node name="CollisionShape3D" parent="LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot" index="2"]
+shape = SubResource("ConcavePolygonShape3D_bacaw")
+
+[node name="CSGPolygon3D" parent="LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot/DestroyInGameRoot" index="0"]
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+material = ExtResource("6_edqyy")
+
+[node name="Skeleton3D" parent="LevelTemplate/Player/3D Root/CharacterBody3D/PlayerAnimated/Armature" index="0"]
+bones/0/position = Vector3(2.54313e-06, 1.19996, -122.7)
+bones/0/rotation = Quaternion(-0.707107, 0, 0, 0.707107)
+bones/1/position = Vector3(0, 18.3147, -1.56848)
+bones/1/rotation = Quaternion(-0.0427029, 0, 0, 0.999088)
+bones/2/position = Vector3(2.27374e-13, 21.4454, 4.76837e-07)
+bones/2/rotation = Quaternion(3.35276e-08, -1.98262e-16, 4.63858e-15, 1)
+bones/3/position = Vector3(1.43072e-13, 24.509, -9.53674e-07)
+bones/3/rotation = Quaternion(-2.6077e-08, 1.98262e-16, -4.63858e-15, 1)
+bones/4/position = Vector3(-2.27374e-13, 27.5727, 0)
+bones/4/rotation = Quaternion(0.0427029, 1.85601e-23, 4.34237e-22, 0.999088)
+bones/5/rotation = Quaternion(4.00409e-09, -3.92948e-30, 5.65339e-30, 1)
+bones/7/position = Vector3(7.71585, 23.2265, -0.30468)
+bones/7/rotation = Quaternion(-0.595689, -0.368622, 0.619026, -0.355076)
+bones/8/position = Vector3(1.13249e-06, 18.1837, -2.08616e-05)
+bones/8/rotation = Quaternion(0.3216, 0.097288, -0.0332398, 0.941278)
+bones/9/position = Vector3(-1.43051e-06, 56.2369, 5.36442e-06)
+bones/9/rotation = Quaternion(0.0497112, 0.194623, 0.242434, 0.949145)
+bones/10/position = Vector3(1.81794e-06, 39.6161, 2.14577e-06)
+bones/10/rotation = Quaternion(0.167165, -0.00889514, -0.0524093, 0.984495)
+bones/11/position = Vector3(-1.43051e-06, 14.6802, 4.64916e-06)
+bones/11/rotation = Quaternion(-0.1328, 0.0056266, -0.0419607, 0.990238)
+bones/12/position = Vector3(2.38419e-06, 3.2252, 9.29832e-06)
+bones/12/rotation = Quaternion(1.45286e-06, 1.09524e-06, 3.44589e-08, 1)
+bones/13/position = Vector3(-0.305361, 2.59919, -0.0454719)
+bones/13/rotation = Quaternion(2.99886e-07, 1.04099e-06, 1.43424e-07, 1)
+bones/14/position = Vector3(-0.0196791, 0.935268, 0.420431)
+bones/15/position = Vector3(-7.71585, 23.238, -0.438751)
+bones/15/rotation = Quaternion(0.590174, -0.371996, 0.623781, 0.352436)
+bones/16/position = Vector3(-7.15256e-07, 18.1837, 2.43187e-05)
+bones/16/rotation = Quaternion(0.321019, -0.0862957, 0.0293873, 0.942675)
+bones/17/position = Vector3(-1.66893e-06, 56.2115, -1.43051e-05)
+bones/17/rotation = Quaternion(0.0539351, -0.21426, -0.238078, 0.945781)
+bones/18/position = Vector3(5.126e-06, 39.6116, -6.19888e-06)
+bones/18/rotation = Quaternion(0.170243, 0.00955417, 0.0552285, 0.983807)
+bones/19/position = Vector3(-4.29153e-06, 14.5885, -4.08292e-06)
+bones/19/rotation = Quaternion(-0.194354, -0.0038482, 0.0194333, 0.980731)
+bones/20/position = Vector3(-1.43051e-06, 3.09347, -4.52995e-06)
+bones/20/rotation = Quaternion(1.93715e-07, 1.93575e-06, 4.93601e-07, 1)
+bones/21/position = Vector3(-0.0345225, 3.11401, -0.442133)
+bones/21/rotation = Quaternion(7.45058e-09, -4.78793e-06, -9.83477e-07, 1)
+bones/22/position = Vector3(0.346476, 0.846658, 0.573216)
+bones/23/rotation = Quaternion(0.00269015, 0.0277504, 0.994948, -0.096445)
+bones/24/rotation = Quaternion(-0.0576483, 0.00199547, -0.0345846, 0.997736)
+bones/25/position = Vector3(3.36114e-06, 43.8663, -1.19209e-07)
+bones/25/rotation = Quaternion(0.499451, -0.0515664, 0.0297989, 0.864292)
+bones/26/position = Vector3(-8.44523e-06, 31.1067, 2.5034e-06)
+bones/26/rotation = Quaternion(0.278018, -0.069974, 0.020311, 0.957809)
+bones/27/position = Vector3(3.58559e-08, 12.1382, 2.98023e-08)
+bones/28/rotation = Quaternion(-0.00284413, 0.0293503, 0.994904, 0.0964237)
+bones/29/position = Vector3(-2.2091e-06, 53.1855, -3.43054e-07)
+bones/29/rotation = Quaternion(-0.0570237, -0.00197776, 0.0345631, 0.997772)
+bones/30/rotation = Quaternion(0.495358, 0.0522637, -0.0298752, 0.8666)
+bones/31/position = Vector3(-4.45545e-06, 30.8708, 3.8743e-06)
+bones/31/rotation = Quaternion(0.280367, 0.0675981, -0.0197979, 0.957305)
+
+[editable path="LevelTemplate"]
+[editable path="LevelTemplate/NavigationRegion3D/Floor0"]
+[editable path="LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor"]
+[editable path="LevelTemplate/Player"]
+[editable path="LevelTemplate/Player/3D Root/CharacterBody3D/PlayerAnimated"]
+[editable path="LevelTemplate/Player/3D Root/FollowPlayerNoRotation/OverlaySymbols"]

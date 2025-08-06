@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7c04uykvrh3x"]
+
+[ext_resource type="Script" uid="uid://ddkemnxptcu8f" path="res://Prefabs/Guard/Perception Sources/GuardVisionCone.cs" id="1_hstgy"]
+
+[sub_resource type="Gradient" id="Gradient_1ra45"]
+colors = PackedColorArray(0.946135, 0.842071, 0.273519, 1, 0.978737, 0, 0.165701, 1)
+
+[node name="VisionCone" type="Node3D" node_paths=PackedStringArray("Light")]
+script = ExtResource("1_hstgy")
+IsSpot = true
+Light = NodePath("Light")
+AwarenessGradient = SubResource("Gradient_1ra45")
+
+[node name="Light" type="SpotLight3D" parent="."]
+light_color = Color(0.945098, 0.843137, 0.27451, 1)
+light_energy = 0.8
+light_indirect_energy = 0.0
+light_volumetric_fog_energy = 0.0
+light_specular = 0.0
+light_cull_mask = 4293918722
+shadow_enabled = true
+shadow_bias = 0.3
+shadow_blur = 0.015
+shadow_caster_mask = 4293918724
+spot_range = 12.0
+spot_attenuation = -1.16
+spot_angle = 26.5
+spot_angle_attenuation = 2.36258

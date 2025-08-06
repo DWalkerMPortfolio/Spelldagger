@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4llp7123a3x1"]
+
+[ext_resource type="Texture2D" uid="uid://cg3182wv0tvrx" path="res://addons/points_editor_hotkeys/Rectangle.svg" id="1_clhh6"]
+[ext_resource type="Shortcut" uid="uid://cu1gy1g64s13n" path="res://addons/points_editor_hotkeys/BoxSelectPointsShortcut.tres" id="1_r7unu"]
+[ext_resource type="Script" uid="uid://c0lo5f5j7xki6" path="res://addons/points_editor_hotkeys/BoxSelectButton.cs" id="3_b1x06"]
+
+[node name="BoxSelectButton" type="Button"]
+tooltip_text = "Box select points."
+theme_type_variation = &"FlatMenuButton"
+toggle_mode = true
+shortcut = ExtResource("1_r7unu")
+icon = ExtResource("1_clhh6")
+script = ExtResource("3_b1x06")

@@ -1,0 +1,9 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://bb4po0mmvp22d"]
+
+[ext_resource type="Script" uid="uid://cbekyh6tvkh2s" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorAlertedCamera.cs" id="1_oc52q"]
+
+[resource]
+script = ExtResource("1_oc52q")
+Shout = true
+FacePlayer = true
+ShoutRadius = 15.0

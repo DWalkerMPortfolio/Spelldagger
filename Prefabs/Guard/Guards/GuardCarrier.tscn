@@ -1,0 +1,46 @@
+[gd_scene load_steps=11 format=3 uid="uid://cognkehdnwykf"]
+
+[ext_resource type="PackedScene" uid="uid://cbgt34rs8ldj0" path="res://Prefabs/Guard/GuardBase.tscn" id="1_xsysv"]
+[ext_resource type="Resource" uid="uid://wwdyhkyifwg3" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorPatrol.tres" id="2_t02l0"]
+[ext_resource type="PackedScene" uid="uid://c7c04uykvrh3x" path="res://Prefabs/Guard/Perception Sources/GuardVisionCone.tscn" id="3_kp564"]
+[ext_resource type="Resource" uid="uid://fgbos0b87bs0" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorChasePlayer.tres" id="3_llupd"]
+[ext_resource type="Material" uid="uid://cl70mm5t3y6xf" path="res://Prefabs/Guard/GuardPlaceholderMaterial.tres" id="4_a2tdu"]
+[ext_resource type="PackedScene" uid="uid://bsvjmqgujp4k5" path="res://Prefabs/Guard/Weapons/GuardLaser.tscn" id="8_0bgik"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jwd6x"]
+radius = 0.75
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_0x21r"]
+radius = 0.75
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3p0do"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_h06pm"]
+
+[node name="GuardCarrier" instance=ExtResource("1_xsysv")]
+IdleBehavior = ExtResource("2_t02l0")
+AlertedBehavior = ExtResource("3_llupd")
+
+[node name="CollisionShape3D" parent="3DRoot/CharacterBody3D" index="1"]
+shape = SubResource("CapsuleShape3D_jwd6x")
+
+[node name="VisionCone" parent="3DRoot/CharacterBody3D/Foot" index="0" instance=ExtResource("3_kp564")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/CharacterBody3D" index="3"]
+material_override = ExtResource("4_a2tdu")
+mesh = SubResource("CapsuleMesh_0x21r")
+skeleton = NodePath("")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/CharacterBody3D/MeshInstance3D" index="0"]
+transform = Transform3D(0.532623, 0, 0, 0, 0.282645, 0, 0, 0, 0.868949, 0, 0.304362, -0.427156)
+material_override = SubResource("StandardMaterial3D_3p0do")
+mesh = SubResource("BoxMesh_h06pm")
+
+[node name="Laser" parent="3DRoot/CharacterBody3D" index="4" instance=ExtResource("8_0bgik")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+
+[node name="GuardController" parent="." index="1"]
+PerceptionSourcePaths = Array[NodePath]([NodePath("../3DRoot/CharacterBody3D/Foot/VisionCone")])
+WeaponPaths = Array[NodePath]([NodePath("../3DRoot/CharacterBody3D/Laser")])
+ShapecastRadius = 0.7

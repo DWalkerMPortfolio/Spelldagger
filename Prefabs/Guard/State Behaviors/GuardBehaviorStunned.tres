@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://boyi7pmhhdp4g"]
+
+[ext_resource type="Script" uid="uid://cppcrfh4browl" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorStunned.cs" id="1_kvhm5"]
+
+[resource]
+script = ExtResource("1_kvhm5")
+StunnedSoundRadius = 20.0
+Shout = true

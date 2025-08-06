@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1wh3quqt7y8n"]
+
+[ext_resource type="Script" uid="uid://devpwr2ujdmhs" path="res://Prefabs/Props/PropEditor.cs" id="1_j7etb"]
+[ext_resource type="PackedScene" uid="uid://bs6mrihivu0je" path="res://Prefabs/Meshes/LightCaptureMeshInstance.tscn" id="2_f5hfd"]
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="2_w4gcf"]
+[ext_resource type="PackedScene" uid="uid://c18b10ntsqnnr" path="res://Prefabs/Meshes/ProximityFadeMeshInstance.tscn" id="3_j7etb"]
+
+[node name="PropBase" type="Node2D" node_paths=PackedStringArray("Root")]
+script = ExtResource("1_j7etb")
+LightCaptureMeshInstance = ExtResource("2_f5hfd")
+ProximityFadeMeshInstance = ExtResource("3_j7etb")
+Root = NodePath("3DRoot")
+
+[node name="3DRoot" type="Node3D" parent="." node_paths=PackedStringArray("twoDParent")]
+process_mode = 3
+script = ExtResource("2_w4gcf")
+ExcludedCollisionObjects = []
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+twoDParent = NodePath("..")
+ExcludedRids = []

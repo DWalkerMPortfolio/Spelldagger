@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgsrs4cxnmxsn"]
+
+[sub_resource type="Curve3D" id="Curve3D_yhqcg"]
+_data = {
+"points": PackedVector3Array(-4.77719, 0, -0.471436, 4.77719, 0, 0.471436, 0.0614433, 0, -9.72363, -1.13567, 0, -4.45768, 1.13567, 0, 4.45768, 11.4902, 0, -2.38098, 3.81073, 0, -1.86217, -3.81073, 0, 1.86217, 8.54082, 0, 7.17368, 0, 0, 0, 0, 0, 0, -7.77276, 0, 8.21824),
+"tilts": PackedFloat32Array(0, 0, 0, 0)
+}
+point_count = 4
+
+[node name="RailTest" type="Node3D"]
+
+[node name="Path3D" type="Path3D" parent="."]
+curve = SubResource("Curve3D_yhqcg")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="."]
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0232372, 0, 0.000405312)
+polygon = PackedVector2Array(3, 0, 3, 1, 4, 1, 4, 0)
+mode = 2
+path_node = NodePath("../Path3D")
+path_interval_type = 0
+path_interval = 1.0
+path_simplify_angle = 0.0
+path_rotation = 2
+path_rotation_accurate = false
+path_local = false
+path_continuous_u = true
+path_u_distance = 1.0
+path_joined = false

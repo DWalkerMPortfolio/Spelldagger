@@ -1,0 +1,20 @@
+Pre Draw:
+	- obj_control:
+		- clear shadow surfaces
+	- class_light:
+		- calculate sprites
+Draw Begin:
+	- obj_control
+		- calculate shadows
+		- calculate and draw textures
+	- obj_guard
+		- calculate and draw vision cones
+Draw:
+	- everything
+		- draw
+		- apply grayscale shader
+Draw End:
+	- obj_control
+		- draw partial shdows
+		- draw walls
+		- draw complete shadows

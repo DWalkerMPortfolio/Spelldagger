@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://hfbva7inkonc"]
+
+[ext_resource type="Script" uid="uid://ftac1liyuuh" path="res://Prefabs/Pickup/Rune/RuneItem.cs" id="1_l5717"]
+
+[resource]
+script = ExtResource("1_l5717")
+Name = "Farsight"

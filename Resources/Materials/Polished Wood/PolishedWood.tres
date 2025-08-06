@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://d1hmasbdfws6v"]
+
+[ext_resource type="Shader" uid="uid://85msycibstys" path="res://Resources/Shaders/SDStandardShader.gdshader" id="1_ehn35"]
+[ext_resource type="Texture2D" uid="uid://bnkltuv16jy4h" path="res://Resources/Materials/Polished Wood/Wood067_1K-JPG_Color.jpg" id="1_jmyih"]
+[ext_resource type="Texture2D" uid="uid://d28o7kxtuh6wi" path="res://Resources/Materials/Polished Wood/Wood067_1K-JPG_NormalGL.jpg" id="2_4va2n"]
+[ext_resource type="Texture2D" uid="uid://bc23k2r7ncfkv" path="res://Resources/Materials/Polished Wood/Wood067_1K-JPG_Roughness.jpg" id="3_ckvy2"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ehn35")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("1_jmyih")
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/texture_roughness = ExtResource("3_ckvy2")
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 0.0
+shader_parameter/texture_normal = ExtResource("2_4va2n")
+shader_parameter/normal_strength = 1.0
+shader_parameter/ao_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/ao_light_affect = 0.0
+shader_parameter/backlight = Color(0, 0, 0, 1)
+shader_parameter/floor_uvs = false
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/dark_albedo = Color(0, 0, 0, 1)
+shader_parameter/dark_detail_texture_lod = 3.0
+shader_parameter/dark_detail_texture_step = Vector2(0.15, 0.3)
+shader_parameter/dark_detail_color = Color(1, 1, 1, 0.035)
+shader_parameter/dark_detail_noise_scale = Vector2(0.35, 0.35)
+shader_parameter/dark_detail_noise_step_range = Vector2(0.25, 1)
+shader_parameter/dark_detail_noise_min_value = 0.6
+shader_parameter/dark_normal_step = Vector2(0.8, 1)

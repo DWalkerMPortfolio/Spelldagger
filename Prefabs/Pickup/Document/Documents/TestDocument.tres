@@ -1,0 +1,12 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://jseoor4ly3nb"]
+
+[ext_resource type="PackedScene" uid="uid://c5xglmd86vgpx" path="res://Prefabs/Pickup/Document/Documents/TestDocumentTemplate.tscn" id="1_1owps"]
+[ext_resource type="ArrayMesh" uid="uid://tvgdv3taattt" path="res://Prefabs/Pickup/Document/Documents.glb-Meshes/Book.res" id="2_fw2yo"]
+[ext_resource type="Script" uid="uid://b7h5wt2adw728" path="res://Prefabs/Pickup/Document/DocumentItem.cs" id="2_hl655"]
+
+[resource]
+script = ExtResource("2_hl655")
+Template = ExtResource("1_1owps")
+Text = "This is a test document."
+Name = "Test Document"
+Mesh = ExtResource("2_fw2yo")

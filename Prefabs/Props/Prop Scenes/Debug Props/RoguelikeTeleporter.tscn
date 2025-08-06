@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://bseirjrre025d"]
+
+[ext_resource type="PackedScene" uid="uid://c1wh3quqt7y8n" path="res://Prefabs/Props/PropBase.tscn" id="1_1ffc0"]
+[ext_resource type="Script" uid="uid://qcnatpb2meik" path="res://Prefabs/Roguelike/RoguelikeTeleporter.cs" id="2_1ffc0"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wv5q0"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.435294, 1, 1, 0.243137)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_lakqm"]
+top_radius = 1.0
+bottom_radius = 1.0
+height = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_h7t6j"]
+height = 0.1
+radius = 1.0
+
+[node name="RoguelikeTeleporter" instance=ExtResource("1_1ffc0")]
+
+[node name="3DRoot" parent="." index="0"]
+ExcludedCollisionObjects = []
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot" index="0"]
+material_override = SubResource("StandardMaterial3D_wv5q0")
+mesh = SubResource("CylinderMesh_lakqm")
+
+[node name="Area3D" type="Area3D" parent="3DRoot" index="1"]
+collision_mask = 2
+script = ExtResource("2_1ffc0")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/Area3D" index="0"]
+shape = SubResource("CylinderShape3D_h7t6j")

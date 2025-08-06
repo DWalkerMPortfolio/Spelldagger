@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://wl4t52q52ihm"]
+
+[ext_resource type="Script" uid="uid://xba7sk6asic1" path="res://Prefabs/Guard/Perception Sources/GuardDamageDetector.cs" id="1_lpkwl"]
+[ext_resource type="Script" uid="uid://bg0qemwsqww07" path="res://Prefabs/Hazard/Damageable.cs" id="2_4mdhw"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_i6mbj"]
+
+[node name="DamageDetector" type="Node3D" node_paths=PackedStringArray("Damageable")]
+script = ExtResource("1_lpkwl")
+Damageable = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 8
+collision_mask = 5
+script = ExtResource("2_4mdhw")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_i6mbj")

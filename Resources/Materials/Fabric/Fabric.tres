@@ -1,0 +1,37 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bvv34abgfd8jl"]
+
+[ext_resource type="Shader" uid="uid://85msycibstys" path="res://Resources/Shaders/SDStandardShader.gdshader" id="1_mml2h"]
+[ext_resource type="Texture2D" uid="uid://cnijbypadmhex" path="res://Resources/Materials/Fabric/Fabric036_1K-JPG_Color.jpg" id="1_mv0qh"]
+[ext_resource type="Texture2D" uid="uid://d1sydo52c363k" path="res://Resources/Materials/Fabric/Fabric036_1K-JPG_AmbientOcclusion.jpg" id="2_0xovl"]
+[ext_resource type="Texture2D" uid="uid://750er7a6rtxm" path="res://Resources/Materials/Fabric/Fabric036_1K-JPG_NormalGL.jpg" id="3_57gqm"]
+[ext_resource type="Texture2D" uid="uid://cr111xjxvjpxi" path="res://Resources/Materials/Fabric/Fabric036_1K-JPG_Roughness.jpg" id="4_xlfmb"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_mml2h")
+shader_parameter/albedo = Color(0.812988, 0.782963, 0.749828, 1)
+shader_parameter/texture_albedo = ExtResource("1_mv0qh")
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/texture_roughness = ExtResource("4_xlfmb")
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 0.0
+shader_parameter/texture_normal = ExtResource("3_57gqm")
+shader_parameter/normal_strength = 1.0
+shader_parameter/ao_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/ao_light_affect = 0.0
+shader_parameter/backlight = Color(0.805491, 0.756979, 0.615752, 1)
+shader_parameter/floor_uvs = false
+shader_parameter/uv_scale = Vector2(1, 1)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/dark_albedo = Color(0, 0, 0, 1)
+shader_parameter/dark_detail_texture = ExtResource("2_0xovl")
+shader_parameter/dark_detail_texture_lod = 3.0
+shader_parameter/dark_detail_texture_step = Vector2(0.15, 0.3)
+shader_parameter/dark_detail_color = Color(1, 1, 1, 0.035)
+shader_parameter/dark_detail_noise_scale = Vector2(0.35, 0.35)
+shader_parameter/dark_detail_noise_step_range = Vector2(0.25, 1)
+shader_parameter/dark_detail_noise_min_value = 0.6
+shader_parameter/dark_normal_step = Vector2(0.8, 1)

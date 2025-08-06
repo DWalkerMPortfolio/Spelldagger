@@ -1,0 +1,66 @@
+[gd_scene load_steps=4 format=3 uid="uid://drn22ompsdcbn"]
+
+[ext_resource type="Script" uid="uid://c5ibe0j8bswy4" path="res://addons/spelldagger_utilities/GenerateMeshPropsPopup.cs" id="1_p3y2i"]
+[ext_resource type="Shortcut" uid="uid://37mnlmifdbsp" path="res://addons/spelldagger_utilities/ConfirmShortcut.tres" id="2_nnqtg"]
+[ext_resource type="Shortcut" uid="uid://2kjajeij0q4k" path="res://addons/spelldagger_utilities/CancelShortcut.tres" id="3_mlhcd"]
+
+[node name="Popup" type="Window" node_paths=PackedStringArray("SnapToFloor", "SnapToWall", "AddCollision", "LightCapture", "Confirm", "Cancel")]
+initial_position = 1
+size = Vector2i(500, 300)
+script = ExtResource("1_p3y2i")
+SnapToFloor = NodePath("VBoxContainer/SnapToFloor")
+SnapToWall = NodePath("VBoxContainer/SnapToWall")
+AddCollision = NodePath("VBoxContainer/AddCollision")
+LightCapture = NodePath("VBoxContainer/LightCapture")
+Confirm = NodePath("VBoxContainer/HBoxContainer/Confirm")
+Cancel = NodePath("VBoxContainer/HBoxContainer/Cancel")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SnapToFloor" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+text = "Snap to Ground"
+
+[node name="SnapToWall" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+text = "Snap to Wall"
+
+[node name="AddCollision" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Add Collision"
+
+[node name="LightCapture" type="CheckBox" parent="VBoxContainer"]
+layout_mode = 2
+button_pressed = true
+text = "Light Capture"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="Confirm" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+shortcut = ExtResource("2_nnqtg")
+text = "Confirm"
+
+[node name="Cancel" type="Button" parent="VBoxContainer/HBoxContainer"]
+layout_mode = 2
+shortcut = ExtResource("3_mlhcd")
+text = "Cancel"

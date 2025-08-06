@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://0wkgcpdemruf"]
+
+[ext_resource type="Script" uid="uid://cj8ioj8oer3a1" path="res://Prefabs/Hazard/HazardVolume.cs" id="1_it1ir"]
+[ext_resource type="Material" uid="uid://d3prydcp5qnav" path="res://Prefabs/Hazard/HazardDebug.tres" id="2_mfkqo"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lprl0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_it1ir"]
+
+[node name="HazardVolume" type="Area3D"]
+script = ExtResource("1_it1ir")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lprl0")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+material_override = ExtResource("2_mfkqo")
+mesh = SubResource("BoxMesh_it1ir")

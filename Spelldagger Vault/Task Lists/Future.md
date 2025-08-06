@@ -1,0 +1,54 @@
+- [ ] Gameplay updates
+	- [ ] Polish dash
+	- [ ] Hide? (hold down button and stand still in darkness to reduce guard detection speed)
+	- [ ] Improve guard AI
+		- [ ] Ignore pathfinding if there's a direct path to the next patrol point?
+		- [ ] Make guards actually reach patrol points rather than turning slightly before
+		- [ ] Go on high alert if spotting another stunned guard? (and don't shout All Clear)
+		- [ ] Player collision alert
+		- [ ] Multiple guards on same patrol path keep the same separation
+		- [ ] Spin around when becoming un-stunned?
+	- [ ] New mechanics
+		- [ ] Ladders
+		- [ ] Objects to hide in?
+- [ ] Art updates
+	- [ ] Add indicator when player is in light
+	- [ ] Reimplement screen shake
+	- [ ] Adjust light capture falloff so that "metaball" blending looks better. Remember to recalibrate light colliders
+	- [ ] Make only certain lights flicker (move logic into lights instead of light capture post process)
+	- [ ] VFX
+	- [ ] Constellation
+	- [ ] Improved world particles?
+		- [ ] Wrap
+		- [ ] Fog
+		- [ ] React to light
+	- [ ] Fireplace fire?
+	- [ ] Improve player vision display
+		- [ ] Fix issues when focusing daggers on other floors
+		- [ ] Fix issue when dashing past a wall on a lower floor during transition
+	- [ ] Add indicator on doors when a guard's vision cone is on the other side
+- [ ] UI
+	- [ ] Messages (picked up key, door requires key, etc.)
+	- [ ] Inventory?
+	- [ ] Marker on focused dagger
+	- [ ] Button prompts
+	- [ ] Temporal stability
+- [ ] Audio
+	- [ ] Footsteps
+	- [ ] Dagger sounds
+	- [ ] Temporal control sounds
+	- [ ] Dynamic music?
+- [ ] Bug fixes
+	- [ ] (!) Fix white squares graphical bugs on Langston and Austin's computers
+	- [ ] Fix light capture dither being visible on all SDStandardShader materials (very visible on Default)
+	- [ ] Rewind sounds properly?
+	- [ ] Clean up build
+		- [ ] Included files
+	- [ ] Fix ranged guards rotating off horizontal when dealing with slopes
+	- [ ] Fix dagger vision on upper floor bleeding down into lower floor
+	- [ ] Fix noises from other floors being visible
+	- [ ] Fix wall corners breaking with some segment lengths
+	- [ ] Switch to using actual signals instead of pure events?
+	- [ ] Fix guards getting stuck stunned
+	- [ ] Fix magic sensing guards getting stuck activated
+- [ ] Demo level (train station)

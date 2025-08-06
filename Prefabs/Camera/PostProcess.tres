@@ -1,0 +1,44 @@
+[gd_resource type="ShaderMaterial" load_steps=8 format=3 uid="uid://damw11e4kyilv"]
+
+[ext_resource type="Shader" uid="uid://d1676crdf8hpi" path="res://Prefabs/Camera/PostProcessGradient.gdshader" id="1_csavg"]
+[ext_resource type="Shader" uid="uid://brhh2uyt62qvp" path="res://Prefabs/Camera/PostProcessOutlines.gdshader" id="2_c1vne"]
+
+[sub_resource type="Gradient" id="Gradient_csavg"]
+colors = PackedColorArray(0.228183, 0.102321, 3.60981e-08, 1, 1.68458e-07, 0.173439, 0.302193, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c1vne"]
+gradient = SubResource("Gradient_csavg")
+fill_from = Vector2(0, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_c1vne"]
+offsets = PackedFloat32Array(0.562189, 1)
+colors = PackedColorArray(0, 0, 0, 0, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1adrp"]
+gradient = SubResource("Gradient_c1vne")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+metadata/_snap_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1adrp"]
+render_priority = 127
+shader = ExtResource("1_csavg")
+shader_parameter/vignette_texture = SubResource("GradientTexture2D_1adrp")
+shader_parameter/vignette_strength = 0.25
+shader_parameter/gradient_texture = SubResource("GradientTexture2D_c1vne")
+shader_parameter/gradient_strength = 0.3
+
+[resource]
+resource_local_to_scene = true
+render_priority = 0
+next_pass = SubResource("ShaderMaterial_1adrp")
+shader = ExtResource("2_c1vne")
+shader_parameter/outline_color = Color(1, 1, 1, 0.75)
+shader_parameter/depth_threshold = 0.025
+shader_parameter/depth_normal_threshold = 0.9
+shader_parameter/normal_threshold = Vector2(0, 0.15)
+shader_parameter/normal_strength = 1.0
+shader_parameter/light_threshold = 0.5
+shader_parameter/light_outline_color = Color(1, 1, 1, 0.35)

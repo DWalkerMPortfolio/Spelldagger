@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://bsvjmqgujp4k5"]
+
+[ext_resource type="Material" uid="uid://d3prydcp5qnav" path="res://Prefabs/Hazard/HazardDebug.tres" id="1_8ogjx"]
+[ext_resource type="Script" uid="uid://cn4dwea38b1wy" path="res://Prefabs/Guard/Weapons/GuardLaser.cs" id="1_xbobq"]
+[ext_resource type="Script" uid="uid://dqf0p7wxlnlew" path="res://Prefabs/Player/Pocketwatch/TemporalController.cs" id="3_uovos"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_xbobq"]
+size = Vector2(0.2, 1)
+center_offset = Vector3(0, 0, -0.5)
+orientation = 1
+
+[node name="Laser" type="Node3D" node_paths=PackedStringArray("MeshInstance")]
+script = ExtResource("1_xbobq")
+ChargeDuration = 1.0
+MeshInstance = NodePath("MeshInstance3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.1, 0, 0, 0)
+visible = false
+material_override = ExtResource("1_8ogjx")
+mesh = SubResource("QuadMesh_xbobq")
+
+[node name="TemporalController" type="Node" parent="." node_paths=PackedStringArray("ControlledNode")]
+script = ExtResource("3_uovos")
+ControlledNode = NodePath("..")

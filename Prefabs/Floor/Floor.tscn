@@ -1,0 +1,109 @@
+[gd_scene load_steps=13 format=4 uid="uid://cic2m4e3tr68n"]
+
+[ext_resource type="Script" uid="uid://plinpualv72b" path="res://Prefabs/Floor/FloorEditor.cs" id="1_gbgqd"]
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="2_1eycd"]
+[ext_resource type="PackedScene" uid="uid://dsphqkspja36s" path="res://Prefabs/Floor/Hole.tscn" id="2_5yh8d"]
+[ext_resource type="Material" uid="uid://cawalymmsawim" path="res://Resources/Materials/DefaultFloor.tres" id="2_g1aul"]
+[ext_resource type="Script" uid="uid://2fchjjiq03vh" path="res://Prefabs/Floor/FloorCollider.cs" id="3_g1aul"]
+[ext_resource type="Material" uid="uid://bkkl2vgu3ug3d" path="res://Prefabs/Light/LightCapture.tres" id="4_3f5db"]
+[ext_resource type="Script" uid="uid://b24u3toe6v2d4" path="res://Resources/Scripts/HideInGame3D.cs" id="5_cdyix"]
+[ext_resource type="Material" uid="uid://b11tc37kq8ijm" path="res://Prefabs/Guard/GuardVisionDisplay.tres" id="7_46agl"]
+[ext_resource type="Script" uid="uid://bbmc0vprlr5gp" path="res://Resources/Scripts/DestroyInGame.cs" id="8_46agl"]
+[ext_resource type="Script" uid="uid://dhchgkjlwnhx2" path="res://Resources/Scripts/ProximityFader.cs" id="8_g1aul"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_je7yv"]
+_surfaces = [{
+"aabb": AABB(0, 0, -0.5, 2, 2, 0.5),
+"attribute_data": PackedByteArray("AAAAAAAAwD4AAIA/AADAPgAAgD8AAAA/AACAPwAAAD8AAIA/AACAPwAAAD8AAIA/AACAPwAAwD4AAAAAAADAPgAAAAAAAIA+AAAAPwAAgD8AAAAAAACAPwAAAAAAAAA/AAAAAAAAAAAAAIA/AAAAAAAAgD8AAAA+AACAPwAAAD8AAAAAAAAAPwAAAAAAAMA+AAAAAAAAgD4AAIA/AACAPgAAgD8AAMA+AACAPwAAgD4AAAAAAACAPgAAAAAAAAA+AAAAPwAAgD8AAAA/AAAAPwAAgD8AAAA/AAAAAAAAAD4AAIA/AAAAPgAAgD8AAIA+AAAAAAAAAD8AAAA/AAAAPwAAAD8AAIA/AACAPwAAAD4AAAAAAAAAPgAAAAAAAAAA"),
+"format": 34359738391,
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAC/AAAAAAAAAEAAAAC/AAAAAAAAAEAAAAC/AAAAAAAAAAAAAAC/AAAAQAAAAAAAAAC/AAAAAAAAAAAAAAC/AAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAC/AAAAQAAAAEAAAAC/AAAAAAAAAEAAAAC/AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAAAAAAC/AAAAAAAAAAAAAAC/AAAAQAAAAAAAAAC/AAAAQAAAAAAAAAAAAAAAQAAAAEAAAAAAAAAAQAAAAAAAAAC/AAAAQAAAAEAAAAC/AAAAAAAAAEAAAAC/AAAAQAAAAEAAAAAAAAAAQAAAAEAAAAC/AAAAQAAAAAAAAAC/AAAAAAAAAEAAAAAAAAAAQAAAAEAAAAAAAAAAQAAAAAAAAAAAAAAAQAAAAEAAAAC/AAAAQAAAAEAAAAAAAAAAAAAAAEAAAAAAAAD/f/////8AAP9//////wAA/3///////////wAA/7//////AAD/v/////8AAP+//38AAP//////fwAA//////9/AAD//////3//f////7//f/9/////v/9//3////+//3//////////f/////////9/////////AAD/f/////8AAP9//////wAA/3///////38AAP//////fwAA//////9/AAD/////////f/////////9//////////3///////////wAA/7//////AAD/v/////8AAP+/////f/////////9//////////3///////3//f////7//f/9/////v/9//3////+//3//////////f/////////9/////////")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_je7yv"]
+data = PackedVector3Array(0, 0, 0, 0, 0, -0.5, 0, 2, -0.5, 0, 2, -0.5, 0, 0, -0.5, 2, 0, -0.5, 0, 0, -0.5, 0, 0, 0, 2, 0, 0, 2, 0, 0, 0, 0, 0, 0, 2, 0, 0, 2, 0, 0, 2, -0.5, 2, 2, -0.5, 0, 2, -0.5, 0, 2, 0, 0, 0, 0, 2, 0, 0, 2, 0, -0.5, 0, 0, -0.5, 2, 0, -0.5, 2, 0, 0, 2, 2, 0, 2, 0, -0.5, 2, 2, -0.5, 0, 2, -0.5, 2, 2, 0, 2, 2, -0.5, 2, 0, -0.5, 0, 2, 0, 2, 2, 0, 2, 0, 0, 2, 2, -0.5, 2, 2, 0, 0, 2, 0)
+
+[node name="Floor" type="Polygon2D" node_paths=PackedStringArray("CsgRoot", "MeshInstance", "LightCapture", "GuardVisionDisplay", "ShadowCaster", "CollisionShape", "HoleRoot", "Root")]
+color = Color(0.415686, 0.415686, 0.415686, 0)
+polygon = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
+script = ExtResource("1_gbgqd")
+FloorMaterial = ExtResource("2_g1aul")
+CsgRoot = NodePath("3DRoot/AnimatableBody/DestroyInGameRoot/CSGPolygon3D")
+MeshInstance = NodePath("3DRoot/AnimatableBody/HideInEditorRoot/MeshInstance3D")
+LightCapture = NodePath("3DRoot/AnimatableBody/HideInEditorRoot/MeshInstance3D/LightCapture")
+GuardVisionDisplay = NodePath("3DRoot/AnimatableBody/GuardVisionDisplay")
+ShadowCaster = NodePath("3DRoot/AnimatableBody/HideInEditorRoot/ShadowCaster")
+CollisionShape = NodePath("3DRoot/AnimatableBody/CollisionShape3D")
+HolePrefab = ExtResource("2_5yh8d")
+HoleRoot = NodePath("HoleRoot")
+PreviousPolygon = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
+Root = NodePath("3DRoot")
+Type = 0
+
+[node name="3DRoot" type="Node3D" parent="." node_paths=PackedStringArray("twoDParent")]
+process_mode = 3
+script = ExtResource("2_1eycd")
+ExcludedCollisionObjects = []
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+twoDParent = NodePath("..")
+ExcludedRids = []
+
+[node name="AnimatableBody" type="AnimatableBody3D" parent="3DRoot"]
+process_mode = 1
+disable_mode = 1
+collision_layer = 17
+sync_to_physics = false
+script = ExtResource("3_g1aul")
+
+[node name="HideInEditorRoot" type="Node3D" parent="3DRoot/AnimatableBody"]
+visible = false
+script = ExtResource("5_cdyix")
+HideInEditor = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/AnimatableBody/HideInEditorRoot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.5, 0)
+material_override = ExtResource("2_g1aul")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_je7yv")
+skeleton = NodePath("../..")
+
+[node name="LightCapture" type="MeshInstance3D" parent="3DRoot/AnimatableBody/HideInEditorRoot/MeshInstance3D"]
+layers = 32
+material_override = ExtResource("4_3f5db")
+instance_shader_parameters/transparency = 0.0
+mesh = SubResource("ArrayMesh_je7yv")
+
+[node name="ShadowCaster" type="MeshInstance3D" parent="3DRoot/AnimatableBody/HideInEditorRoot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.5, 0)
+layers = 5
+cast_shadow = 3
+mesh = SubResource("ArrayMesh_je7yv")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="GuardVisionDisplay" type="MeshInstance3D" parent="3DRoot/AnimatableBody"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.5, 0)
+layers = 2
+material_override = ExtResource("7_46agl")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_je7yv")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/AnimatableBody"]
+transform = Transform3D(1, 0, 0, 0, 1.31134e-07, -1, 0, 1, 1.31134e-07, 0, -0.5, 0)
+shape = SubResource("ConcavePolygonShape3D_je7yv")
+
+[node name="DestroyInGameRoot" type="Node3D" parent="3DRoot/AnimatableBody"]
+script = ExtResource("8_46agl")
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="3DRoot/AnimatableBody/DestroyInGameRoot"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.5, 0)
+polygon = PackedVector2Array(0, 0, 2, 0, 2, 2, 0, 2)
+depth = 0.5
+
+[node name="ProximityFade" type="Node3D" parent="3DRoot/AnimatableBody"]
+script = ExtResource("8_g1aul")
+ShaderGeometryInstancePaths = Array[NodePath]([NodePath("../HideInEditorRoot/MeshInstance3D"), NodePath("../HideInEditorRoot/MeshInstance3D/LightCapture"), NodePath("../GuardVisionDisplay")])
+
+[node name="HoleRoot" type="Node2D" parent="."]
+metadata/_edit_lock_ = true

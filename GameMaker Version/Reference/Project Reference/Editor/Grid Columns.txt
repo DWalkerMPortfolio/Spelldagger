@@ -1,0 +1,45 @@
+Wall/Detail
+0. X
+1. Y
+2. X
+3. Y
+
+Texture
+0. Texture ID
+1. X
+2. Y
+3-inf. X,Y,X,Y,...
+
+Object
+0. Sprite filename
+1. Name
+2. In-Game filename
+3. Category
+4. Range of influence
+
+Instance
+0. Object name
+1. X
+2. Y
+3. Rotation
+4. ID
+
+Path
+0. Instance ID
+1. X
+2. Y
+3-inf. X,y,X,Y,...
+
+Above When Exported
+0-?. Regular grid
+?+1. Unique ID (if exported with addID)
+
+Document (Map)
+Key: Title
+Value: Contents
+
+Other Data (Map)
+Key: ID
+Value: Data (Map)
+	- Key: variable.type
+	- Value: value

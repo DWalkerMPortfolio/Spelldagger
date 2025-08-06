@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b11tc37kq8ijm"]
+
+[ext_resource type="Shader" uid="uid://rjh1cgvs80i4" path="res://Prefabs/Guard/GuardVisionDisplay.gdshader" id="1_forb1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_forb1")
+shader_parameter/alpha = 0.2
+shader_parameter/darkness_alpha = 0.025

@@ -1,0 +1,15 @@
+- Fully exposed project and editor tools
+	- Use GodotRe to extract project
+	- Provide method of getting uncompiled scripts
+		- Package with game or put on GitHub?
+		- Just editor tools or all scripts?
+- Ability to write custom code
+	- Compile additional DLL that gets loaded into the game
+		- How to compile just mod DLL?
+		- How to load mod DLL into the game?
+- Ability to modify base game code
+	- Use harmony?
+- [x] Ability for multiple mods to edit the same scene
+	- Modify scene text files to merge scene changes
+- Run game in editor?
+	- Would require all scripts to be packaged with game

@@ -1,0 +1,25 @@
+- Austin
+	- Didn't read all the controls text
+		- Didn't know how to fast-forward, intentionally rewind, or use runes
+	- Repeatedly tried and failed to stun two-headed guard (which doesn't have a weak point)
+	- Music is too loud to hear over speech in video
+	- Tried to brute-force a lot of encounters (usually eventually succeeded)
+		- Need harder barriers (make very clear when something won't work). Or make guards less of an obstacle
+	- Tried to have carrier guard block lasers (should that work?)
+	- Frequently hit camera weak point trigger but dagger fell out of it because it didn't stick to the wall
+	- Encountered bug where guards stayed stunned
+- Langston:
+	- Too easy to slip past basic guards in hallways
+	- Guards turning to face you instantly while alerted is bad
+	- Came back to play again, removing a different set of abilities this time
+- Dani:
+	- Didn't use distraction
+	- Wanted to see more open spaces that require you to get past multiple sets of guards in one go
+	- Was really excited by possibilities of daggers
+	- Wanted to see rewind clock synchronized with in-game time
+	- Wanted a map to annotate
+	- Camera got stuck stunned and dagger detector got stuck detecting dagger
+	- Control scheme was unintuitive, too much time searching for correct button
+	- Suggested anti-magic fields that
+	- Really enjoyed moment-to-moment gameplay
+	- Got soft-locked by dying immediately after teleporter cleared rewind history

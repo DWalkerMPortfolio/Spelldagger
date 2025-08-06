@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://ba0fo8pfg5bvr"]
+
+[ext_resource type="Script" uid="uid://bngh67sauoyqx" path="res://Prefabs/Level Template/LevelEditor.cs" id="1_34xad"]
+[ext_resource type="PackedScene" uid="uid://cic2m4e3tr68n" path="res://Prefabs/Floor/Floor.tscn" id="2_2rgm1"]
+[ext_resource type="PackedScene" uid="uid://ys4udiqskwhl" path="res://Prefabs/Wall/Wall.tscn" id="3_nscgk"]
+[ext_resource type="PackedScene" uid="uid://ced6nljscj86r" path="res://Prefabs/Pickup/Pickup.tscn" id="4_jjma5"]
+[ext_resource type="PackedScene" uid="uid://o351ma0f741e" path="res://Prefabs/Level Template/LevelFloor.tscn" id="5_450u2"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_xgltn"]
+
+[node name="SubLevelTemplate" type="Node2D" node_paths=PackedStringArray("LevelFloorRoot", "NavigationRegion")]
+script = ExtResource("1_34xad")
+LevelFloorRoot = NodePath("NavigationRegion3D/LevelFloorRoot")
+ElementPrefabs = Dictionary[int, PackedScene]({
+0: ExtResource("2_2rgm1"),
+1: ExtResource("3_nscgk"),
+4: ExtResource("4_jjma5")
+})
+LevelFloorPrefab = ExtResource("5_450u2")
+NavigationRegion = NodePath("NavigationRegion3D")
+NavigationCollisionLayers = 1
+LastTransform = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+navigation_mesh = SubResource("NavigationMesh_xgltn")
+
+[node name="LevelFloorRoot" type="Node2D" parent="NavigationRegion3D"]

@@ -1,0 +1,174 @@
+[gd_scene load_steps=22 format=3 uid="uid://dsd5ujj21kbg5"]
+
+[ext_resource type="Script" uid="uid://di6psjlbtyce3" path="res://Prefabs/Player/Dagger/Dagger.cs" id="1_yadxy"]
+[ext_resource type="ArrayMesh" uid="uid://btj3hu1k6g00g" path="res://Prefabs/Player/Dagger/Dagger.glb-Meshes/Dagger.res" id="2_ja306"]
+[ext_resource type="Script" uid="uid://dotd3pexjqs8h" path="res://Resources/Scripts/StateMachine.cs" id="2_kpvrd"]
+[ext_resource type="PackedScene" uid="uid://p114j6mabpq1" path="res://Prefabs/Player/Dagger/DaggerTrail.tscn" id="2_w8l02"]
+[ext_resource type="Script" uid="uid://dqf0p7wxlnlew" path="res://Prefabs/Player/Pocketwatch/TemporalController.cs" id="3_d8eh8"]
+[ext_resource type="Resource" uid="uid://hfbva7inkonc" path="res://Prefabs/Pickup/Rune/FarsightRune.tres" id="3_e2xm5"]
+[ext_resource type="Resource" uid="uid://c2x72bhaah4o6" path="res://Prefabs/Pickup/Rune/WarpRune.tres" id="4_lelpj"]
+[ext_resource type="QuadMesh" uid="uid://4bgovce75qgt" path="res://Prefabs/Player/Dagger/DaggerParticlePass.tres" id="5_ms2cs"]
+[ext_resource type="Resource" uid="uid://ba54852ipuy3" path="res://Prefabs/Pickup/Rune/DistractionRune.tres" id="5_npee6"]
+[ext_resource type="Script" uid="uid://cj8ioj8oer3a1" path="res://Prefabs/Hazard/HazardVolume.cs" id="7_3yn02"]
+[ext_resource type="Script" uid="uid://cfjxbfmyeq1gl" path="res://Prefabs/Camera/CameraTarget.cs" id="9_6my8r"]
+[ext_resource type="Script" uid="uid://b3gk584m1imrk" path="res://Prefabs/Player/Dagger/FarsightVisionLight.cs" id="11_npee6"]
+[ext_resource type="Script" uid="uid://c4lfqlvogvnli" path="res://Prefabs/Player/Dagger/FocusInput.cs" id="13_nmts4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nbl5a"]
+albedo_color = Color(0.450648, 0.450648, 0.450648, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_v0aky"]
+size = Vector3(0.2, 0.1, 0.8)
+
+[sub_resource type="Curve" id="Curve_1n7c6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_q63mh"]
+texture_mode = 1
+curve = SubResource("Curve_1n7c6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_qi8tp"]
+emission_shape = 1
+emission_sphere_radius = 0.5
+direction = Vector3(0, 0, -1)
+spread = 5.0
+initial_velocity_min = 5.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -10.0
+linear_accel_max = -5.0
+alpha_curve = SubResource("CurveTexture_q63mh")
+turbulence_noise_strength = 0.05
+turbulence_noise_scale = 0.1
+turbulence_noise_speed = Vector3(10, 0, 0)
+
+[sub_resource type="Curve" id="Curve_m6hd1"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.5), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+metadata/_snap_enabled = true
+
+[sub_resource type="CurveTexture" id="CurveTexture_4wdew"]
+curve = SubResource("Curve_m6hd1")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_um3vh"]
+emission_shape = 1
+emission_sphere_radius = 0.1
+spread = 180.0
+initial_velocity_min = 3.0
+initial_velocity_max = 4.0
+gravity = Vector3(0, 0, 0)
+alpha_curve = SubResource("CurveTexture_4wdew")
+
+[node name="Dagger" type="RigidBody3D" node_paths=PackedStringArray("StateMachine", "MeshInstance", "MeshRoot", "HazardVolume", "ThrowParticles", "ReturnParticles", "TrailRoot", "FarsightVisionLight", "CameraTarget")]
+collision_layer = 4
+collision_mask = 137
+freeze = true
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_yadxy")
+StateMachine = NodePath("StateMachine")
+MeshInstance = NodePath("MeshRoot/MeshInstance3D")
+MeshRoot = NodePath("MeshRoot")
+HazardVolume = NodePath("HazardVolume")
+ThrowParticles = NodePath("ThrowParticles")
+ReturnParticles = NodePath("ReturnParticles")
+TrailPrefab = ExtResource("2_w8l02")
+TrailRoot = NodePath("TrailRoot")
+FarsightVisionLight = NodePath("FarsightVisionLight")
+CameraTarget = NodePath("CameraTarget")
+FarsightRuneItem = ExtResource("3_e2xm5")
+WarpRuneItem = ExtResource("4_lelpj")
+DistractionRuneItem = ExtResource("5_npee6")
+ThrowSpeed = 100.0
+ThrowDistance = 12.0
+StuckImpaleDistance = 0.25
+FallenLinearDamp = 1.0
+FallenGravity = 5.0
+FarsightVisionRange = 20.0
+WarpSoundRadius = 5.0
+DistractionSoundRadius = 15.0
+DistractionSoundDuration = 3.0
+DistractionCooldown = 2.0
+
+[node name="MeshRoot" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshRoot"]
+transform = Transform3D(0.2, 0, 8.47033e-22, 6.32842e-28, 0.2, 1.12503e-14, 0, -1.12503e-14, 0.2, 4.46321e-22, 1.02106e-14, 0.181518)
+material_override = SubResource("StandardMaterial3D_nbl5a")
+mesh = ExtResource("2_ja306")
+skeleton = NodePath("../../../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_v0aky")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_kpvrd")
+
+[node name="TemporalController" type="Node" parent="." node_paths=PackedStringArray("ControlledNode")]
+script = ExtResource("3_d8eh8")
+ControlledNode = NodePath("..")
+Priority = 1
+
+[node name="ThrowParticles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.387416)
+emitting = false
+amount = 10
+lifetime = 0.2
+fixed_fps = 60
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_qi8tp")
+draw_pass_1 = ExtResource("5_ms2cs")
+
+[node name="ReturnParticles" type="GPUParticles3D" parent="."]
+emitting = false
+amount = 5
+lifetime = 0.3
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+transform_align = 1
+process_material = SubResource("ParticleProcessMaterial_um3vh")
+draw_pass_1 = ExtResource("5_ms2cs")
+
+[node name="TrailRoot" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.395077)
+
+[node name="HazardVolume" type="Area3D" parent="."]
+collision_layer = 4
+collision_mask = 8
+script = ExtResource("7_3yn02")
+Active = false
+Team = 1
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="HazardVolume"]
+shape = SubResource("BoxShape3D_v0aky")
+
+[node name="FarsightVisionLight" type="OmniLight3D" parent="." node_paths=PackedStringArray("Parent")]
+top_level = true
+visible = false
+light_cull_mask = 4293918728
+shadow_enabled = true
+shadow_bias = 0.0
+shadow_normal_bias = 0.0
+shadow_reverse_cull_face = true
+shadow_caster_mask = 4293918724
+omni_range = 0.0
+omni_attenuation = 0.001
+script = ExtResource("11_npee6")
+Parent = NodePath("..")
+
+[node name="CameraTarget" type="Node3D" parent="." node_paths=PackedStringArray("Origin")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("9_6my8r")
+Priority = 1
+Origin = NodePath("..")
+MaxDistance = 2.0
+Easing = 0.05
+Offset = Vector3(0, 2, 0)
+
+[node name="FocusInput" type="Node" parent="." node_paths=PackedStringArray("Dagger")]
+process_mode = 3
+script = ExtResource("13_nmts4")
+Dagger = NodePath("..")

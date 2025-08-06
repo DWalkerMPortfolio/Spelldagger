@@ -1,0 +1,19 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bah33kob253mc"]
+
+[ext_resource type="Shader" uid="uid://dle8diwi7sgg6" path="res://Prefabs/Player/Cloak.gdshader" id="1_w8wkt"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_w8wkt")
+shader_parameter/color = Color(1.54018e-05, 0.124766, 0.413578, 1)
+shader_parameter/fresnel_color = Color(0.495174, 0.923884, 1, 1)
+shader_parameter/fresnel_amount = 3.92
+shader_parameter/fresnel_brightness = 0.25
+shader_parameter/distortion_strength_1 = 0.1
+shader_parameter/distortion_waves_1 = 1
+shader_parameter/distortion_speed_1 = 1.0
+shader_parameter/distortion_strength_2 = 0.1
+shader_parameter/distortion_waves_2 = 10
+shader_parameter/distortion_speed_2 = -2.0
+shader_parameter/trail_offset_strength = 0.4
+shader_parameter/trail_offset_distance = 10.0

@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c2x72bhaah4o6"]
+
+[ext_resource type="Script" uid="uid://ftac1liyuuh" path="res://Prefabs/Pickup/Rune/RuneItem.cs" id="1_sduot"]
+
+[resource]
+script = ExtResource("1_sduot")
+Name = "Warp"

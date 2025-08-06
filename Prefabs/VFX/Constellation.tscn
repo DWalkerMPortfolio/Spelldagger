@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://dhrssxmymbi6l"]
+
+[ext_resource type="Script" uid="uid://yhgxrpcoxr1d" path="res://Prefabs/VFX/Line.cs" id="1_c6n2f"]
+[ext_resource type="Texture2D" uid="uid://bsiid8y5kv6vc" path="res://Prefabs/VFX/Textures/star_08.png" id="2_t8jot"]
+
+[sub_resource type="Gradient" id="Gradient_qbjo2"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jhgyw"]
+gradient = SubResource("Gradient_qbjo2")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bfaq8"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = SubResource("GradientTexture1D_jhgyw")
+
+[sub_resource type="QuadMesh" id="QuadMesh_jhgyw"]
+size = Vector2(0.05, 1)
+center_offset = Vector3(0, 0, -0.5)
+orientation = 1
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xtr1b"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+albedo_texture = ExtResource("2_t8jot")
+
+[sub_resource type="QuadMesh" id="QuadMesh_kckc1"]
+orientation = 1
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Connector" type="MeshInstance3D" parent="." node_paths=PackedStringArray("Origin", "Target")]
+transform = Transform3D(0.999556, 0, 0.192984, 0, 1, 0, -0.0298001, 0, 6.47308, 2.35918, 0.0689852, 3.92132)
+material_override = SubResource("StandardMaterial3D_bfaq8")
+mesh = SubResource("QuadMesh_jhgyw")
+script = ExtResource("1_c6n2f")
+Origin = NodePath("../Origin")
+Target = NodePath("../Destination")
+
+[node name="Origin" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.35918, 0.0689852, 3.92132)
+material_override = SubResource("StandardMaterial3D_xtr1b")
+mesh = SubResource("QuadMesh_kckc1")
+
+[node name="Destination" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.1662, 0.0689852, -2.55175)
+material_override = SubResource("StandardMaterial3D_xtr1b")
+mesh = SubResource("QuadMesh_kckc1")

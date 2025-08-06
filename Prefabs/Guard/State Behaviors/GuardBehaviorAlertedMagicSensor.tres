@@ -1,0 +1,8 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c7u3l8psnwqlp"]
+
+[ext_resource type="Script" uid="uid://cvpp8x3sxg2t1" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorAlertedMagicSensor.cs" id="1_xwi3t"]
+
+[resource]
+script = ExtResource("1_xwi3t")
+ShoutRadius = 15.0
+ShoutInterval = 1.0

@@ -1,0 +1,435 @@
+[gd_scene load_steps=35 format=4 uid="uid://bhn7lwac68bv7"]
+
+[ext_resource type="PackedScene" uid="uid://gijq5c0trrtr" path="res://Prefabs/Level Template/LevelTemplate.tscn" id="1_ymwww"]
+[ext_resource type="PackedScene" uid="uid://o351ma0f741e" path="res://Prefabs/Level Template/LevelFloor.tscn" id="2_o5hrc"]
+[ext_resource type="PackedScene" uid="uid://cic2m4e3tr68n" path="res://Prefabs/Floor/Floor.tscn" id="4_aln0r"]
+[ext_resource type="Script" uid="uid://bqgjtvwrsrn4t" path="res://Prefabs/Debug/DebugPathFollower.cs" id="6_cyd5k"]
+[ext_resource type="Script" uid="uid://ksl8mfmd80cw" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorChasePlayer.cs" id="6_lircf"]
+[ext_resource type="Material" uid="uid://cawalymmsawim" path="res://Resources/Materials/DefaultFloor.tres" id="6_v3cnu"]
+[ext_resource type="PackedScene" uid="uid://ba0fo8pfg5bvr" path="res://Prefabs/Level Template/SubLevelTemplate.tscn" id="9_cyd5k"]
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="10_s2tx0"]
+[ext_resource type="PackedScene" uid="uid://r4en3c0oqmqk" path="res://Prefabs/Guard/Guards/GuardBasic.tscn" id="15_aln0r"]
+[ext_resource type="PackedScene" uid="uid://ys4udiqskwhl" path="res://Prefabs/Wall/Wall.tscn" id="15_g5g0u"]
+[ext_resource type="ArrayMesh" uid="uid://nvm66we38poo" path="res://Prefabs/Wall/Walls.glb-Meshes/Wall_Basic.res" id="17_n35s3"]
+[ext_resource type="Material" uid="uid://ckpc8h6unvaoo" path="res://Resources/Materials/Default.tres" id="20_txnjq"]
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_lircf"]
+vertices = PackedVector3Array(19.5, 0.499999, -2, 18.75, 0.499999, -2, 18.25, 0.499999, -1.25, 19.5, 0.499999, 3.5, 13.25, 0.499999, -5.25, 14.25, 0.499999, -5.75, 14.25, 0.499999, -7.5, 0.5, 0.499999, -7.5, 13.25, 0.499999, -4.5, 17.5, 0.499999, -1.25, 14.25, 0.499999, -3.5, 0.5, 0.499999, 3.5, 18, 0.499999, -3.25, 19.5, 0.499999, -7.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(7, 4, 8), PackedInt32Array(9, 2, 3), PackedInt32Array(10, 9, 3), PackedInt32Array(10, 3, 8), PackedInt32Array(8, 3, 11), PackedInt32Array(8, 11, 7), PackedInt32Array(1, 12, 0), PackedInt32Array(0, 12, 13), PackedInt32Array(5, 6, 12), PackedInt32Array(12, 6, 13)]
+geometry_parsed_geometry_type = 1
+geometry_collision_mask = 1
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ymwww"]
+_surfaces = [{
+"aabb": AABB(-4, -8, -0.5, 20, 12, 0.5),
+"attribute_data": PackedByteArray("AAAAAAAAwD4AAIA/AADAPgAAgD8AAAA/AACAPwAAAD8AAIA/AACAPwAAAD8AAIA/AACAPwAAwD4AAAAAAADAPgAAAAAAAIA+AAAAPwAAgD8AAAAAAACAPwAAAAAAAAA/AAAAAAAAAAAAAIA/AAAAAAAAgD8AAAA+AACAPwAAAD8AAAAAAAAAPwAAAAAAAMA+AAAAAAAAgD4AAIA/AACAPgAAgD8AAMA+AACAPwAAgD4AAAAAAACAPgAAAAAAAAA+AAAAPwAAgD8AAAA/AAAAPwAAgD8AAAA/AAAAAAAAAD4AAIA/AAAAPgAAgD8AAIA+AAAAAAAAAD8AAAA/AAAAPwAAAD8AAIA/AACAPwAAAD4AAAAAAAAAPgAAAAAAAAAA"),
+"format": 34359738391,
+"material": ExtResource("6_v3cnu"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AACAwAAAAMEAAAAAAACAwAAAAMEAAAC/AACAwAAAgEAAAAC/AACAwAAAgEAAAAC/AACAwAAAAMEAAAC/AACAQQAAAMEAAAC/AACAwAAAAMEAAAC/AACAwAAAAMEAAAAAAACAQQAAAMEAAAAAAACAQQAAAMEAAAAAAACAwAAAAMEAAAAAAACAwAAAgEAAAAAAAACAwAAAgEAAAAAAAACAwAAAgEAAAAC/AACAQQAAgEAAAAC/AACAwAAAgEAAAAC/AACAwAAAgEAAAAAAAACAwAAAAMEAAAAAAACAQQAAAMEAAAAAAACAQQAAAMEAAAC/AACAwAAAAMEAAAC/AACAQQAAAMEAAAC/AACAQQAAAMEAAAAAAACAQQAAgEAAAAAAAACAQQAAAMEAAAC/AACAQQAAgEAAAAC/AACAwAAAgEAAAAC/AACAQQAAgEAAAAAAAACAQQAAgEAAAAC/AACAQQAAAMEAAAC/AACAwAAAgEAAAAAAAACAQQAAgEAAAAAAAACAQQAAAMEAAAAAAACAQQAAgEAAAAC/AACAQQAAgEAAAAAAAACAwAAAgEAAAAAAAAD/f/////8AAP9//////wAA/3///////////wAA/7//////AAD/v/////8AAP+//38AAP//////fwAA//////9/AAD//////3//f////7//f/9/////v/9//3////+//3//////////f/////////9/////////AAD/f/////8AAP9//////wAA/3///////38AAP//////fwAA//////9/AAD/////////f/////////9//////////3///////////wAA/7//////AAD/v/////8AAP+/////f/////////9//////////3///////3//f////7//f/9/////v/9//3////+//3//////////f/////////9/////////")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lircf"]
+data = PackedVector3Array(-4, -8, 0, -4, -8, -0.5, -4, 4, -0.5, -4, 4, -0.5, -4, -8, -0.5, 16, -8, -0.5, -4, -8, -0.5, -4, -8, 0, 16, -8, 0, 16, -8, 0, -4, -8, 0, -4, 4, 0, -4, 4, 0, -4, 4, -0.5, 16, 4, -0.5, -4, 4, -0.5, -4, 4, 0, -4, -8, 0, 16, -8, 0, 16, -8, -0.5, -4, -8, -0.5, 16, -8, -0.5, 16, -8, 0, 16, 4, 0, 16, -8, -0.5, 16, 4, -0.5, -4, 4, -0.5, 16, 4, 0, 16, 4, -0.5, 16, -8, -0.5, -4, 4, 0, 16, 4, 0, 16, -8, 0, 16, 4, -0.5, 16, 4, 0, -4, 4, 0)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o5hrc"]
+_surfaces = [{
+"aabb": AABB(-1.09, 0, -2.12, 4.18, 4.5, 3.24),
+"attribute_data": PackedByteArray("bv0QOwAAfD5k/RA7AQAEPgNvfz/7/3s+wP6/PsD+vz7A/r8+4P7fPgD5/z3g/t8+A29/P/z/Az4Db38/+/97PmT9EDsBAAQ+oP8fP+D+3z7A/r8+4P7fPsIhHj/A/r8+wP6/PtD/Tz+g/x8/0P9PP6D/Hz/g/18/4P9fP8D+vz7g/18/4P7fPqD/Hz/g/t8+APn/PeD+3z4A+f89wP6/PsD+vz7A/r8+wP6/PuD+3z7A/r8+wP6/PsIhHj/A/r8+wP6/PtD/Tz+g/x8/4P9fP8D+vz7g/18/A29/PwIAwj7h/RA7AAD+Puv9EDsAAMI+oP8fP+D+3z7CIR4/wP6/PqD/Hz/A/r8+oP8fP+D+3z6g/x8/wP6/PuD/Xz/A/r8+4f0QOwAA/j4Db38/AgDCPggAeD8CAP4+CAB4PwIA/j4Db38/AgDCPgNvfz8CAP4+"),
+"format": 34359738391,
+"material": ExtResource("20_txnjq"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 42,
+"vertex_data": PackedByteArray("HoWLvwAAAADXo/C/w/VovwAAAAAUrgfAHYWLvwAAkEDWo/C/j8JFQAAAAACuR2E/w/VovwAAAAAUrgfAHoWLvwAAAADXo/C/wfVovwAAkEAUrgfAHYWLvwAAkEDWo/C/w/VovwAAAAAUrgfAwfVovwAAkEAUrgfAw/VovwAAAAAUrgfAkMJFQNHMi0CvR2E/HoWLvwAAAADXo/C/HYWLvwAAkEDWo/C/cT06QAAAkEAqXI8/cT06QAAAkEAqXI8/HYWLvwAAkEDWo/C/wfVovwAAkEAUrgfAHoWLvwAAAADXo/C/cT06QAAAAAApXI8/j8JFQAAAAACuR2E/w/VovwAAAAAUrgfAj8JFQAAAAACuR2E/kMJFQNHMi0CvR2E/HoWLvwAAAADXo/C/cT06QAAAkEAqXI8/cT06QAAAAAApXI8/cT06QAAAkEAqXI8/j8JFQAAAAACuR2E/cT06QAAAAAApXI8/wfVovwAAkEAUrgfAkMJFQNHMi0CvR2E/kMJFQAAAkECvR2E/wfVovwAAkEAUrgfAkMJFQAAAkECvR2E/cT06QAAAkEAqXI8/j8JFQAAAAACuR2E/cT06QAAAkEAqXI8/kMJFQNHMi0CvR2E/kMJFQNHMi0CvR2E/cT06QAAAkEAqXI8/kMJFQAAAkECvR2E/AADatv9///8AANq2/3///wAA2rb/f////38AAP//keT/fwAA//+R5P9/AAD//5HkAADatv9///8AANq2/3///wAA2rb/f//////bNv9//////9s2/3//////2zb/f///JEn/f/9///8kSf9//3///yRJ/3//f////3///yRJ/7//f///JEn/v/9///8kSf+//38AAP//keT/fwAA//+R5P9/AAD//5Hk//8jyf9//////yPJ/3//////I8n/f///JEn/f/9///8kSf9//3///yRJ/3//f///I8n/f/9///8jyf9//3///yPJ/3//f/////8jyf9//////yPJ/3//////I8n/f////3///yRJ/7//f///JEn/v/9///8kSf+/I8n/f/9///8jyf9//3///yPJ/3//f///I8n/f/9///8jyf9//3///yPJ/3//f///")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_unrf4"]
+data = PackedVector3Array(-1.09, 0, -1.88, -0.91, 0, -2.12, -1.09, 4.5, -1.88, 3.09, 0, 0.88, -0.91, 0, -2.12, -1.09, 0, -1.88, -0.91, 4.5, -2.12, -1.09, 4.5, -1.88, -0.91, 0, -2.12, -0.91, 4.5, -2.12, -0.91, 0, -2.12, 3.09, 4.3688, 0.88, -1.09, 0, -1.88, -1.09, 4.5, -1.88, 2.91, 4.5, 1.12, 2.91, 4.5, 1.12, -1.09, 4.5, -1.88, -0.91, 4.5, -2.12, -1.09, 0, -1.88, 2.91, 0, 1.12, 3.09, 0, 0.88, -0.91, 0, -2.12, 3.09, 0, 0.88, 3.09, 4.3688, 0.88, -1.09, 0, -1.88, 2.91, 4.5, 1.12, 2.91, 0, 1.12, 2.91, 4.5, 1.12, 3.09, 0, 0.88, 2.91, 0, 1.12, -0.91, 4.5, -2.12, 3.09, 4.3688, 0.88, 3.09, 4.5, 0.88, -0.91, 4.5, -2.12, 3.09, 4.5, 0.88, 2.91, 4.5, 1.12, 3.09, 0, 0.88, 2.91, 4.5, 1.12, 3.09, 4.3688, 0.88, 3.09, 4.3688, 0.88, 2.91, 4.5, 1.12, 3.09, 4.5, 0.88)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_aln0r"]
+_surfaces = [{
+"aabb": AABB(-1, 0, -2, 4, 5, 3),
+"attribute_data": PackedByteArray("AAAAAAAAgD8AAAAAAACAPwAAAAAAAAAAAAAAAAAAAAA="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAACAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AABAQAAAAAAAAIA/AACAvwAAAAAAAADAAACAvwAAoEAAAADAAABAQAAAoEAAAIA/JEn/f4KpUqQkSf9/gqlSpCRJ/3+CqVKkJEn/f4KpUqQ=")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_g5g0u"]
+data = PackedVector3Array(3, 0, 1, -1, 0, -2, -1, 5, -2, 3, 0, 1, -1, 5, -2, 3, 5, 1)
+backface_collision = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cyd5k"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0.346577, 0.280009, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v3cnu"]
+
+[sub_resource type="Curve2D" id="Curve2D_yysgo"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 512, -64, -665.727, 629.588, 665.727, -629.588, 2880, -64, 1734.7, 1.90208, -1734.7, -1.90208, 1792, -2624)
+}
+point_count = 3
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_fgn0c"]
+vertices = PackedVector3Array(-1.75, 0.499999, 7.5, -1.5, 0.499999, 11.5, 1.5, 0.499999, 11.5, 1.75, 0.499999, 7.5, -7.5, 0.499999, -7.5, 7.5, 0.499999, -7.5, -7.5, 0.499999, 7.5, 7.5, 0.499999, 7.5)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(0, 4, 3), PackedInt32Array(3, 4, 5), PackedInt32Array(0, 6, 4), PackedInt32Array(5, 7, 3)]
+geometry_parsed_geometry_type = 1
+geometry_collision_mask = 1
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_xjnhd"]
+_surfaces = [{
+"aabb": AABB(-7, -7, -0.5, 16, 20, 0.5),
+"attribute_data": PackedByteArray("AABQPwAAAD8AAFA/mpkZPwAAAD8AAIA/AACAPwAAoD4AAAAAAACgPgAAAAAAAIA+AACgPpqZGT8AAAA/mpkZPwAAAD8AAIA/AABAPgAAAD8AAKA+AAAAPwAAoD6amRk/AACAPwAAgD4AAAAAAACAPgAAAAAAAEA+AACAPwAAQD4AAAAAAABAPgAAAAAAAAA+AABAPgAAAD8AAKA+mpkZPwAAAD8AAIA/AAAAPwAAgD8AAEA+mpkZPwAAQD4AAAA/AAAAAAAAgD4AAIA/AACAPgAAgD8AAKA+AAAAAAAAoD4AAIA/AACgPgAAgD8AAMA+AAAAPwAAgD8AAAA/mpkZPwAAMD+amRk/AAAAAAAAQD4AAIA/AABAPgAAgD8AAIA+AAAwP5qZGT8AADA/AAAAPwAAUD8AAAA/AAAAPwAAgD8AADA/mpkZPwAAUD8AAAA/AAAAAAAA4D4AAIA/AADgPgAAgD8AAAA/AACAPwAAwD4AAAAAAADAPgAAAAAAAKA+AAAAAAAAwD4AAIA/AADAPgAAgD8AAOA+AACAPwAAAD4AAAAAAAAAPgAAAAAAAIA9AACAPwAAgD0AAAAAAACAPQAAAAAAAAAAAAAAPwAAgD8AAAAAmpkZPwAAQD6amRk/AACAPwAAAD8AAAAAAAAAPwAAAAAAAOA+AAAAAAAAAD4AAIA/AAAAPgAAgD8AAEA+AAAAAAAAgD0AAIA/AACAPQAAgD8AAAA+AABQP5qZGT8AAIA/mpkZPwAAAD8AAIA/AAAAAAAAAAAAAIA/AAAAAAAAgD8AAIA9AAAAPwAAgD8AAAAAAACAPwAAAACamRk/AACAPwAA4D4AAAAAAADgPgAAAAAAAMA+AACAP5qZGT8AAIA/AACAPwAAAD8AAIA/"),
+"format": 34359738391,
+"material": ExtResource("6_v3cnu"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 84,
+"vertex_data": PackedByteArray("AACAvwAAUEEAAAC/AACAvwAAEEEAAAC/AAAQQQAA4MAAAAC/AAAQQQAAEEEAAAC/AAAQQQAAEEEAAAAAAABAQAAAEEEAAAAAAABAQAAAEEEAAAAAAAAQQQAAEEEAAAAAAAAQQQAA4MAAAAAAAACAvwAAUEEAAAAAAABAQAAAUEEAAAAAAABAQAAAEEEAAAAAAABAQAAAEEEAAAC/AABAQAAAEEEAAAAAAABAQAAAUEEAAAAAAABAQAAAUEEAAAC/AABAQAAAUEEAAAAAAACAvwAAUEEAAAAAAACAvwAAUEEAAAAAAABAQAAAEEEAAAAAAAAQQQAA4MAAAAAAAAAQQQAA4MAAAAAAAACAvwAAEEEAAAAAAACAvwAAUEEAAAAAAABAQAAAEEEAAAAAAABAQAAAEEEAAAC/AAAQQQAAEEEAAAC/AAAQQQAAEEEAAAAAAAAQQQAAEEEAAAC/AAAQQQAA4MAAAAC/AAAQQQAA4MAAAAC/AAAQQQAAEEEAAAC/AABAQAAAEEEAAAC/AABAQAAAUEEAAAAAAABAQAAAUEEAAAC/AABAQAAAEEEAAAC/AABAQAAAEEEAAAC/AABAQAAAUEEAAAC/AACAvwAAUEEAAAC/AAAQQQAA4MAAAAC/AABAQAAAEEEAAAC/AACAvwAAUEEAAAC/AADgwAAA4MAAAAAAAADgwAAA4MAAAAC/AADgwAAAEEEAAAC/AAAQQQAA4MAAAAC/AAAQQQAA4MAAAAAAAAAQQQAAEEEAAAAAAAAQQQAA4MAAAAAAAAAQQQAA4MAAAAC/AADgwAAA4MAAAAC/AACAvwAAUEEAAAC/AACAvwAAUEEAAAAAAACAvwAAEEEAAAAAAACAvwAAEEEAAAC/AACAvwAAEEEAAAAAAADgwAAAEEEAAAAAAAAQQQAA4MAAAAAAAADgwAAAEEEAAAAAAACAvwAAEEEAAAAAAADgwAAAEEEAAAC/AADgwAAAEEEAAAAAAADgwAAA4MAAAAAAAACAvwAAUEEAAAAAAACAvwAAUEEAAAC/AABAQAAAUEEAAAC/AACAvwAAEEEAAAAAAACAvwAAEEEAAAC/AACAvwAAUEEAAAC/AACAvwAAEEEAAAC/AADgwAAAEEEAAAC/AAAQQQAA4MAAAAC/AADgwAAAEEEAAAAAAADgwAAAEEEAAAC/AACAvwAAEEEAAAC/AAAQQQAA4MAAAAAAAADgwAAA4MAAAAAAAADgwAAAEEEAAAAAAADgwAAA4MAAAAC/AADgwAAA4MAAAAAAAAAQQQAA4MAAAAAAAADgwAAAEEEAAAC/AADgwAAA4MAAAAC/AAAQQQAA4MAAAAC//////wAA/7//////AAD/v/////8AAP+//3//////////f/////////9//////////3//f/7//7//f/9/////v/9//3////+//3//f////7//f/9/////v/9//3/+//+/////f/////////9//////////3///////3//////////f/////////9//////////3//f////7//f/9//v//v/9//3////+//3//f////7//f/9//v//v/9//3////+//3//////////f/////////9/////////////f/////////9//////////3///////////wAA/7//////AAD/v/////8AAP+/////f/////////9//////////3///////////wAA/7//////AAD/v/////8AAP+//////wAA/7//////AAD/v/////8AAP+/AAD/f/////8AAP9//////wAA/3//////////f/////////9//////////3///////38AAP//////fwAA//////9/AAD/////AAD/f/////8AAP9//////wAA/3///////3//////////f/////////9//////////3//f////7//f/9/////v/9//3/+//+/AAD/f/////8AAP9//////wAA/3///////3//////////f/////////9/////////AAD/f/////8AAP9//////wAA/3///////////wAA/7//////AAD/v/////8AAP+//3//////////f/////////9//////////3//f////7//f/9/////v/9//3////+//38AAP//////fwAA//////9/AAD//////////wAA/7//////AAD/v/////8AAP+/")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_v3cnu"]
+data = PackedVector3Array(-1, 13, -0.5, -1, 9, -0.5, 9, -7, -0.5, 9, 9, -0.5, 9, 9, 0, 3, 9, 0, 3, 9, 0, 9, 9, 0, 9, -7, 0, -1, 13, 0, 3, 13, 0, 3, 9, 0, 3, 9, -0.5, 3, 9, 0, 3, 13, 0, 3, 13, -0.5, 3, 13, 0, -1, 13, 0, -1, 13, 0, 3, 9, 0, 9, -7, 0, 9, -7, 0, -1, 9, 0, -1, 13, 0, 3, 9, 0, 3, 9, -0.5, 9, 9, -0.5, 9, 9, 0, 9, 9, -0.5, 9, -7, -0.5, 9, -7, -0.5, 9, 9, -0.5, 3, 9, -0.5, 3, 13, 0, 3, 13, -0.5, 3, 9, -0.5, 3, 9, -0.5, 3, 13, -0.5, -1, 13, -0.5, 9, -7, -0.5, 3, 9, -0.5, -1, 13, -0.5, -7, -7, 0, -7, -7, -0.5, -7, 9, -0.5, 9, -7, -0.5, 9, -7, 0, 9, 9, 0, 9, -7, 0, 9, -7, -0.5, -7, -7, -0.5, -1, 13, -0.5, -1, 13, 0, -1, 9, 0, -1, 9, -0.5, -1, 9, 0, -7, 9, 0, 9, -7, 0, -7, 9, 0, -1, 9, 0, -7, 9, -0.5, -7, 9, 0, -7, -7, 0, -1, 13, 0, -1, 13, -0.5, 3, 13, -0.5, -1, 9, 0, -1, 9, -0.5, -1, 13, -0.5, -1, 9, -0.5, -7, 9, -0.5, 9, -7, -0.5, -7, 9, 0, -7, 9, -0.5, -1, 9, -0.5, 9, -7, 0, -7, -7, 0, -7, 9, 0, -7, -7, -0.5, -7, -7, 0, 9, -7, 0, -7, 9, -0.5, -7, -7, -0.5, 9, -7, -0.5)
+
+[sub_resource type="Resource" id="Resource_o5hrc"]
+script = ExtResource("6_lircf")
+JustGetLineOfSight = false
+Speed = 3.0
+TurnSpeed = 270.0
+StartChaseSoundRadius = 15.0
+MinMovingToLastSeenPositionTime = 1.0
+ChaseStopRadius = 1.25
+RecalculatePathDistance = 3.0
+FollowLastSpottedPlayerDirectionDistance = 3.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lircf"]
+resource_local_to_scene = true
+albedo_color = Color(1, 0.346577, 0.280009, 1)
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_o5hrc"]
+vertices = PackedVector3Array(-2, 1, -7, -2, 1, 7, 2, 1, 7, 2, 1, -7)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_parsed_geometry_type = 1
+
+[sub_resource type="BoxMesh" id="BoxMesh_o5hrc"]
+size = Vector3(5, 1, 15)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o5hrc"]
+points = PackedVector3Array(2.5, 0.5, 7.5, 2.5, -0.5, 7.5, 2.5, 0.5, -7.5, -2.5, 0.5, 7.5, -2.5, -0.5, 7.5, 2.5, -0.5, -7.5, -2.5, 0.5, -7.5, -2.5, -0.5, -7.5)
+
+[sub_resource type="Animation" id="Animation_o5hrc"]
+resource_name = "Move"
+length = 20.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 10, 20),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(5, -0.5, -15.5), Vector3(-5, -0.5, -15.5), Vector3(5, -0.5, -15.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 20),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_unrf4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(5, -0.5, -15.5)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aln0r"]
+_data = {
+&"Move": SubResource("Animation_o5hrc"),
+&"RESET": SubResource("Animation_unrf4")
+}
+
+[sub_resource type="BoxMesh" id="BoxMesh_hgbtc"]
+
+[node name="MovingPlatformTest" type="Node3D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+
+[node name="SubLevelTemplate" parent="Node2D" instance=ExtResource("9_cyd5k")]
+
+[node name="NavigationRegion3D" parent="Node2D/SubLevelTemplate" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+navigation_mesh = SubResource("NavigationMesh_lircf")
+
+[node name="LevelFloorRoot" parent="Node2D/SubLevelTemplate/NavigationRegion3D" index="0"]
+position = Vector2(512, 0)
+
+[node name="Floor0" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot" index="0" node_paths=PackedStringArray("ElementRoots", "LevelEditor") instance=ExtResource("2_o5hrc")]
+ElementRoots = {
+0: NodePath("FloorRoot"),
+1: NodePath("WallRoot"),
+2: NodePath("GuardRoot"),
+3: NodePath("PropRoot"),
+4: NodePath("PickupRoot")
+}
+LevelEditor = NodePath("../../..")
+
+[node name="Floor" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/FloorRoot" index="0" instance=ExtResource("4_aln0r")]
+position = Vector2(256, 0)
+polygon = PackedVector2Array(-256, -512, 1024, -512, 1024, 256, -256, 256)
+PreviousPolygon = PackedVector2Array(-256, -512, 1024, -512, 1024, 256, -256, 256)
+Initialized = true
+
+[node name="3DRoot" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/FloorRoot/Floor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0)
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 768, 0)
+
+[node name="MeshInstance3D" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody/HideInEditorRoot" index="0"]
+mesh = SubResource("ArrayMesh_ymwww")
+
+[node name="LightCapture" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody/HideInEditorRoot/MeshInstance3D" index="0"]
+mesh = SubResource("ArrayMesh_ymwww")
+
+[node name="ShadowCaster" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody/HideInEditorRoot" index="1"]
+mesh = SubResource("ArrayMesh_ymwww")
+
+[node name="GuardVisionDisplay" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody" index="1"]
+mesh = SubResource("ArrayMesh_ymwww")
+
+[node name="CollisionShape3D" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody" index="2"]
+shape = SubResource("ConcavePolygonShape3D_lircf")
+
+[node name="CSGPolygon3D" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody/DestroyInGameRoot" index="0"]
+polygon = PackedVector2Array(-4, -8, 16, -8, 16, 4, -4, 4)
+material = ExtResource("6_v3cnu")
+
+[node name="Wall" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot" index="0" node_paths=PackedStringArray("Floor") instance=ExtResource("15_g5g0u")]
+position = Vector2(960, -192)
+points = PackedVector2Array(192, 64, -64, -128)
+Floor = NodePath("../..")
+PreviousPoints = PackedVector2Array(192, 64, -64, -128)
+Initialized = true
+
+[node name="3DRoot" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, 0, -3)
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 1472, -192)
+
+[node name="Mesh" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall/3DRoot/HideInEditor/StaticBody3D" index="0"]
+mesh = SubResource("ArrayMesh_o5hrc")
+
+[node name="LightCapture" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall/3DRoot/HideInEditor/StaticBody3D/Mesh" index="0"]
+mesh = SubResource("ArrayMesh_o5hrc")
+
+[node name="GuardVisionDisplay" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall/3DRoot/HideInEditor/StaticBody3D" index="1"]
+mesh = SubResource("ArrayMesh_o5hrc")
+
+[node name="CollisionShape3D" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall/3DRoot/HideInEditor/StaticBody3D" index="2"]
+shape = SubResource("ConcavePolygonShape3D_unrf4")
+
+[node name="PlayerVisionDisplay" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall/3DRoot/HideInEditor" index="1"]
+mesh = SubResource("ArrayMesh_aln0r")
+
+[node name="Mesh" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall/3DRoot/VisionOccluder" index="0"]
+mesh = SubResource("ArrayMesh_aln0r")
+
+[node name="CollisionShape3D" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall/3DRoot/VisionOccluder" index="1"]
+shape = SubResource("ConcavePolygonShape3D_g5g0u")
+
+[node name="@CSGCombiner3D@26535" type="CSGCombiner3D" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall/3DRoot/CSGTreeRoot/CSGTree/Additive" index="0"]
+
+[node name="@CSGMesh3D@26536" type="CSGMesh3D" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall/3DRoot/CSGTreeRoot/CSGTree/Additive/@CSGCombiner3D@26535"]
+transform = Transform3D(0.6, 0, 0.8, 0, 1, 0, -0.8, 0, 0.6, 3, 0, 1)
+mesh = ExtResource("17_n35s3")
+
+[node name="@CSGPolygon3D@26537" type="CSGPolygon3D" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall/3DRoot/CSGTreeRoot/CSGTree/Additive/@CSGCombiner3D@26535"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, -0.01, 0)
+operation = 1
+polygon = PackedVector2Array(2.904, 1.128, -1.096, -1.872, -0.904, -2.128, 3.096, 0.872)
+depth = 4.52
+material = ExtResource("20_txnjq")
+
+[node name="GuardBasic" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/GuardRoot" index="0" node_paths=PackedStringArray("Floor") instance=ExtResource("15_aln0r")]
+position = Vector2(128, 64)
+rotation = 1.57079
+points = PackedVector2Array(0, 0, 0.00156403, -704, -255.996, -576.002)
+Floor = NodePath("../..")
+Initialized = true
+
+[node name="3DRoot" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/GuardRoot/GuardBasic" index="0"]
+transform = Transform3D(6.27438e-06, 0, -1, 0, 1, 0, 1, 0, 6.27438e-06, 10, 0, 1)
+ParentGlobalTransformPrevious = Transform2D(6.27438e-06, 1, -1, 6.27438e-06, 640, 64)
+
+[node name="MeshInstance3D" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/GuardRoot/GuardBasic/3DRoot/CharacterBody3D" index="3"]
+material_override = SubResource("StandardMaterial3D_cyd5k")
+
+[node name="GuardController" parent="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/GuardRoot/GuardBasic" index="1"]
+Debug = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node2D/SubLevelTemplate/NavigationRegion3D" index="1"]
+mesh = SubResource("BoxMesh_v3cnu")
+
+[node name="Path2D" type="Path2D" parent="Node2D/SubLevelTemplate"]
+position = Vector2(0, 64)
+curve = SubResource("Curve2D_yysgo")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Node2D/SubLevelTemplate/Path2D"]
+position = Vector2(512, -64)
+loop = false
+script = ExtResource("6_cyd5k")
+Speed = 1.0
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Node2D/SubLevelTemplate/Path2D/PathFollow2D"]
+remote_path = NodePath("../../../NavigationRegion3D/LevelFloorRoot")
+
+[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Node2D/SubLevelTemplate/Path2D/PathFollow2D" node_paths=PackedStringArray("twoDParent")]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, 0)
+remote_path = NodePath("../../../NavigationRegion3D")
+script = ExtResource("10_s2tx0")
+ExcludedCollisionObjects = []
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 512, 0)
+twoDParent = NodePath("..")
+ExcludedRids = []
+
+[node name="LevelTemplate" parent="Node2D" instance=ExtResource("1_ymwww")]
+
+[node name="NavigationRegion3D" parent="Node2D/LevelTemplate" index="0"]
+navigation_mesh = SubResource("NavigationMesh_fgn0c")
+
+[node name="Floor0" parent="Node2D/LevelTemplate/NavigationRegion3D" index="0" node_paths=PackedStringArray("ElementRoots", "LevelEditor") instance=ExtResource("2_o5hrc")]
+ElementRoots = {
+0: NodePath("FloorRoot"),
+1: NodePath("WallRoot"),
+2: NodePath("GuardRoot"),
+3: NodePath("PropRoot"),
+4: NodePath("PickupRoot")
+}
+LevelEditor = NodePath("../..")
+
+[node name="Floor" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/FloorRoot" index="0" instance=ExtResource("4_aln0r")]
+position = Vector2(-64, -64)
+polygon = PackedVector2Array(-448, -448, 576, -448, 576, 576, 192, 576, 192, 832, -64, 832, -64, 576, -448, 576)
+PreviousPolygon = PackedVector2Array(-448, -448, 576, -448, 576, 576, 192, 576, 192, 832, -64, 832, -64, 576, -448, 576)
+Initialized = true
+
+[node name="3DRoot" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1)
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, -64, -64)
+
+[node name="MeshInstance3D" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody/HideInEditorRoot" index="0"]
+mesh = SubResource("ArrayMesh_xjnhd")
+
+[node name="LightCapture" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody/HideInEditorRoot/MeshInstance3D" index="0"]
+mesh = SubResource("ArrayMesh_xjnhd")
+
+[node name="ShadowCaster" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody/HideInEditorRoot" index="1"]
+mesh = SubResource("ArrayMesh_xjnhd")
+
+[node name="GuardVisionDisplay" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody" index="1"]
+mesh = SubResource("ArrayMesh_xjnhd")
+
+[node name="CollisionShape3D" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody" index="2"]
+shape = SubResource("ConcavePolygonShape3D_v3cnu")
+
+[node name="CSGPolygon3D" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor/3DRoot/AnimatableBody/DestroyInGameRoot" index="0"]
+polygon = PackedVector2Array(-7, -7, 9, -7, 9, 9, 3, 9, 3, 13, -1, 13, -1, 9, -7, 9)
+material = ExtResource("6_v3cnu")
+
+[node name="GuardBasic" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/GuardRoot" index="0" node_paths=PackedStringArray("Floor") instance=ExtResource("15_aln0r")]
+position = Vector2(-384, 384)
+points = PackedVector2Array(0, 0, 0, -768, 768, -768, 768, 0)
+AlertedBehavior = SubResource("Resource_o5hrc")
+Floor = NodePath("../..")
+Initialized = true
+
+[node name="3DRoot" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/GuardRoot/GuardBasic" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 6)
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, -384, 384)
+
+[node name="MeshInstance3D" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/GuardRoot/GuardBasic/3DRoot/CharacterBody3D" index="3"]
+material_override = SubResource("StandardMaterial3D_lircf")
+
+[node name="GuardController" parent="Node2D/LevelTemplate/NavigationRegion3D/Floor0/GuardRoot/GuardBasic" index="1"]
+WeaponPaths = []
+
+[node name="Player" parent="Node2D/LevelTemplate" index="1"]
+position = Vector2(1600, -320)
+
+[node name="3D Root" parent="Node2D/LevelTemplate/Player" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25, 0, -5)
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 1600, -320)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, -0.5, -15.5)
+visible = false
+navigation_mesh = SubResource("NavigationMesh_o5hrc")
+
+[node name="AnimatableBody3D" type="AnimatableBody3D" parent="NavigationRegion3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="NavigationRegion3D/AnimatableBody3D"]
+mesh = SubResource("BoxMesh_o5hrc")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="NavigationRegion3D/AnimatableBody3D"]
+shape = SubResource("ConvexPolygonShape3D_o5hrc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="NavigationRegion3D/AnimatableBody3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_aln0r")
+}
+autoplay = "Move"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 26.8699, -29.7383, -14.5059)
+mesh = SubResource("BoxMesh_hgbtc")
+
+[editable path="Node2D/SubLevelTemplate"]
+[editable path="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0"]
+[editable path="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/FloorRoot/Floor"]
+[editable path="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/WallRoot/Wall"]
+[editable path="Node2D/SubLevelTemplate/NavigationRegion3D/LevelFloorRoot/Floor0/GuardRoot/GuardBasic"]
+[editable path="Node2D/LevelTemplate"]
+[editable path="Node2D/LevelTemplate/NavigationRegion3D/Floor0"]
+[editable path="Node2D/LevelTemplate/NavigationRegion3D/Floor0/FloorRoot/Floor"]
+[editable path="Node2D/LevelTemplate/NavigationRegion3D/Floor0/GuardRoot/GuardBasic"]
+[editable path="Node2D/LevelTemplate/Player"]
+[editable path="Node2D/LevelTemplate/Player/3D Root/CharacterBody3D/PlayerAnimated"]
+[editable path="Node2D/LevelTemplate/Player/3D Root/CharacterBody3D/PlayerAnimated/PlayerCloak2"]
+[editable path="Node2D/LevelTemplate/Player/3D Root/FollowPlayerNoRotation/OverlaySymbols"]

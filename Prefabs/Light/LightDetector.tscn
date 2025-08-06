@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpofgvrn7dfjw"]
+
+[ext_resource type="Script" uid="uid://cnkd0ofmg2tjm" path="res://Prefabs/Light/LightDetector.cs" id="1_ihun3"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_8ospw"]
+radius = 0.1
+
+[node name="LightDetector" type="Area3D"]
+collision_layer = 0
+collision_mask = 32
+monitorable = false
+script = ExtResource("1_ihun3")
+LightOccluderLayers = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_8ospw")

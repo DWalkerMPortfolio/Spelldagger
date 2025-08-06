@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://b4fl5i4nxgucs"]
+
+[ext_resource type="Shader" uid="uid://l7klahen0f3o" path="res://Prefabs/Light/LightCapture.gdshader" id="1_5beh1"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_5beh1")
+shader_parameter/is_wall = true
+shader_parameter/wall_check_threshold = 0.9

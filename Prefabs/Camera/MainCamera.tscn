@@ -1,0 +1,125 @@
+[gd_scene load_steps=15 format=3 uid="uid://c6h1qs8nrqfr1"]
+
+[ext_resource type="Script" uid="uid://cnpntn5qvom2b" path="res://Prefabs/Camera/MainCamera.cs" id="1_pxbo8"]
+[ext_resource type="Material" uid="uid://damw11e4kyilv" path="res://Prefabs/Camera/PostProcess.tres" id="2_v3idy"]
+[ext_resource type="Script" uid="uid://b24u3toe6v2d4" path="res://Resources/Scripts/HideInGame3D.cs" id="3_qrtom"]
+[ext_resource type="Script" uid="uid://dtoqeke8y6sfa" path="res://Prefabs/Camera/LightCaptureViewport.cs" id="3_v3idy"]
+[ext_resource type="Shader" uid="uid://bl8bomfqcdbtx" path="res://Prefabs/Camera/LightCaptureDistort.gdshader" id="5_qtnpq"]
+
+[sub_resource type="Environment" id="Environment_qrtom"]
+background_mode = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_csavg"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qtnpq"]
+seamless = true
+noise = SubResource("FastNoiseLite_csavg")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_c1vne"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o0xyt"]
+noise = SubResource("FastNoiseLite_c1vne")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_o0xyt"]
+render_priority = 127
+shader = ExtResource("5_qtnpq")
+shader_parameter/distortion_noise = SubResource("NoiseTexture2D_qtnpq")
+shader_parameter/distortion_scale = 0.025
+shader_parameter/distortion_strength = 0.05
+shader_parameter/distortion_speed = 0.05
+shader_parameter/flicker_noise = SubResource("NoiseTexture2D_o0xyt")
+shader_parameter/flicker_strength = 0.05
+shader_parameter/flicker_speed = 0.05
+
+[sub_resource type="QuadMesh" id="QuadMesh_qrtom"]
+flip_faces = true
+size = Vector2(2, 2)
+
+[sub_resource type="Environment" id="Environment_v3idy"]
+background_mode = 1
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.05
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.0769693, 0.116241, 0.262186, 1)
+fog_density = 1.0
+fog_sky_affect = 0.0
+fog_height = 2.0
+fog_height_density = 0.01
+fog_depth_begin = 56.5
+fog_depth_end = 90.0
+volumetric_fog_density = 0.0
+adjustment_enabled = true
+adjustment_contrast = 1.05
+adjustment_saturation = 1.1
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_qtnpq"]
+dof_blur_amount = 0.05
+
+[node name="MainCamera" type="Node3D"]
+
+[node name="LightCaptureViewport" type="SubViewport" parent="."]
+size = Vector2i(1920, 1080)
+script = ExtResource("3_v3idy")
+
+[node name="Camera3D" type="Camera3D" parent="LightCaptureViewport"]
+process_priority = 1
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 60, 0)
+cull_mask = 36
+environment = SubResource("Environment_qrtom")
+fov = 25.0
+far = 100.0
+
+[node name="Distort" type="MeshInstance3D" parent="LightCaptureViewport/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.62268e-06, -60)
+visible = false
+layers = 32
+material_override = SubResource("ShaderMaterial_o0xyt")
+cast_shadow = 0
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_qrtom")
+skeleton = NodePath("../../..")
+script = ExtResource("3_qrtom")
+HideInEditor = true
+
+[node name="CameraRoot" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CameraRoot" node_paths=PackedStringArray("Root", "Fadeout", "LightCaptureCamera")]
+process_mode = 3
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 60, 0)
+cull_mask = 1048543
+environment = SubResource("Environment_v3idy")
+attributes = SubResource("CameraAttributesPractical_qtnpq")
+current = true
+fov = 25.0
+far = 100.0
+script = ExtResource("1_pxbo8")
+Root = NodePath("..")
+Fadeout = NodePath("Fadeout")
+LightCaptureCamera = NodePath("../../LightCaptureViewport/Camera3D")
+Easing = 0.1
+TransitionDuration = 1.0
+FadeTransitionDistance = 15.0
+
+[node name="Fadeout" type="ColorRect" parent="CameraRoot/Camera3D"]
+modulate = Color(1, 1, 1, 0)
+z_index = -4096
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 1)
+
+[node name="PostProcess" type="MeshInstance3D" parent="CameraRoot/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 2.62268e-06, -60)
+visible = false
+material_override = ExtResource("2_v3idy")
+cast_shadow = 0
+extra_cull_margin = 16384.0
+mesh = SubResource("QuadMesh_qrtom")
+skeleton = NodePath("../../..")
+script = ExtResource("3_qrtom")
+HideInEditor = true

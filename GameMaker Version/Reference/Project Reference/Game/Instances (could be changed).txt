@@ -1,0 +1,13 @@
+- obj_control:
+	- create:
+		- level data initialization:
+			- instance grid initialized
+			- instance create list initialized
+			- door grid initialized (to be changed)
+	- begin step:
+		- sector management:
+			- destroy instances (if sector changed and not in view)
+				- remove from instanceCreateList
+			- create instances (if sector changed, not in instanceCreatList, not in view)
+				- assign image_angle, influence, instanceIndex, dataMap, pathRow
+				- add to instanceCreateList list

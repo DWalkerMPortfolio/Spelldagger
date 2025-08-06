@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://dgyd7t5png7w1"]
+
+[ext_resource type="PackedScene" uid="uid://c1wh3quqt7y8n" path="res://Prefabs/Props/PropBase.tscn" id="1_aksa3"]
+[ext_resource type="Script" uid="uid://dhchgkjlwnhx2" path="res://Resources/Scripts/ProximityFader.cs" id="2_pi1e0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_aksa3"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lojkd"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[node name="Cube" instance=ExtResource("1_aksa3")]
+
+[node name="3DRoot" parent="." index="0"]
+ExcludedCollisionObjects = []
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="3DRoot" index="0"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/StaticBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+mesh = SubResource("BoxMesh_aksa3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/StaticBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+shape = SubResource("ConcavePolygonShape3D_lojkd")
+
+[node name="ProximityFade" type="Node3D" parent="3DRoot" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+script = ExtResource("2_pi1e0")
+GeometryInstancePaths = Array[NodePath]([NodePath("../StaticBody3D/MeshInstance3D")])

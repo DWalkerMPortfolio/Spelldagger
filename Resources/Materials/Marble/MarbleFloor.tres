@@ -1,0 +1,35 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://cg83sv2xp1y5s"]
+
+[ext_resource type="Shader" uid="uid://85msycibstys" path="res://Resources/Shaders/SDStandardShader.gdshader" id="1_ov5wh"]
+[ext_resource type="Texture2D" uid="uid://hne3islodelj" path="res://Resources/Materials/Marble/Marble017_1K-JPG_Color.jpg" id="2_t3fis"]
+[ext_resource type="Texture2D" uid="uid://cun1obfxbry24" path="res://Resources/Materials/Marble/Marble017_1K-JPG_NormalGL.jpg" id="3_3i4qc"]
+[ext_resource type="Texture2D" uid="uid://d1u10hgandtv7" path="res://Resources/Materials/Marble/Marble017_1K-JPG_Roughness.jpg" id="4_sytd0"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_ov5wh")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/texture_albedo = ExtResource("2_t3fis")
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/texture_roughness = ExtResource("4_sytd0")
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/emission = Color(0, 0, 0, 1)
+shader_parameter/emission_energy = 0.0
+shader_parameter/texture_normal = ExtResource("3_3i4qc")
+shader_parameter/normal_strength = 1.0
+shader_parameter/ao_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/ao_light_affect = 0.0
+shader_parameter/backlight = Color(0, 0, 0, 1)
+shader_parameter/floor_uvs = true
+shader_parameter/uv_scale = Vector2(0.25, 0.25)
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/dark_albedo = Color(0, 0, 0, 1)
+shader_parameter/dark_detail_texture_lod = 3.0
+shader_parameter/dark_detail_texture_step = Vector2(0.15, 0.3)
+shader_parameter/dark_detail_color = Color(1, 1, 1, 0.035)
+shader_parameter/dark_detail_noise_scale = Vector2(0.35, 0.35)
+shader_parameter/dark_detail_noise_step_range = Vector2(0.25, 1)
+shader_parameter/dark_detail_noise_min_value = 0.6
+shader_parameter/dark_normal_step = Vector2(0.8, 1)

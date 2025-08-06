@@ -1,0 +1,16 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://de2l4smd6g2bx"]
+
+[ext_resource type="ArrayMesh" uid="uid://tvgdv3taattt" path="res://Prefabs/Pickup/Document/Documents.glb-Meshes/Book.res" id="1_uomnh"]
+[ext_resource type="PackedScene" uid="uid://c5xglmd86vgpx" path="res://Prefabs/Pickup/Document/Documents/TestDocumentTemplate.tscn" id="2_dm47u"]
+[ext_resource type="Script" uid="uid://b7h5wt2adw728" path="res://Prefabs/Pickup/Document/DocumentItem.cs" id="3_cb15u"]
+
+[resource]
+script = ExtResource("3_cb15u")
+Template = ExtResource("2_dm47u")
+Text = "This document is worth 
+$547,456,384,293,
+348,492,102,103.82
+
+Please don't steal it."
+Name = "Valuable Document"
+Mesh = ExtResource("1_uomnh")

@@ -1,0 +1,15 @@
+- obj_control:
+	- create:
+		- level data initialization:
+			- wall grid initialized
+			- wall visible list initialized
+	- step begin:
+		- sector management (when sector changed):
+			- player wall grid loaded
+			- wall colliders cleared
+			- wall colliders loaded
+		- wall visibility:
+			- wall visible list updated
+	- draw end:
+		- shadows + walls + fade:
+			- visible walls drawn

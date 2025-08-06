@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://dnyf5f8p15gdu"]
+
+[ext_resource type="PackedScene" uid="uid://c1wh3quqt7y8n" path="res://Prefabs/Props/PropBase.tscn" id="1_fi52y"]
+[ext_resource type="PackedScene" uid="uid://bs6mrihivu0je" path="res://Prefabs/Meshes/LightCaptureMeshInstance.tscn" id="2_2dag5"]
+[ext_resource type="ArrayMesh" uid="uid://fc1h2l1eo5e3" path="res://Prefabs/Props/Prop Scenes/Initial Props/Props.glb-Meshes/Shelf.res" id="3_i56vy"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cykp1"]
+points = PackedVector3Array(0.686294, 0.681519, 1.32287, -3.41623e-05, 0.681519, 1.32287, 0.686294, 4.06469e-08, 1.32287, 0.686294, 0.681519, -1.32287, 0.679735, 3.00197, 1.29282, -0.00442937, 2.1368, 1.14624, -3.41623e-05, 4.06469e-08, 1.32287, -3.41623e-05, 3.00197, 1.29282, 0.686294, 4.06469e-08, -1.32287, 0.679735, 3.00197, -1.29308, -3.41623e-05, 0.681519, -1.32287, 0.578104, 4.10933, -0.000258923, 0.477961, 4.30309, 1.21591, -0.00442937, 0.996584, 1.14624, -3.41623e-05, 4.30309, 1.21591, -0.00442937, 3.35957, 1.05508, -3.41623e-05, 4.06469e-08, -1.32287, 0.477961, 4.30309, -1.21617, -3.41623e-05, 3.00197, -1.29308, -0.00442937, 2.1368, -1.1465, -0.00442937, 0.996584, -1.1465, -3.41623e-05, 4.30309, -1.21617, -0.00442937, 3.35957, -1.05534, -0.00442937, 2.73071, -1.10247)
+
+[node name="Shelf" instance=ExtResource("1_fi52y")]
+SnapToWall = true
+
+[node name="3DRoot" parent="." index="0" node_paths=PackedStringArray("ExcludedCollisionObjects")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
+Offset = Vector3(0.15, 0, 0)
+ExcludedCollisionObjects = [NodePath("StaticBody3D")]
+ExcludedRids = Array[RID]([RID(29752557014351900)])
+
+[node name="LightCaptureMeshInstance" parent="3DRoot" index="0" instance=ExtResource("2_2dag5")]
+mesh = ExtResource("3_i56vy")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="3DRoot" index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_cykp1")

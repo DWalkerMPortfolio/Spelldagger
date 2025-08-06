@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://bl0itkuas04jl"]
+
+[ext_resource type="PackedScene" uid="uid://c1wh3quqt7y8n" path="res://Prefabs/Props/PropBase.tscn" id="1_el43u"]
+[ext_resource type="PackedScene" uid="uid://bs6mrihivu0je" path="res://Prefabs/Meshes/LightCaptureMeshInstance.tscn" id="2_1mdus"]
+[ext_resource type="ArrayMesh" uid="uid://bdhgkwqw6egw2" path="res://Prefabs/Props/Prop Scenes/Initial Props/Props.glb-Meshes/Desk.res" id="3_fu2w1"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_el43u"]
+points = PackedVector3Array(1.01974, 1.21643, 1.77396, 0.9317, 1.2717, 1.69546, -1.01974, 1.21643, 1.77396, 0.833879, 0, 1.54679, 1.01974, 1.21643, -0.000347376, -0.9319, 1.2717, 1.69546, 0.9317, 1.2717, -1.69581, -0.834078, 0, 1.54679, -1.01974, 1.21643, -1.77431, 0.833879, 0, -1.54714, 1.01954, 1.21643, -1.77431, -0.9319, 1.2717, -1.69581, -0.834078, 0, -1.54714)
+
+[node name="Desk" instance=ExtResource("1_el43u")]
+
+[node name="3DRoot" parent="." index="0" node_paths=PackedStringArray("ExcludedCollisionObjects")]
+ExcludedCollisionObjects = [NodePath("StaticBody3D")]
+ExcludedRids = Array[RID]([RID(4257132929089568)])
+
+[node name="LightCaptureMeshInstance" parent="3DRoot" index="0" instance=ExtResource("2_1mdus")]
+mesh = ExtResource("3_fu2w1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="3DRoot" index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_el43u")

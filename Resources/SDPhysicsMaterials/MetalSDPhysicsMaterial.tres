@@ -1,0 +1,9 @@
+[gd_resource type="PhysicsMaterial" load_steps=2 format=3 uid="uid://d0m21qkqh8p3u"]
+
+[ext_resource type="Script" uid="uid://5dfbfc4i6qei" path="res://Resources/SDPhysicsMaterials/SDPhysicsMaterial.cs" id="1_8ritw"]
+
+[resource]
+bounce = 0.4
+script = ExtResource("1_8ritw")
+DaggersStick = false
+DaggerHitSoundRadius = 10.0

@@ -1,0 +1,129 @@
+[gd_scene load_steps=8 format=3 uid="uid://div08x7kapqtj"]
+
+[ext_resource type="Script" uid="uid://cokhjohbopydn" path="res://Prefabs/3D Underlay/ThreeDUnderlay.cs" id="1_1jebm"]
+
+[sub_resource type="Environment" id="Environment_ue1w6"]
+ambient_light_source = 2
+ambient_light_color = Color(1, 1, 1, 1)
+ambient_light_energy = 0.0
+reflected_light_source = 1
+fog_mode = 1
+fog_light_color = Color(0, 0, 0, 1)
+fog_light_energy = 0.0
+fog_density = 1.0
+fog_height = 5.0
+fog_height_density = 1.0
+fog_depth_begin = 100.0
+fog_depth_end = 101.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a3cq1"]
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0.173, 0.173, 0.173, 0.5)
+
+[sub_resource type="QuadMesh" id="QuadMesh_g2foi"]
+size = Vector2(10000, 10000)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vrqmn"]
+viewport_path = NodePath("3D Capture")
+
+[sub_resource type="FontFile" id="FontFile_a3cq1"]
+subpixel_positioning = 0
+msdf_pixel_range = 14
+msdf_size = 128
+cache/0/100/0/ascent = 0.0
+cache/0/100/0/descent = 0.0
+cache/0/100/0/underline_position = 0.0
+cache/0/100/0/underline_thickness = 0.0
+cache/0/100/0/scale = 1.0
+cache/0/16/0/ascent = 0.0
+cache/0/16/0/descent = 0.0
+cache/0/16/0/underline_position = 0.0
+cache/0/16/0/underline_thickness = 0.0
+cache/0/16/0/scale = 1.0
+cache/0/120/0/ascent = 0.0
+cache/0/120/0/descent = 0.0
+cache/0/120/0/underline_position = 0.0
+cache/0/120/0/underline_thickness = 0.0
+cache/0/120/0/scale = 1.0
+cache/0/110/0/ascent = 0.0
+cache/0/110/0/descent = 0.0
+cache/0/110/0/underline_position = 0.0
+cache/0/110/0/underline_thickness = 0.0
+cache/0/110/0/scale = 1.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_g2foi"]
+font = SubResource("FontFile_a3cq1")
+font_size = 110
+outline_size = 25
+outline_color = Color(0, 0, 0, 1)
+
+[node name="3D Underlay" type="Node" node_paths=PackedStringArray("CaptureViewport", "CaptureCamera", "DisplaySprite", "DepthDarkener", "HeightLabelRoot", "HeightLabel", "DirectionalLight")]
+script = ExtResource("1_1jebm")
+Visible = true
+CaptureViewport = NodePath("3D Capture")
+CaptureCamera = NodePath("3D Capture/Camera3D")
+DisplaySprite = NodePath("3D Display")
+DepthDarkener = NodePath("3D Capture/Camera3D/DepthDarkener")
+HeightLabelRoot = NodePath("HeightLabelRoot")
+HeightLabel = NodePath("HeightLabelRoot/HeightLabel")
+DirectionalLight = NodePath("DirectionalLight3D")
+CameraHeight = 3.0
+
+[node name="3D Capture" type="SubViewport" parent="."]
+size = Vector2i(1090, 839)
+
+[node name="Camera3D" type="Camera3D" parent="3D Capture"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -57.2309, 5, -146.751)
+environment = SubResource("Environment_ue1w6")
+projection = 1
+fov = 86.0
+size = 539.383
+far = 10.1
+
+[node name="DepthDarkener" type="MeshInstance3D" parent="3D Capture/Camera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5.1)
+material_override = SubResource("StandardMaterial3D_a3cq1")
+mesh = SubResource("QuadMesh_g2foi")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
+light_cull_mask = 4293918721
+
+[node name="3D Display" type="Sprite2D" parent="."]
+process_priority = 100
+z_index = -1
+position = Vector2(-3662.78, -9392.05)
+scale = Vector2(41.1448, 41.1448)
+texture = SubResource("ViewportTexture_vrqmn")
+
+[node name="HeightLabelRoot" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -26086.7
+offset_top = -26652.3
+offset_right = -24996.7
+offset_bottom = -25813.3
+scale = Vector2(41.1448, 41.1448)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_lock_ = true
+metadata/_edit_group_ = true
+
+[node name="HeightLabel" type="Label" parent="HeightLabelRoot"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -196.0
+offset_top = -34.0
+offset_right = 1236.0
+offset_bottom = 113.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.125, 0.125)
+text = "Floor: 0"
+label_settings = SubResource("LabelSettings_g2foi")
+horizontal_alignment = 2

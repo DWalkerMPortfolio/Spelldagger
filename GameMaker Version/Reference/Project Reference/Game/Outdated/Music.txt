@@ -1,0 +1,8 @@
+Baseline
+	- Chords
+Calm
+	- Melody
+Tension (includes calm)
+	- Percussion
+Danger
+	- Brass

@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://ced6nljscj86r"]
+
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="2_y1nk6"]
+[ext_resource type="Script" uid="uid://dm1q01vk6bofl" path="res://Prefabs/Interactable/Interactable.cs" id="3_8ru5l"]
+[ext_resource type="Script" uid="uid://dhchgkjlwnhx2" path="res://Resources/Scripts/ProximityFader.cs" id="4_y1nk6"]
+[ext_resource type="Script" uid="uid://be50w83yuh8q1" path="res://Prefabs/Pickup/Pickup.cs" id="4_yjojm"]
+[ext_resource type="Script" uid="uid://dqf0p7wxlnlew" path="res://Prefabs/Player/Pocketwatch/TemporalController.cs" id="5_y1nk6"]
+
+[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_51m3o"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hgtex"]
+radius = 4.0
+
+[node name="Pickup" type="Node2D" node_paths=PackedStringArray("MeshInstance", "Root", "Interactable", "InteractionShape")]
+script = ExtResource("4_yjojm")
+InteractionRadius = 4.0
+MeshInstance = NodePath("3DRoot/MeshInstance3D")
+Root = NodePath("3DRoot")
+Interactable = NodePath("3DRoot/InteractionZone")
+InteractionShape = NodePath("3DRoot/InteractionZone/CollisionShape3D")
+
+[node name="3DRoot" type="Node3D" parent="." node_paths=PackedStringArray("twoDParent")]
+process_mode = 3
+script = ExtResource("2_y1nk6")
+SnapToGround = true
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+twoDParent = NodePath("..")
+ExcludedRids = Array[RID]([])
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot"]
+process_mode = 1
+mesh = SubResource("PlaceholderMesh_51m3o")
+
+[node name="InteractionZone" type="Area3D" parent="3DRoot"]
+process_mode = 1
+collision_layer = 64
+collision_mask = 0
+monitoring = false
+script = ExtResource("3_8ru5l")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/InteractionZone"]
+shape = SubResource("SphereShape3D_hgtex")
+
+[node name="ProximityFade" type="Node3D" parent="3DRoot"]
+process_mode = 1
+script = ExtResource("4_y1nk6")
+ShaderGeometryInstancePaths = Array[NodePath]([NodePath("../MeshInstance3D")])
+
+[node name="TemporalController" type="Node" parent="." node_paths=PackedStringArray("ControlledNode")]
+script = ExtResource("5_y1nk6")
+ControlledNode = NodePath("..")

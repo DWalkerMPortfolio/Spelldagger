@@ -1,0 +1,18 @@
+- obj_control
+	- create:
+		- level data initialization:
+			- texture grid initialized
+			- texture sheet loaded
+	- step begin:
+		- sector management (when sector changed):
+			- player texture grid loaded
+			- player low texture grid loaded
+	- pre-draw:
+		- calculate textures:
+			- texture surface created (if sector changed)
+	- draw begin:
+		- draw textures + calculate shadows:
+			- texture surface drawn (including flicker effect)
+			- dark texture surface calculated (if lights or sector changed)
+			- lights subtracted from dark texture surface (if lights or sector changed)
+			- dark texture surface drawn

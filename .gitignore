@@ -1,0 +1,6 @@
+.vs/
+Builds/
+Playtest Recordings/
+
+# Godot 4+ specific ignores
+.godot/

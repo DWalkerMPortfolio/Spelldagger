@@ -1,0 +1,141 @@
+[gd_scene load_steps=18 format=4 uid="uid://ys4udiqskwhl"]
+
+[ext_resource type="Script" uid="uid://c4kukdw6ap37j" path="res://Prefabs/Wall/WallEditor.cs" id="1_2mc68"]
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="2_atjb8"]
+[ext_resource type="ArrayMesh" uid="uid://nvm66we38poo" path="res://Prefabs/Wall/Walls.glb-Meshes/Wall_Basic.res" id="2_bovcj"]
+[ext_resource type="PhysicsMaterial" uid="uid://dkl8kk5qi6gos" path="res://Resources/SDPhysicsMaterials/WoodSDPhysicsMaterial.tres" id="2_t8xpi"]
+[ext_resource type="PackedScene" uid="uid://dg5af6epk8qr3" path="res://Prefabs/Door/Door.tscn" id="4_0cevl"]
+[ext_resource type="Script" uid="uid://d4mt0qeh0k076" path="res://Prefabs/Wall/VisionOccluder.cs" id="6_4cal2"]
+[ext_resource type="Material" uid="uid://b4fl5i4nxgucs" path="res://Prefabs/Wall/LightCaptureWall.tres" id="7_bovcj"]
+[ext_resource type="Script" uid="uid://b24u3toe6v2d4" path="res://Resources/Scripts/HideInGame3D.cs" id="7_ikecf"]
+[ext_resource type="Material" uid="uid://b11tc37kq8ijm" path="res://Prefabs/Guard/GuardVisionDisplay.tres" id="7_vpogm"]
+[ext_resource type="Script" uid="uid://bbmc0vprlr5gp" path="res://Resources/Scripts/DestroyInGame.cs" id="8_vpogm"]
+[ext_resource type="Material" uid="uid://b6kfyvl3eu1bd" path="res://Prefabs/Wall/PlayerVisionDisplay.tres" id="11_0cevl"]
+[ext_resource type="Material" uid="uid://cspjcqml0kjqa" path="res://Resources/Materials/VisionOccluder.tres" id="11_bovcj"]
+[ext_resource type="Script" uid="uid://cbhx1rnqyn53p" path="res://Prefabs/Wall/PlayerVisionDisplay.cs" id="12_nushd"]
+[ext_resource type="Script" uid="uid://dhchgkjlwnhx2" path="res://Resources/Scripts/ProximityFader.cs" id="13_0cevl"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7vnih"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nushd"]
+_surfaces = [{
+"aabb": AABB(0, -10, -1, 1e-05, 15.1, 1),
+"format": 34359742471,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAAACAAMA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("AAAAAAAAIMEAAAAAAAAAAAAAIMEAAIC/AAAAADMzo0AAAIC/AAAAADMzo0AAAAAAAAD/f/9//78AAP9//3//vwAA/3//f/+/AAD/f/9//78=")
+}]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_7vnih"]
+data = PackedVector3Array(0, -10, 0, 0, -10, -1, 0, 5.1, -1, 0, -10, 0, 0, 5.1, -1, 0, 5.1, 0)
+backface_collision = true
+
+[node name="Wall" type="Line2D" node_paths=PackedStringArray("StaticBody", "MeshInstance", "GuardVisionDisplay", "LightCapture", "CollisionShape", "VisionOccluder", "PlayerVisionDisplay", "OccluderCollisionShape", "CsgTree", "AdditiveCsgTree", "SubtractiveCsgTree", "DoorRoot", "Root")]
+process_mode = 3
+self_modulate = Color(1, 1, 1, 0)
+points = PackedVector2Array(0, 0, 0, -64)
+width = 2.0
+antialiased = true
+script = ExtResource("1_2mc68")
+WallSegmentMesh = ExtResource("2_bovcj")
+PhysicsMaterial = ExtResource("2_t8xpi")
+StaticBody = NodePath("3DRoot/HideInEditor/StaticBody3D")
+MeshInstance = NodePath("3DRoot/HideInEditor/StaticBody3D/Mesh")
+GuardVisionDisplay = NodePath("3DRoot/HideInEditor/StaticBody3D/GuardVisionDisplay")
+LightCapture = NodePath("3DRoot/HideInEditor/StaticBody3D/Mesh/LightCapture")
+CollisionShape = NodePath("3DRoot/HideInEditor/StaticBody3D/CollisionShape3D")
+VisionOccluder = NodePath("3DRoot/VisionOccluder/Mesh")
+PlayerVisionDisplay = NodePath("3DRoot/HideInEditor/PlayerVisionDisplay")
+OccluderCollisionShape = NodePath("3DRoot/VisionOccluder/CollisionShape3D")
+CsgTree = NodePath("3DRoot/CSGTreeRoot/CSGTree")
+AdditiveCsgTree = NodePath("3DRoot/CSGTreeRoot/CSGTree/Additive")
+SubtractiveCsgTree = NodePath("3DRoot/CSGTreeRoot/CSGTree/Subtractive")
+DoorPrefab = ExtResource("4_0cevl")
+DoorRoot = NodePath("Doors")
+OccluderHeightRange = Vector2(0, 5)
+PreviousPoints = PackedVector2Array(0, 0, 0, -64)
+Root = NodePath("3DRoot")
+Type = 1
+
+[node name="3DRoot" type="Node3D" parent="." node_paths=PackedStringArray("twoDParent")]
+process_mode = 3
+script = ExtResource("2_atjb8")
+ExcludedCollisionObjects = []
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+twoDParent = NodePath("..")
+ExcludedRids = []
+
+[node name="HideInEditor" type="Node3D" parent="3DRoot"]
+process_mode = 1
+visible = false
+script = ExtResource("7_ikecf")
+HideInEditor = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="3DRoot/HideInEditor"]
+physics_material_override = ExtResource("2_t8xpi")
+
+[node name="Mesh" type="MeshInstance3D" parent="3DRoot/HideInEditor/StaticBody3D"]
+mesh = SubResource("ArrayMesh_7vnih")
+
+[node name="LightCapture" type="MeshInstance3D" parent="3DRoot/HideInEditor/StaticBody3D/Mesh"]
+layers = 32
+material_override = ExtResource("7_bovcj")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_7vnih")
+
+[node name="GuardVisionDisplay" type="MeshInstance3D" parent="3DRoot/HideInEditor/StaticBody3D"]
+layers = 2
+material_override = ExtResource("7_vpogm")
+cast_shadow = 0
+mesh = SubResource("ArrayMesh_7vnih")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/HideInEditor/StaticBody3D"]
+
+[node name="PlayerVisionDisplay" type="MeshInstance3D" parent="3DRoot/HideInEditor" node_paths=PackedStringArray("Root")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+layers = 8
+material_override = ExtResource("11_0cevl")
+cast_shadow = 0
+script = ExtResource("12_nushd")
+Root = NodePath("../..")
+
+[node name="VisionOccluder" type="StaticBody3D" parent="3DRoot" node_paths=PackedStringArray("CollisionShape")]
+process_mode = 1
+collision_layer = 16
+collision_mask = 0
+script = ExtResource("6_4cal2")
+CollisionShape = NodePath("CollisionShape3D")
+
+[node name="Mesh" type="MeshInstance3D" parent="3DRoot/VisionOccluder"]
+layers = 4
+material_override = ExtResource("11_bovcj")
+cast_shadow = 3
+mesh = SubResource("ArrayMesh_nushd")
+skeleton = NodePath("../../HideInEditor/StaticBody3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/VisionOccluder"]
+shape = SubResource("ConcavePolygonShape3D_7vnih")
+
+[node name="CSGTreeRoot" type="Node3D" parent="3DRoot"]
+process_mode = 1
+script = ExtResource("8_vpogm")
+metadata/_edit_lock_ = true
+
+[node name="CSGTree" type="CSGCombiner3D" parent="3DRoot/CSGTreeRoot"]
+
+[node name="Additive" type="CSGCombiner3D" parent="3DRoot/CSGTreeRoot/CSGTree"]
+
+[node name="Subtractive" type="CSGCombiner3D" parent="3DRoot/CSGTreeRoot/CSGTree"]
+operation = 2
+
+[node name="ProximityFade" type="Node3D" parent="3DRoot"]
+process_mode = 1
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("13_0cevl")
+ShaderGeometryInstancePaths = Array[NodePath]([NodePath("../HideInEditor/StaticBody3D/Mesh"), NodePath("../HideInEditor/StaticBody3D/Mesh/LightCapture"), NodePath("../HideInEditor/StaticBody3D/GuardVisionDisplay")])
+
+[node name="Doors" type="Node2D" parent="."]
+metadata/_edit_lock_ = true

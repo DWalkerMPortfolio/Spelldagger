@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://o351ma0f741e"]
+
+[ext_resource type="Script" uid="uid://nt2q85qslgyn" path="res://Prefabs/Level Template/LevelEditorFloor.cs" id="1_wwax5"]
+[ext_resource type="PackedScene" uid="uid://cic2m4e3tr68n" path="res://Prefabs/Floor/Floor.tscn" id="2_0lbkx"]
+[ext_resource type="PackedScene" uid="uid://ys4udiqskwhl" path="res://Prefabs/Wall/Wall.tscn" id="3_2brog"]
+[ext_resource type="PackedScene" uid="uid://ced6nljscj86r" path="res://Prefabs/Pickup/Pickup.tscn" id="4_2yrim"]
+
+[node name="LevelFloor" type="Node2D" node_paths=PackedStringArray("ElementRoots", "OtherRoot")]
+script = ExtResource("1_wwax5")
+ElementRoots = {
+0: NodePath("FloorRoot"),
+1: NodePath("WallRoot"),
+2: NodePath("GuardRoot"),
+3: NodePath("PropRoot"),
+4: NodePath("PickupRoot")
+}
+ElementPrefabs = Dictionary[int, PackedScene]({
+0: ExtResource("2_0lbkx"),
+1: ExtResource("3_2brog"),
+4: ExtResource("4_2yrim")
+})
+OtherRoot = NodePath("OtherRoot")
+
+[node name="FloorRoot" type="Node2D" parent="."]
+
+[node name="WallRoot" type="Node2D" parent="."]
+
+[node name="GuardRoot" type="Node2D" parent="."]
+
+[node name="PropRoot" type="Node2D" parent="."]
+
+[node name="PickupRoot" type="Node2D" parent="."]
+
+[node name="OtherRoot" type="Node2D" parent="."]

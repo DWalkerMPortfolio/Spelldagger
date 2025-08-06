@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bos3gnpg8c3bn"]
+
+[ext_resource type="Script" uid="uid://ddkemnxptcu8f" path="res://Prefabs/Guard/Perception Sources/GuardVisionCone.cs" id="1_umhof"]
+
+[sub_resource type="Gradient" id="Gradient_1ra45"]
+colors = PackedColorArray(0.606211, 0.348484, 1, 1, 0.943961, 2.69532e-06, 0.498785, 1)
+
+[node name="MagicVisionRadius" type="Node3D" node_paths=PackedStringArray("Light")]
+script = ExtResource("1_umhof")
+Range = 2.0
+Light = NodePath("Light")
+AwarenessGradient = SubResource("Gradient_1ra45")
+SenseTarget = 1
+
+[node name="Light" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+light_color = Color(0.607843, 0.34902, 1, 1)
+light_energy = 0.8
+light_cull_mask = 4293918722
+shadow_enabled = true
+shadow_caster_mask = 4293918724
+omni_range = 2.0
+omni_attenuation = 0.0

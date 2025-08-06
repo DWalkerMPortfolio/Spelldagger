@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3 uid="uid://cbgt34rs8ldj0"]
+
+[ext_resource type="Script" uid="uid://dw3qf73supk1l" path="res://Prefabs/Guard/GuardEditor.cs" id="1_vpgeq"]
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="5_7y2i8"]
+[ext_resource type="Script" uid="uid://bo35dmj3x4tn6" path="res://Prefabs/Guard/GuardController.cs" id="12_j74bq"]
+[ext_resource type="Script" uid="uid://dotd3pexjqs8h" path="res://Resources/Scripts/StateMachine.cs" id="13_woe73"]
+[ext_resource type="Script" uid="uid://dqf0p7wxlnlew" path="res://Prefabs/Player/Pocketwatch/TemporalController.cs" id="14_mtdwk"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_xx3cn"]
+
+[node name="Guard" type="Line2D" node_paths=PackedStringArray("Root")]
+points = PackedVector2Array(0, 0)
+width = 0.0
+default_color = Color(1, 1, 1, 0)
+script = ExtResource("1_vpgeq")
+Root = NodePath("3DRoot")
+DestroyInGame = false
+Type = 2
+metadata/_edit_group_ = true
+
+[node name="3DRoot" type="Node3D" parent="." node_paths=PackedStringArray("twoDParent")]
+script = ExtResource("5_7y2i8")
+ExcludedCollisionObjects = []
+ActiveInGame = false
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+twoDParent = NodePath("..")
+ExcludedRids = []
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="3DRoot"]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_xx3cn")
+
+[node name="Foot" type="Node3D" parent="3DRoot/CharacterBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+
+[node name="DebugLabel" type="Label3D" parent="3DRoot/CharacterBody3D"]
+transform = Transform3D(-3, -4.52987e-07, -1.98007e-14, 0, -1.31134e-07, 3, -4.52987e-07, 3, 1.31134e-07, 0, 2.72668, 0)
+visible = false
+render_priority = 127
+text = "Idle"
+
+[node name="GuardController" type="Node" parent="." node_paths=PackedStringArray("Editor", "Body", "StateMachine", "Foot", "NavigationPathReferenceTransform", "DebugLabel")]
+script = ExtResource("12_j74bq")
+Editor = NodePath("..")
+Body = NodePath("../3DRoot/CharacterBody3D")
+StateMachine = NodePath("StateMachine")
+Foot = NodePath("../3DRoot/CharacterBody3D/Foot")
+NavigationPathReferenceTransform = NodePath("../PathReferenceTransform")
+DebugLabel = NodePath("../3DRoot/CharacterBody3D/DebugLabel")
+GravityScale = 20.0
+HighAlertMinAwareness = 0.5
+AwarenessDecayDelta = -5.0
+DirectPathCheckingStep = 0.5
+ShapecastRadius = 0.45
+ShapecastHeight = 1.9
+PathHeightOffset = -0.25
+PathSimplificationEpsilon = 0.15
+
+[node name="StateMachine" type="Node" parent="GuardController"]
+script = ExtResource("13_woe73")
+
+[node name="TemporalController" type="Node" parent="GuardController" node_paths=PackedStringArray("ControlledNode")]
+script = ExtResource("14_mtdwk")
+ControlledNode = NodePath("..")
+
+[node name="SelectionPoint" type="Node2D" parent="."]
+
+[node name="PathReferenceTransform" type="Node3D" parent="."]

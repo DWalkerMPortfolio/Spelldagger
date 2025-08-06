@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ba7000ovsfc31"]
+
+[ext_resource type="Script" uid="uid://vhyq2tvqyt3n" path="res://Prefabs/Level Template/LevelEditorElementNode2D.cs" id="1_o5o8u"]
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="1_tkv2f"]
+[ext_resource type="PackedScene" uid="uid://66ps6wrm0i4s" path="res://Prefabs/Light/OmniLight.tscn" id="4_isg1o"]
+
+[node name="Light" type="Node2D" node_paths=PackedStringArray("Root")]
+script = ExtResource("1_o5o8u")
+Root = NodePath("3DRoot")
+
+[node name="3DRoot" type="Node3D" parent="." node_paths=PackedStringArray("twoDParent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 0)
+script = ExtResource("1_tkv2f")
+Offset = Vector3(0, 3, 0)
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+twoDParent = NodePath("..")
+ExcludedRids = Array[RID]([])
+
+[node name="Light" parent="3DRoot" instance=ExtResource("4_isg1o")]
+Range = 15.0

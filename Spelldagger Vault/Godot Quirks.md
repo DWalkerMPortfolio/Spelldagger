@@ -1,0 +1,4 @@
+- Don't initialize exported Godot collections with non-tool C# classes because they don't exist in the editor. Don't need to initialize exported Godot collections at all. Otherwise get error: "Script class can only be set together with base class name."
+- Use NodePath instead of Node in exported arrays, otherwise duplicating Node breaks references
+- Use `protected override void Dispose(bool disposing)` to clean up references to tool scripts to prevent issues with assembly unloading
+- Always initialize variables in shaders, the default initialization varies by platform

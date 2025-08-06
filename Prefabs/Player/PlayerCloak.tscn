@@ -1,0 +1,87 @@
+[gd_scene load_steps=8 format=3 uid="uid://cwuehm7355r74"]
+
+[ext_resource type="ArrayMesh" uid="uid://dybbfkww5umo0" path="res://Prefabs/Player/Player.glb-Meshes/CloakTestOpenFront.res" id="1_rue15"]
+[ext_resource type="Script" uid="uid://brer1lcawnlhl" path="res://Prefabs/Player/CloakTrail.cs" id="2_rue15"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_rue15"]
+top_radius = 0.25
+bottom_radius = 0.25
+height = 10.0
+
+[sub_resource type="Animation" id="Animation_t4sp6"]
+resource_name = "Idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:blend_shapes/Key 1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rue15"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:blend_shapes/Key 1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_mccfo"]
+resource_name = "Walk"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:blend_shapes/Key 1")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_tr8g5"]
+_data = {
+&"Idle": SubResource("Animation_t4sp6"),
+&"RESET": SubResource("Animation_rue15"),
+&"Walk": SubResource("Animation_mccfo")
+}
+
+[node name="PlayerCloak" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." node_paths=PackedStringArray("TrailPosition")]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 1, 0)
+mesh = ExtResource("1_rue15")
+"blend_shapes/Key 1" = 0.0
+script = ExtResource("2_rue15")
+TrailPosition = NodePath("TrailPosition")
+SpringConstant = 4.0
+SpringDamping = 0.5
+TrailOffsetMaxDistance = 2.0
+
+[node name="TrailPosition" type="Node3D" parent="MeshInstance3D"]
+transform = Transform3D(0.75, 0, 0, 0, 0.75, 0, 0, 0, 0.75, 0, 1, 0)
+top_level = true
+visible = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MeshInstance3D/TrailPosition"]
+mesh = SubResource("CylinderMesh_rue15")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_tr8g5")
+}
+autoplay = "Idle"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://c21k3hp6mbw35"]
+
+[ext_resource type="Script" uid="uid://dbch08bvnyjk5" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorSentry.cs" id="1_61dxi"]
+
+[resource]
+script = ExtResource("1_61dxi")
+SoundRadius = 1.5
+SoundInterval = 1.5
+Speed = 2.0
+HighAlertSpeed = 2.5
+TurnSpeed = 60.0
+HighAlertTurnSpeed = 120.0
+HighAlertLookInterval = 5.0
+RepositionDistance = 0.5

@@ -1,0 +1,16 @@
+class_prop
+	- grayscale shader
+	
+	class_door
+		- solid
+		- override grayscale shader
+		- manually applied to ds grid
+
+	class_solid
+		- solid
+		- applied to mp grid
+
+		class_wall
+			- override grayscale shader
+			- drawn over partial shadows by obj_control
+			- manually applied to ds grid

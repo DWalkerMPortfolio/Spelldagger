@@ -1,0 +1,51 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5xglmd86vgpx"]
+
+[ext_resource type="Script" uid="uid://w0ua1t57mxhq" path="res://Prefabs/Pickup/Document/DocumentTemplate.cs" id="1_15eib"]
+
+[node name="TestDocumentScene" type="Control" node_paths=PackedStringArray("TextLabel")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(640, 360)
+mouse_filter = 2
+script = ExtResource("1_15eib")
+TextLabel = NodePath("ColorRect/Label")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(10, 10)
+pivot_offset = Vector2(20, 20)
+mouse_filter = 2
+color = Color(0.180005, 0.180005, 0.180005, 1)
+
+[node name="Label" type="Label" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -74.0
+offset_top = -17.0
+offset_right = 124.0
+offset_bottom = 183.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.168233, 0.168233)
+pivot_offset = Vector2(89, 20)
+text = "This is a test document"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

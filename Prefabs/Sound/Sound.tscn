@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://dxakotxdwiqep"]
+
+[ext_resource type="Shader" uid="uid://5efk6drsddqm" path="res://Prefabs/Sound/Sound.gdshader" id="1_n4hdv"]
+[ext_resource type="Script" uid="uid://i4rgcdorfsxv" path="res://Prefabs/Sound/Sound.cs" id="1_snp7t"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2tay4"]
+render_priority = 127
+shader = ExtResource("1_n4hdv")
+shader_parameter/wave_frequency = 10.0
+shader_parameter/wave_thinness = 0.895
+shader_parameter/wave_smoothness = 0.145
+shader_parameter/wave_speed = 1.0
+shader_parameter/wave_fade_power = 2.865
+shader_parameter/edge_thickness = 0.08
+shader_parameter/edge_smoothness = 0.09
+shader_parameter/edge_alpha_multiplier = 2.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_snp7t"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_cg7r1"]
+height = 1.0
+
+[node name="Sound" type="Node3D" node_paths=PackedStringArray("Mesh", "Area")]
+process_mode = 3
+script = ExtResource("1_snp7t")
+Mesh = NodePath("Mesh")
+Area = NodePath("Mesh/Area3D")
+ScaleInDuration = 0.25
+MessageColors = Dictionary[int, Color]({
+0: Color(1, 1, 1, 0.196078),
+1: Color(0.972549, 0.878431, 0, 0.196078),
+2: Color(0.999999, 0.553192, 0.577216, 0.196078),
+3: Color(0.555757, 0.768909, 0.549953, 0.196078)
+})
+
+[node name="Mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 3, 0, 0, 0, 1, 0, 0, 0)
+sorting_offset = 100.0
+material_override = SubResource("ShaderMaterial_2tay4")
+instance_shader_parameters/alpha = 1.0
+instance_shader_parameters/color = Color(1, 1, 1, 0.196078)
+instance_shader_parameters/max_distance = 0.0
+mesh = SubResource("BoxMesh_snp7t")
+
+[node name="Area3D" type="Area3D" parent="Mesh"]
+collision_mask = 4294967295
+monitorable = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Mesh/Area3D"]
+shape = SubResource("CylinderShape3D_cg7r1")

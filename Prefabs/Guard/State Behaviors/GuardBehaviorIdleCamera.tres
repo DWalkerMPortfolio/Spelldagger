@@ -1,0 +1,7 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://dbexxx7uh0hib"]
+
+[ext_resource type="Script" uid="uid://c6l6j4n13uxij" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorIdleCamera.cs" id="1_j5db0"]
+
+[resource]
+script = ExtResource("1_j5db0")
+TurnSpeed = 60.0

@@ -1,0 +1,5 @@
+- Langston:
+	- Pair of guards in basement were tricky to get past
+	- Accidentally opened secret door just by pressing interact
+	- Interpreted hint about hearing where secret vault was by looking for sounds in the vault
+	- Worried about using same solution to solve overcome all obstacles, need to require variety in approaches

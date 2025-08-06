@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=4 format=3 uid="uid://dbiealla5fkla"]
+
+[ext_resource type="PackedScene" uid="uid://c5xglmd86vgpx" path="res://Prefabs/Pickup/Document/Documents/TestDocumentTemplate.tscn" id="2_hnvgp"]
+[ext_resource type="ArrayMesh" uid="uid://tvgdv3taattt" path="res://Prefabs/Pickup/Document/Documents.glb-Meshes/Book.res" id="2_mpri3"]
+[ext_resource type="Script" uid="uid://b7h5wt2adw728" path="res://Prefabs/Pickup/Document/DocumentItem.cs" id="3_uob0m"]
+
+[resource]
+script = ExtResource("3_uob0m")
+Template = ExtResource("2_hnvgp")
+Text = "Bob, could you bring some documents to the vault once the boss gets in tomorrow. Remember to put them in the actual vault, not the decoy.
+- Alice"
+Name = "Decoy Vault Note"
+Mesh = ExtResource("2_mpri3")

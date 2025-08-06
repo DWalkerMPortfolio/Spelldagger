@@ -1,0 +1,67 @@
+[gd_scene load_steps=11 format=3 uid="uid://bf1ewexou3lox"]
+
+[ext_resource type="PackedScene" uid="uid://c1wh3quqt7y8n" path="res://Prefabs/Props/PropBase.tscn" id="1_ic8hn"]
+[ext_resource type="PackedScene" uid="uid://bs6mrihivu0je" path="res://Prefabs/Meshes/LightCaptureMeshInstance.tscn" id="2_2p68o"]
+[ext_resource type="ArrayMesh" uid="uid://d1jbdvowut04d" path="res://Prefabs/Props/Prop Scenes/Initial Props/Props.glb-Meshes/Fireplace.res" id="3_mvmht"]
+[ext_resource type="PackedScene" uid="uid://dx5io3bh1luvu" path="res://Prefabs/Light/SpotLight.tscn" id="5_2p68o"]
+[ext_resource type="PackedScene" uid="uid://bvewqu27g2al3" path="res://Prefabs/VFX/Fireplace.tscn" id="5_mvmht"]
+[ext_resource type="ArrayMesh" uid="uid://bevm02hhav255" path="res://Prefabs/Props/Prop Scenes/Initial Props/Props.glb-Meshes/FireplaceGrate.res" id="6_mvmht"]
+
+[sub_resource type="Curve" id="Curve_2q4d8"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.5, 0.0952001), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jvm55"]
+resource_local_to_scene = true
+curve = SubResource("Curve_2q4d8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t5phf"]
+particle_flag_align_y = true
+angle_min = 1.07288e-05
+angle_max = 1.07288e-05
+direction = Vector3(0, 0, -1)
+spread = 50.0
+flatness = 1.0
+initial_velocity_min = 0.1
+initial_velocity_max = 0.25
+gravity = Vector3(0, 0, 0)
+scale_min = 3.0
+scale_max = 5.0
+color = Color(1, 0.624333, 0.464455, 1)
+alpha_curve = SubResource("CurveTexture_jvm55")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_mvmht"]
+points = PackedVector3Array(1.38204, 2.73016, 2.06318, -5.54674e-07, 2.73016, 2.06318, 0.99757, 0, 1.90363, 0.99757, 0, -1.90404, 1.38191, 2.73016, -2.06318, 0.445348, 4.95476, -0.560629, 0.445348, 4.95476, 0.560225, -5.54674e-07, 0, 1.90363, -5.54674e-07, 4.95476, 0.560225, -5.54674e-07, 0, -1.90404, -5.54674e-07, 2.73016, -2.06318, -5.54674e-07, 4.95476, -0.560629, 0.37649, 5.00473, -0.476211, 0.37649, 5.00473, 0.475807, -5.54674e-07, 5.00473, 0.475807, -5.54674e-07, 5.00473, -0.476211)
+
+[node name="Fireplace" instance=ExtResource("1_ic8hn")]
+SnapToWall = true
+
+[node name="3DRoot" parent="." index="0" node_paths=PackedStringArray("ExcludedCollisionObjects")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.1, 0, 0)
+Offset = Vector3(0.1, 0, 0)
+ExcludedCollisionObjects = [NodePath("StaticBody3D")]
+ExcludedRids = Array[RID]([RID(10344325653200946)])
+
+[node name="LightCaptureMeshInstance" parent="3DRoot" index="0" instance=ExtResource("2_2p68o")]
+mesh = ExtResource("3_mvmht")
+
+[node name="SpotLight" parent="3DRoot/LightCaptureMeshInstance" index="1" instance=ExtResource("5_2p68o")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.116645, 0.360139, 0)
+Range = 12.0
+Color = Color(0.94167, 0.728957, 0.606485, 1)
+SpotAngle = 62.0
+
+[node name="FireFlare" parent="3DRoot/LightCaptureMeshInstance" index="2" instance=ExtResource("5_mvmht")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.115512, 0)
+process_material = SubResource("ParticleProcessMaterial_t5phf")
+
+[node name="Grate" type="MeshInstance3D" parent="3DRoot/LightCaptureMeshInstance" index="3"]
+transform = Transform3D(1, 0, 0, 0, 0.280631, 0, 0, 0, 1, 0.689283, 2.38419e-07, 0.562555)
+cast_shadow = 3
+mesh = ExtResource("6_mvmht")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="3DRoot" index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="3DRoot/StaticBody3D" index="0"]
+shape = SubResource("ConvexPolygonShape3D_mvmht")

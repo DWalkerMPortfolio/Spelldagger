@@ -1,0 +1,58 @@
+[gd_scene load_steps=5 format=3 uid="uid://dx5io3bh1luvu"]
+
+[ext_resource type="Script" uid="uid://cmon0i40tn80k" path="res://Prefabs/Light/LightEditor.cs" id="1_syec1"]
+[ext_resource type="Script" uid="uid://b0fma3ap4hbwd" path="res://Prefabs/Light/LightArea.cs" id="2_hwtu0"]
+[ext_resource type="Script" uid="uid://dhchgkjlwnhx2" path="res://Resources/Scripts/ProximityFader.cs" id="3_d32wh"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_l8iqf"]
+radius = 1.0
+
+[node name="SpotLight" type="Node3D" node_paths=PackedStringArray("SpotLight", "LightCaptureSpotLight", "CollisionShape", "Area")]
+script = ExtResource("1_syec1")
+Energy = 4.0
+SpotAngle = 60.0
+IsSpotLight = true
+SpotLight = NodePath("SpotLight3D")
+LightCaptureSpotLight = NodePath("SpotLight3D/LightCaptureLight")
+CollisionShape = NodePath("Area3D/CollisionShape3D")
+Area = NodePath("Area3D")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+light_energy = 4.0
+light_cull_mask = 4293918721
+shadow_enabled = true
+shadow_normal_bias = 1.75
+shadow_opacity = 0.9
+shadow_blur = 5.0
+shadow_caster_mask = 4293918725
+spot_range = 12.0
+spot_attenuation = -0.5
+spot_angle = 60.0
+spot_angle_attenuation = 1.03526
+
+[node name="LightCaptureLight" type="SpotLight3D" parent="SpotLight3D"]
+layers = 32
+light_size = 0.01
+light_cull_mask = 4293918752
+shadow_enabled = true
+shadow_blur = 3.0
+shadow_caster_mask = 4293918756
+spot_range = 12.0
+spot_attenuation = -0.2
+spot_angle = 60.0
+spot_angle_attenuation = 0.0206176
+
+[node name="Area3D" type="Area3D" parent="."]
+collision_layer = 32
+collision_mask = 0
+monitoring = false
+script = ExtResource("2_hwtu0")
+Angle = 60.0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(8.25, 0, 0, 0, 8.25, 0, 0, 0, 8.25, 0, 0, 0)
+shape = SubResource("SphereShape3D_l8iqf")
+
+[node name="ProximityFade" type="Node3D" parent="."]
+script = ExtResource("3_d32wh")
+Light3dPaths = Array[NodePath]([NodePath("../SpotLight3D"), NodePath("../SpotLight3D/LightCaptureLight")])

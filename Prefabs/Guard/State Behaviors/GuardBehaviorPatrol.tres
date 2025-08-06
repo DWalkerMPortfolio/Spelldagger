@@ -1,0 +1,14 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://wwdyhkyifwg3"]
+
+[ext_resource type="Script" uid="uid://xc8wfo7qtasb" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorPatrol.cs" id="1_3ik02"]
+
+[resource]
+script = ExtResource("1_3ik02")
+PathEndBehavior = 1
+Speed = 2.0
+HighAlertSpeed = 2.5
+TurnSpeed = 60.0
+HighAlertTurnSpeed = 120.0
+CreateSounds = true
+SoundRadius = 1.5
+SoundInterval = 1.5

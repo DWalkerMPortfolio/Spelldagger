@@ -1,0 +1,6 @@
+[gd_resource type="Resource" load_steps=2 format=3 uid="uid://cnqm0rnwhv7qw"]
+
+[ext_resource type="Script" uid="uid://dlw5mcqwpvves" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorDebugPathfinding.cs" id="1_xiaq6"]
+
+[resource]
+script = ExtResource("1_xiaq6")

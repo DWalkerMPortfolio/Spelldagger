@@ -1,0 +1,7 @@
+Wood:
+#2d1200
+#1a0a01
+
+Stone:
+#4f4f4f
+#3c3c3c

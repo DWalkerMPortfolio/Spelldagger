@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://y03f7omvep7a"]
+
+[ext_resource type="ArrayMesh" uid="uid://tvgdv3taattt" path="res://Prefabs/Pickup/Document/Documents.glb-Meshes/Book.res" id="2_noskx"]
+[ext_resource type="Script" uid="uid://b7h5wt2adw728" path="res://Prefabs/Pickup/Document/DocumentItem.cs" id="3_ckb1e"]
+
+[resource]
+script = ExtResource("3_ckb1e")
+Text = "Ha!
+You got bamboozled by my decoy vault!
+There's nothing here!
+- Boss"
+Name = "Bamboozled!"
+Mesh = ExtResource("2_noskx")

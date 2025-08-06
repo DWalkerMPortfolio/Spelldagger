@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://bs6mrihivu0je"]
+
+[ext_resource type="Material" uid="uid://bkkl2vgu3ug3d" path="res://Prefabs/Light/LightCapture.tres" id="2_0a4we"]
+[ext_resource type="Script" uid="uid://dhchgkjlwnhx2" path="res://Resources/Scripts/ProximityFader.cs" id="3_5kpb4"]
+[ext_resource type="Script" uid="uid://ms0sf2b5p52j" path="res://Prefabs/Light/LightCapture.cs" id="3_tj6e4"]
+
+[node name="LightCaptureMeshInstance" type="MeshInstance3D"]
+
+[node name="LightCapture" type="MeshInstance3D" parent="." node_paths=PackedStringArray("SourceMeshInstance")]
+layers = 32
+material_override = ExtResource("2_0a4we")
+cast_shadow = 0
+script = ExtResource("3_tj6e4")
+SourceMeshInstance = NodePath("..")
+
+[node name="ProximityFade" type="Node3D" parent="."]
+script = ExtResource("3_5kpb4")
+ShaderGeometryInstancePaths = Array[NodePath]([NodePath(".."), NodePath("../LightCapture")])

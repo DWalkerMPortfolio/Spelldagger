@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://c18b10ntsqnnr"]
+
+[ext_resource type="Script" uid="uid://dhchgkjlwnhx2" path="res://Resources/Scripts/ProximityFader.cs" id="2_ey85a"]
+
+[node name="ProximityFadeMeshInstance" type="MeshInstance3D"]
+
+[node name="ProximityFade" type="Node3D" parent="."]
+script = ExtResource("2_ey85a")
+ShaderGeometryInstancePaths = Array[NodePath]([NodePath("..")])

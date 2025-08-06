@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://ci7x6vdcwjdqv"]
+
+[ext_resource type="Script" uid="uid://cyygc5opkbs11" path="res://Prefabs/Guard/Perception Sources/GuardSoundListener.cs" id="1_wqwdk"]
+[ext_resource type="Script" uid="uid://bdyj250e7o8ac" path="res://Prefabs/Sound/SoundListener.cs" id="2_ivi8q"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_ivi8q"]
+
+[node name="SoundListener" type="Node3D" node_paths=PackedStringArray("SoundListener")]
+script = ExtResource("1_wqwdk")
+SoundListener = NodePath("Area3D")
+
+[node name="Area3D" type="Area3D" parent="."]
+script = ExtResource("2_ivi8q")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_ivi8q")

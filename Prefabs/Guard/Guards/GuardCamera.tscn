@@ -1,0 +1,91 @@
+[gd_scene load_steps=15 format=3 uid="uid://du8l8qj8eeoye"]
+
+[ext_resource type="PackedScene" uid="uid://cbgt34rs8ldj0" path="res://Prefabs/Guard/GuardBase.tscn" id="1_jfdw5"]
+[ext_resource type="Material" uid="uid://cl70mm5t3y6xf" path="res://Prefabs/Guard/GuardPlaceholderMaterial.tres" id="2_60vor"]
+[ext_resource type="Resource" uid="uid://bb4po0mmvp22d" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorAlertedCamera.tres" id="2_l02nh"]
+[ext_resource type="Resource" uid="uid://dbexxx7uh0hib" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorIdleCamera.tres" id="2_oboaj"]
+[ext_resource type="Script" uid="uid://cppcrfh4browl" path="res://Prefabs/Guard/State Behaviors/GuardBehaviorStunned.cs" id="3_oboaj"]
+[ext_resource type="PackedScene" uid="uid://c7c04uykvrh3x" path="res://Prefabs/Guard/Perception Sources/GuardVisionCone.tscn" id="3_t2lxw"]
+[ext_resource type="Script" uid="uid://dgpb4n4m1c3lm" path="res://Resources/Scripts/Follow2DParent.cs" id="6_te4k3"]
+[ext_resource type="Script" uid="uid://8fgdr4xkwci1" path="res://Prefabs/Guard/GuardWeakPoint.cs" id="7_oboaj"]
+
+[sub_resource type="Resource" id="Resource_iblls"]
+script = ExtResource("3_oboaj")
+StunnedSoundRadius = 20.0
+Shout = false
+
+[sub_resource type="SphereMesh" id="SphereMesh_jfdw5"]
+radius = 0.25
+height = 0.5
+
+[sub_resource type="BoxMesh" id="BoxMesh_t2lxw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_iblls"]
+size = Vector3(0.5, 0.5, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lpnmy"]
+albedo_color = Color(0, 0, 0, 1)
+emission_enabled = true
+emission = Color(0.975322, 0, 0.0407292, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_b1tte"]
+size = Vector3(0.25, 0.25, 0.25)
+
+[node name="GuardCamera" instance=ExtResource("1_jfdw5")]
+IdleBehavior = ExtResource("2_oboaj")
+AlertedBehavior = ExtResource("2_l02nh")
+DamagedBehavior = SubResource("Resource_iblls")
+
+[node name="CollisionShape3D" parent="3DRoot/CharacterBody3D" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = null
+disabled = true
+
+[node name="Foot" parent="3DRoot/CharacterBody3D" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="DebugLabel" parent="3DRoot/CharacterBody3D" index="2"]
+transform = Transform3D(-3, -4.52987e-07, -1.98007e-14, 0, -1.31134e-07, 3, -4.52987e-07, 3, 1.31134e-07, 0, 3.72668, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/CharacterBody3D" index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+material_override = ExtResource("2_60vor")
+mesh = SubResource("SphereMesh_jfdw5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DRoot/CharacterBody3D/MeshInstance3D" index="0"]
+transform = Transform3D(0.261345, 0, 0, 0, 0.16112, 0, 0, 0, 0.362991, 0, 0, -0.0979707)
+mesh = SubResource("BoxMesh_t2lxw")
+
+[node name="VisionCone" parent="3DRoot/CharacterBody3D" index="4" instance=ExtResource("3_t2lxw")]
+transform = Transform3D(1, 0, 0, 0, 0.987303, 0.158848, 0, -0.158848, 0.987303, 0, 1, 0)
+AwarenessIncreaseSpeed = 8.0
+
+[node name="GuardController" parent="." index="1"]
+PerceptionSourcePaths = Array[NodePath]([NodePath("../3DRoot/CharacterBody3D/VisionCone")])
+WeakPointPaths = Array[NodePath]([NodePath("../WeakPoint/3DRoot/WeakPoint")])
+GravityScale = 0.0
+Immovable = true
+
+[node name="WeakPoint" type="Node2D" parent="." index="3"]
+
+[node name="3DRoot" type="Node3D" parent="WeakPoint" index="0" node_paths=PackedStringArray("twoDParent")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("6_te4k3")
+Offset = Vector3(0, 1.5, 0)
+ExcludedCollisionObjects = []
+ParentGlobalTransformPrevious = Transform2D(1, 0, 0, 1, 0, 0)
+twoDParent = NodePath("..")
+ExcludedRids = []
+
+[node name="WeakPoint" type="Area3D" parent="WeakPoint/3DRoot" index="0"]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("7_oboaj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WeakPoint/3DRoot/WeakPoint" index="0"]
+shape = SubResource("BoxShape3D_iblls")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WeakPoint/3DRoot/WeakPoint" index="1"]
+material_override = SubResource("StandardMaterial3D_lpnmy")
+mesh = SubResource("BoxMesh_b1tte")

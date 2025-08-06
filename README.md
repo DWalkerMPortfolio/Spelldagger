@@ -27,3 +27,5 @@ Spelldagger's unique art style took extensive technical art development using a 
 The most important shaders are:
 - [PostProcessOutlines.gdshader](Prefabs/Camera/PostProcessOutlines.gdshader) which handles edge outlines, including those around lights.
 - [SDStandardShader.gdshader](Resources/Shaders/SDStandardShader.gdshader) which is a modified version of Godot's standard shader that handles objects' appearences in darkness and the floor transition animation.
+
+https://github.com/user-attachments/assets/adcbc8e4-5739-4882-86fe-d0b7c6f8b708

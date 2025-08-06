@@ -17,7 +17,11 @@ Some example scripts involved in this system are:
 ### Rewind System
 Spelldagger features a rewind (and fast-forward) system to allow players to correct minor mistakes by rewinding the game-state a limited number of times. To achieve this, I developed a centralized temporal controller system that all other aspects of the game can hook into to manage rewinding their state.\
 The key scripts involved in this system are:
+- [TemporalController.cs](Prefabs/Player/Pocketwatch/TemporalController.cs) which manages the rewind feature.
+- [ITemporalControl.cs](Prefabs/Player/Pocketwatch/ITemporalControl.cs) which is an interface implemented by scripts that control object affected by the rewind feature.
 
 ### Technical Art
 Spelldagger's unique art style took extensive technical art development using a variety of techniques. In particular, many of the most important effects were created by using shaders reacting to otherwise invisible lights and making extensive use of shadows.\
-The key scripts involved in this system are:
+The most important shaders are:
+- [PostProcessOutlines.gdshader](Prefabs/Camera/PostProcessOutlines.gdshader) which handles edge outlines, including those around lights.
+- [SDStandardShader.gdshader](Resources/Shaders/SDStandardShader.gdshader) which is a modified version of Godot's standard shader that handles objects' appearences in darkness and the floor transition animation.

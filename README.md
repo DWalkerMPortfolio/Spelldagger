@@ -8,7 +8,7 @@ The most interesting scripts involved in this system are:
 - [WallEditor.cs](Prefabs/Wall/WallEditor.cs) which handles defining and generating wall meshes. There are equivalent scripts for all other level elements.
 - [LevelEditor.cs](Prefabs/Level%20Template/LevelEditor.cs) which handles global level editing operations.
 
-https://github.com/user-attachments/assets/60cdc816-d9fd-4c9e-916e-f652907f3fc3
+https://github.com/user-attachments/assets/2786a953-f756-406e-818b-7fe380412a94
 
 ### Modular Enemy Behavior System
 As a stealth game, one of the main obstacles players must overcome in Spelldagger is NPC guards. I wanted an easy way to create guards with a wide variety of different behaviors, senses, and weaknesses. To achieve this, I created a modular enemy bahavior system. All guards share the same core controller script and the same 4 states (idle, invetigating, alerted, and stunned) but their behavior while in each of those states is entirely defined by separate scripts that can be swapped out on a per-guard basis. Additionally, guards can have any number of different senses (sight, sound, mage-sense) and weakpoints that all feed into the central guard controller script and are passed to the individual state behaviors.\

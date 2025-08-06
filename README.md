@@ -7,6 +7,7 @@ Spelldagger features a suite of editor tools designed for rapid in-engine develo
 The most interesting scripts involved in this system are:
 - [WallEditor.cs](Prefabs/Wall/WallEditor.cs) which handles defining and generating wall meshes. There are equivalent scripts for all other level elements.
 - [LevelEditor.cs](Prefabs/Level%20Template/LevelEditor.cs) which handles global level editing operations.
+
 https://github.com/user-attachments/assets/60cdc816-d9fd-4c9e-916e-f652907f3fc3
 
 ### Modular Enemy Behavior System

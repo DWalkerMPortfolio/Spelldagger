@@ -16,6 +16,8 @@ Some example scripts involved in this system are:
 - [GuardController.cs](Prefabs/Guard/GuardController.cs) which is the central guard behavior script that interfaces with the modular state behavior scripts.
 - [GuardBehaviorPatrol.cs](Prefabs/Guard/State%20Behaviors/GuardBehaviorPatrol.cs) which is an example modular guard state behavior script, in this case for patrolling along a path defined by another editor tool.
 
+https://github.com/user-attachments/assets/68d5e8d5-108d-4644-b634-26519a3228b8
+
 ### Rewind System
 Spelldagger features a rewind (and fast-forward) system to allow players to correct minor mistakes by rewinding the game-state a limited number of times. To achieve this, I developed a centralized temporal controller system that all other aspects of the game can hook into to manage rewinding their state.\
 The key scripts involved in this system are:
